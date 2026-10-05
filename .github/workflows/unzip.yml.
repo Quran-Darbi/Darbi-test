@@ -1,0 +1,20 @@
+name: unzip
+on:
+  push:
+    paths: ['darbi_staging_site.zip']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          unzip -oq darbi_staging_site.zip
+          rm darbi_staging_site.zip
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A
+          git commit -m "deploy site" || true
+          git push
