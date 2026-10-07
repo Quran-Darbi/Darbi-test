@@ -1692,9 +1692,16 @@ const liveOn=!/[?&]live=0\b/.test(location.search);   // للطوارئ: أضف 
 let _lastFinalN=[];   // كل كلمات الجلسة الحالية للتعرّف (مُطبَّعة) بعد إزالة المكرر
 // يعيد عدد الكلمات التي تبدأ بها القائمة n وهي مكرَّرة من آخر ما كُتب في هذه الجلسة:
 // (1) تراكمي: القائمة تبدأ بكل ما سبق  (2) تداخل: تبدأ بآخر كلمتين فأكثر مما سبق  (3) إعادة تسليم: القائمة كلها (3 كلمات فأكثر) موجودة في ذيل ما سبق
+// هل في نص هذه الصفحة تكرار فعلي متتالٍ لهذه الكلمة (مثل «صفًّا صفًّا» و«دكًّا دكًّا»)؟ إن كان فلا نحذف تكرارها
+function _refRepeats(w){
+  try{for(let i=0;i+1<refWords.length;i++){if(norm(refWords[i])===w&&norm(refWords[i+1])===w)return true;}}catch(_){}
+  return false;
+}
 function _ovCount(n){
   const s=_lastFinalN;
   if(!s.length||!n.length)return 0;
+  // أول كلمة في الجلسة قد تصل مكرَّرة عدة مرات: ما دامت الجلسة كلمة واحدة نحذف كل تكرار لها في بداية النص الجديد
+  if(s.length===1&&n[0]===s[0]&&!_refRepeats(s[0])){let c=0;while(c<n.length&&n[c]===s[0])c++;return c;}
   if(n.length>s.length&&s.every((x,i)=>x===n[i]))return s.length;
   const m=Math.min(s.length,n.length);
   for(let k=m;k>=2;k--){
