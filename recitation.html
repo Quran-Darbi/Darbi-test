@@ -1894,18 +1894,11 @@ function unmaskWords(words){
     return Math.abs(best-pos)<=15?refWords[best]:w;
   });
 }
-function addWords(newW){
-  if(!newW||!newW.length)return;
-  newW=_cleanSTT(newW);
-  if(!newW.length)return;
-  if(selWord!==null&&selWord<savedWords.length){
-    const _g=(selWord===0)?muqGroupLen():0;   // المقطعة تُستبدل كوحدة
-    savedWords.splice(selWord,_g||1);
-    savedWords.splice(selWord,0,...newW);
-    selWord=null;
-  }else{
-    savedWords=savedWords.concat(newW);
-  }
+// مؤشر الإدراج: عند استبدال كلمة محدَّدة بكلام من أكثر من كلمة قد يصل الكلام على دفعتين (نتيجتين نهائيتين)،
+// فالأولى تحلّ محل الكلمة المحدَّدة. هذا المؤشر يجعل الدفعات التالية في نفس جلسة التسجيل تُدرَج بعدها مباشرة
+// بدل أن تُلحق بآخر النص. يُصفَّر عند بدء جلسة تسجيل جديدة أو انتهائها أو مسح النص.
+let _insertAt=null;
+function _normSaved(){
   savedWords=expandDigits(savedWords);
   savedWords=unmaskWords(savedWords);
   savedWords=splitMergedWords(savedWords);
@@ -1915,6 +1908,30 @@ function addWords(newW){
   savedWords=sttPhrasePass(savedWords,refWords,norm);
   savedWords=fixPronunciation(savedWords);
   savedWords=snapWordsToRasm(savedWords);
+}
+function addWords(newW){
+  if(!newW||!newW.length)return;
+  newW=_cleanSTT(newW);
+  if(!newW.length)return;
+  if(selWord!==null&&selWord<savedWords.length){
+    const at=selWord;
+    const _g=(selWord===0)?muqGroupLen():0;   // المقطعة تُستبدل كوحدة
+    savedWords.splice(selWord,_g||1);
+    savedWords.splice(selWord,0,...newW);
+    selWord=null;
+    const mid=savedWords.length;
+    _normSaved();
+    _insertAt=at+newW.length+(savedWords.length-mid);
+  }else if(_insertAt!==null&&_insertAt<=savedWords.length){
+    const at=_insertAt;
+    savedWords.splice(at,0,...newW);
+    const mid=savedWords.length;
+    _normSaved();
+    _insertAt=at+newW.length+(savedWords.length-mid);
+  }else{
+    savedWords=savedWords.concat(newW);
+    _normSaved();
+  }
 }
 // ===== تصحيح فروق النطق بين STT والرسم العثماني =====
 // القواعد التلاتة دي بتشتغل *بس* لو الكلمة مش مطابقة أصلاً، وكلها
@@ -2590,7 +2607,7 @@ function _dbgRaw(tr,fin){
 }
 function makeRec(){
   const r=new SpeechAPI();r.lang='ar-SA';r.continuous=true;r.interimResults=!!liveOn;let doneUpTo=0;
-  r.onstart=()=>{recognizing=true;currentText='';_lastFinalN=[];setBtn('rec');renderTranscript();};
+  r.onstart=()=>{recognizing=true;currentText='';_lastFinalN=[];_insertAt=null;setBtn('rec');renderTranscript();};
   r.onresult=e=>{
     let interim='';
     for(let i=e.resultIndex;i<e.results.length;i++){
@@ -2619,7 +2636,7 @@ function makeRec(){
   r.onend=()=>{
     recognizing=false;
     if(currentText){addWords(currentText.trim().split(/\s+/).filter(w=>w));currentText='';}
-    _lastFinalN=[];
+    _lastFinalN=[];_insertAt=null;
     renderTranscript();setBtn(savedWords.length?'paused':'idle');
     if(_helpPending){_helpPending=false;clearTimeout(_helpTimer);_doHelp();}
   };
@@ -2656,7 +2673,7 @@ function setBtn(state){
 function clearAll(){
   const _rb=document.getElementById('retryBanner');if(_rb)_rb.style.display='none';
   if(recognizing){try{recInst.stop();}catch(e){}recognizing=false;}
-  recInst=null;savedWords=[];selWord=null;currentText='';
+  recInst=null;savedWords=[];selWord=null;currentText='';_insertAt=null;
   _resetHelp();
   renderTranscript();
   document.getElementById('checkBtn').className='check-btn';
