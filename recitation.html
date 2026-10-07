@@ -320,6 +320,20 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <option value="alimran_p60">ص60 — آيات 78–83</option>
       <option value="alimran_p61">ص61 — آيات 84–91</option>
       <option value="alimran_p62">ص62 — آيات 92–100</option>
+      <option value="alimran_p63">ص63 — آيات 101–108</option>
+      <option value="alimran_p64">ص64 — آيات 109–115</option>
+      <option value="alimran_p65">ص65 — آيات 116–121</option>
+      <option value="alimran_p66">ص66 — آيات 122–132</option>
+      <option value="alimran_p67">ص67 — آيات 133–140</option>
+      <option value="alimran_p68">ص68 — آيات 141–148</option>
+      <option value="alimran_p69">ص69 — آيات 149–153</option>
+      <option value="alimran_p70">ص70 — آيات 154–157</option>
+      <option value="alimran_p71">ص71 — آيات 158–165</option>
+      <option value="alimran_p72">ص72 — آيات 166–173</option>
+      <option value="alimran_p73">ص73 — آيات 174–180</option>
+      <option value="alimran_p74">ص74 — آيات 181–186</option>
+      <option value="alimran_p75">ص75 — آيات 187–194</option>
+      <option value="alimran_p76">ص76 — آيات 195–200</option>
     </optgroup>
     <optgroup label="سورة الكهف">
       <option value="alkahf_p293">ص293 — آيات 1–4</option>
@@ -364,6 +378,14 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <option value="yaseen_p443">ص443 — آيات 41–54</option>
       <option value="yaseen_p444">ص444 — آيات 55–70</option>
       <option value="yaseen_p445">ص445 — آيات 71–83</option>
+    </optgroup>
+    <optgroup label="سورة فصلت">
+      <option value="fussilat_p477">ص477 — آيات 1–11</option>
+      <option value="fussilat_p478">ص478 — آيات 12–20</option>
+      <option value="fussilat_p479">ص479 — آيات 21–29</option>
+      <option value="fussilat_p480">ص480 — آيات 30–38</option>
+      <option value="fussilat_p481">ص481 — آيات 39–46</option>
+      <option value="fussilat_p482">ص482 — آيات 47–54</option>
     </optgroup>
     <optgroup label="سورة الأحقاف">
       <option value="alahqaf_p502">ص502 — آيات 1–5</option>
@@ -698,6 +720,20 @@ const SURAH_NAMES = {
   alimran_p60:'آل عمران ص60 — آيات 78–83',
   alimran_p61:'آل عمران ص61 — آيات 84–91',
   alimran_p62:'آل عمران ص62 — آيات 92–100',
+  alimran_p63:'آل عمران ص63 — آيات 101–108',
+  alimran_p64:'آل عمران ص64 — آيات 109–115',
+  alimran_p65:'آل عمران ص65 — آيات 116–121',
+  alimran_p66:'آل عمران ص66 — آيات 122–132',
+  alimran_p67:'آل عمران ص67 — آيات 133–140',
+  alimran_p68:'آل عمران ص68 — آيات 141–148',
+  alimran_p69:'آل عمران ص69 — آيات 149–153',
+  alimran_p70:'آل عمران ص70 — آيات 154–157',
+  alimran_p71:'آل عمران ص71 — آيات 158–165',
+  alimran_p72:'آل عمران ص72 — آيات 166–173',
+  alimran_p73:'آل عمران ص73 — آيات 174–180',
+  alimran_p74:'آل عمران ص74 — آيات 181–186',
+  alimran_p75:'آل عمران ص75 — آيات 187–194',
+  alimran_p76:'آل عمران ص76 — آيات 195–200',
   alkahf_p293:'الكهف ص293 — آيات 1–4',
   alkahf_p294:'الكهف ص294 — آيات 5–15',
   alkahf_p295:'الكهف ص295 — آيات 16–20',
@@ -734,6 +770,12 @@ const SURAH_NAMES = {
   yaseen_p443:'يس ص443 — آيات 41–54',
   yaseen_p444:'يس ص444 — آيات 55–70',
   yaseen_p445:'يس ص445 — آيات 71–83',
+  fussilat_p477:'فصلت ص477 — آيات 1–11',
+  fussilat_p478:'فصلت ص478 — آيات 12–20',
+  fussilat_p479:'فصلت ص479 — آيات 21–29',
+  fussilat_p480:'فصلت ص480 — آيات 30–38',
+  fussilat_p481:'فصلت ص481 — آيات 39–46',
+  fussilat_p482:'فصلت ص482 — آيات 47–54',
   alahqaf_p502:'الأحقاف ص502 — آيات 1–5',
   alahqaf_p503:'الأحقاف ص503 — آيات 6–14',
   alahqaf_p504:'الأحقاف ص504 — آيات 15–20',
@@ -1243,6 +1285,7 @@ const AYAH_START={
   baqara_p46:270, baqara_p47:275, baqara_p48:282, baqara_p49:283,
   alimran_p50:1, alimran_p51:10, alimran_p52:16, alimran_p53:23, alimran_p54:30,
   alimran_p55:38, alimran_p56:46, alimran_p57:53, alimran_p58:62, alimran_p59:71, alimran_p60:78, alimran_p61:84, alimran_p62:92,
+  alimran_p63:101, alimran_p64:109, alimran_p65:116, alimran_p66:122, alimran_p67:133, alimran_p68:141, alimran_p69:149, alimran_p70:154, alimran_p71:158, alimran_p72:166, alimran_p73:174, alimran_p74:181, alimran_p75:187, alimran_p76:195,
   maryam_p305:1,
   maryam_p306:12,
   maryam_p307:26,
@@ -1267,6 +1310,12 @@ const AYAH_START={
   yaseen_p443:41,
   yaseen_p444:55,
   yaseen_p445:71,
+  fussilat_p477:1,
+  fussilat_p478:12,
+  fussilat_p479:21,
+  fussilat_p480:30,
+  fussilat_p481:39,
+  fussilat_p482:47,
   alahqaf_p502:1,
   alahqaf_p503:6,
   alahqaf_p504:15,
@@ -1475,9 +1524,11 @@ const RECITE_SEQUENCE=['fatiha',
 'alkahf_p293','alkahf_p294','alkahf_p295','alkahf_p296','alkahf_p297','alkahf_p298','alkahf_p299','alkahf_p300','alkahf_p301','alkahf_p302','alkahf_p303','alkahf_p304',
 'alimran_p50','alimran_p51','alimran_p52','alimran_p53','alimran_p54',
 'alimran_p55','alimran_p56','alimran_p57','alimran_p58','alimran_p59','alimran_p60','alimran_p61','alimran_p62',
+'alimran_p63','alimran_p64','alimran_p65','alimran_p66','alimran_p67','alimran_p68','alimran_p69','alimran_p70','alimran_p71','alimran_p72','alimran_p73','alimran_p74','alimran_p75','alimran_p76',
 'maryam_p305','maryam_p306','maryam_p307','maryam_p308','maryam_p309','maryam_p310','maryam_p311','maryam_p312',
 'taha_p312','taha_p313','taha_p314','taha_p315','taha_p316','taha_p317','taha_p318','taha_p319','taha_p320','taha_p321',
 'yaseen_p440','yaseen_p441','yaseen_p442','yaseen_p443','yaseen_p444','yaseen_p445',
+'fussilat_p477','fussilat_p478','fussilat_p479','fussilat_p480','fussilat_p481','fussilat_p482',
 'alahqaf_p502','alahqaf_p503','alahqaf_p504','alahqaf_p505','alahqaf_p506','muhammad_p507','muhammad_p508','muhammad_p509','muhammad_p510','alfath_p511','alfath_p512','alfath_p513','alfath_p514','alfath_p515','alhujurat_p515','alhujurat_p516','alhujurat_p517','qaf_p518','qaf_p519','qaf_p520','azzariyat_p520','azzariyat_p521','azzariyat_p522','azzariyat_p523',
 'attur_p523','attur_p524','attur_p525','annajm_p526','annajm_p527','annajm_p528',
 'alqamar_p528','alqamar_p529','alqamar_p530','alqamar_p531',
@@ -1686,7 +1737,7 @@ function _nextRefIdx(){
 // قالها المستخدم فعلًا ولم تصل بعدُ كأنها «التالية». لذلك إن كان التسجيل شغّالًا نوقفه مؤقتًا لتصل الكلمات المعلّقة، ثم نكشف الكلمة.
 // ===== العرض الفوري (أكتوبر 2026): هيكل الصفحة ثابت، والكلمة الصحيحة تظهر خضراء في مكانها =====
 // النتائج المؤقتة (ظهور الكلمات أثناء القراءة) مفعّلة دائمًا
-const liveOn=!/[?&]live=0\b/.test(location.search);   // للطوارئ: أضف ?live=0 إلى الرابط لإيقاف الكتابة الفورية
+const liveOn=false;   // الكتابة الفورية أثناء التلاوة معطّلة حاليًا (يعمل العرض كما كان في النسخة الحية). لتفعيلها لاحقًا غيّر false إلى true
 // متصفحات أندرويد مع النتائج المؤقتة قد تعيد النص النهائي تراكميًا («بسم» ثم «بسم الله» ثم «بسم الله الرحمن»…).
 // فإذا بدأ النص الجديد بالنص النهائي السابق نفسه أخذنا الجزء الزائد فقط. يعمل فقط مع «العرض الفوري».
 let _lastFinalN=[];   // كل كلمات الجلسة الحالية للتعرّف (مُطبَّعة) بعد إزالة المكرر
@@ -2610,7 +2661,11 @@ function renderTranscript(){
   });
   if(currentText){
     // كلمات لم تستقر بعد (نتيجة مؤقتة): شرائح باهتة غير قابلة للنقر حتى تثبت
-    currentText.trim().split(/\s+/).filter(w=>w).forEach(w=>{
+    if(!liveOn){
+      const cur=document.createElement('span');
+      cur.style.cssText='color:var(--teal);font-style:italic;margin:2px;';
+      cur.textContent=' '+currentText;box.appendChild(cur);
+    }else currentText.trim().split(/\s+/).filter(w=>w).forEach(w=>{
       const t=document.createElement('span');t.className='rec-word';
       t.style.cssText='opacity:.55;cursor:default;border-bottom-style:dashed;';
       t.textContent=w;box.appendChild(t);
