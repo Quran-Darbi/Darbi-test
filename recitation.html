@@ -1682,7 +1682,21 @@ function _nextRefIdx(){
   for(let i=0;i<res.length;i++){if(res[i].status==='ok')last=i;}
   return s0+last+1;
 }
+// المساعدة تحتاج موضعًا دقيقًا: التعرّف الصوتي يسلّم الكلمات متأخرًا بعد النطق، فلو حُسب الموضع أثناء التسجيل لعدّ كلمة
+// قالها المستخدم فعلًا ولم تصل بعدُ كأنها «التالية». لذلك إن كان التسجيل شغّالًا نوقفه مؤقتًا لتصل الكلمات المعلّقة، ثم نكشف الكلمة.
+let _helpPending=false,_helpTimer=null;
 function showHint(){
+  if(!refWords.length)return;
+  if(recognizing&&recInst){
+    _helpPending=true;
+    try{recInst.stop();}catch(e){_helpPending=false;_doHelp();return;}
+    clearTimeout(_helpTimer);
+    _helpTimer=setTimeout(function(){if(_helpPending){_helpPending=false;_doHelp();}},1800);
+    return;
+  }
+  _doHelp();
+}
+function _doHelp(){
   if(!refWords.length)return;
   const idx=_nextRefIdx();
   if(idx>=refWords.length)return;
@@ -2582,6 +2596,7 @@ function makeRec(){
     recognizing=false;
     if(currentText){addWords(currentText.trim().split(/\s+/).filter(w=>w));currentText='';}
     renderTranscript();setBtn(savedWords.length?'paused':'idle');
+    if(_helpPending){_helpPending=false;clearTimeout(_helpTimer);_doHelp();}
   };
   return r;
 }
