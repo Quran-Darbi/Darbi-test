@@ -1137,6 +1137,10 @@ function norm(s){
     .replace(/^وجي$/,'وجاي')           // الفجر: وَجِاْيٓءَ يَوْمَئِذٍۭ بِجَهَنَّمَ
     .replace(/^الحرف$/,'الحرث')        // البقرة ص31: نِسَآؤُكُمْ حَرْثٌ.../ٱلْحَرْثَ (ث↔ف)
     .replace(/^ينسخ$/,'ينفخ')          // النبأ: يَوْمَ يُنفَخُ فِى ٱلصُّورِ (ف↔س)
+    // فصلت (ملاحظات هند 2026-10-07): كلمات يكتبها التعرف الصوتي بشكل مختلف رغم النطق الصحيح
+    .replace(/^اضلنا$/,'اضلانا')        // أَضَلَّانَا: يحذف ألف التثنية
+    .replace(/^فقضهن$/,'فقضاهن')        // فَقَضَىٰهُنَّ: يحذف الألف
+    .replace(/^وناي$/,'ونا')            // وَنَـَٔا: يكتبها «ونأى/ونائي»
     .replace(/\s+/g,' ')
     .trim();
 }
@@ -1888,16 +1892,28 @@ function findStart(userWords){
   return 0;
 }
 
+// إدغام النون الساكنة في (م ل ر) والإقلاب قبل الباء: «وَإِن مَّسَّهُ» تُسمع «وامّسه» فيكتبها التعرف «وام»
+// فالكلمة المنتهية بنون تُقبل بنونها مستبدلة بحرف الكلمة التالية (م/ل/ر؛ والباء تُقلب ميمًا)
+function _wEq(ref,i,u){
+  const r=norm(ref[i]),w=norm(u);
+  if(r===w)return true;
+  if(r.length>1&&r.charAt(r.length-1)==='ن'&&i+1<ref.length){
+    let c=norm(ref[i+1]).charAt(0);
+    if(c==='ب')c='م';
+    if((c==='م'||c==='ل'||c==='ر')&&w===r.slice(0,-1)+c)return true;
+  }
+  return false;
+}
 function compareWords(userWords,ref){
   const n=ref.length,m=userWords.length;
   const dp=Array.from({length:n+1},()=>new Array(m+1).fill(0));
   for(let i=1;i<=n;i++)for(let j=1;j<=m;j++){
-    if(norm(ref[i-1])===norm(userWords[j-1]))dp[i][j]=dp[i-1][j-1]+1;
+    if(_wEq(ref,i-1,userWords[j-1]))dp[i][j]=dp[i-1][j-1]+1;
     else dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
   }
   const aligned=[];let i=n,j=m;
   while(i>0||j>0){
-    if(i>0&&j>0&&norm(ref[i-1])===norm(userWords[j-1])){aligned.push({ref:ref[i-1],user:userWords[j-1],status:'ok'});i--;j--;}
+    if(i>0&&j>0&&_wEq(ref,i-1,userWords[j-1])){aligned.push({ref:ref[i-1],user:userWords[j-1],status:'ok'});i--;j--;}
     else if(j>0&&(i===0||dp[i][j-1]>=dp[i-1][j])){j--;}
     else{aligned.push({ref:ref[i-1],user:'',status:'missing'});i--;}
   }
