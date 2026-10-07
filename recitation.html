@@ -1697,6 +1697,17 @@ function _nextRefIdx(){
 // قالها المستخدم فعلًا ولم تصل بعدُ كأنها «التالية». لذلك إن كان التسجيل شغّالًا نوقفه مؤقتًا لتصل الكلمات المعلّقة، ثم نكشف الكلمة.
 // ===== العرض الفوري (أكتوبر 2026): هيكل الصفحة ثابت، والكلمة الصحيحة تظهر خضراء في مكانها =====
 let liveOn=false,_lvKey='';
+// متصفحات أندرويد مع النتائج المؤقتة قد تعيد النص النهائي تراكميًا («بسم» ثم «بسم الله» ثم «بسم الله الرحمن»…).
+// فإذا بدأ النص الجديد بالنص النهائي السابق نفسه أخذنا الجزء الزائد فقط. يعمل فقط مع «العرض الفوري».
+let _lastFinalN=[];
+function _cumDedup(ws){
+  const n=ws.map(norm);
+  const l=_lastFinalN;
+  let out=ws;
+  if(l.length&&n.length>=l.length&&l.every((x,i)=>x===n[i]))out=ws.slice(l.length);
+  if(n.length)_lastFinalN=n;
+  return out;
+}
 try{liveOn=localStorage.getItem('darbi_live_view')==='1';}catch(e){}
 function _liveBtnTxt(){const b=document.getElementById('liveBtn');if(b)b.textContent=_tx(liveOn?'liveOn':'liveOff');}
 function toggleLive(){
@@ -1705,13 +1716,22 @@ function toggleLive(){
   _liveBtnTxt();updateLiveView();
 }
 function _liveKnown(words){
-  // فهارس مطلقة في refWords للكلمات التي تطابقت مع المرجع
+  // فهارس مطلقة في refWords. مطابقة أمامية متسلسلة: كل كلمة تُقبل فقط إن وُجدت قريبة من الموضع الحالي
+  // (حتى ٣ كلمات للأمام)، فلا تُملأ مواضع بعيدة تشبهها في الكلمات (مثل «الرحمن الرحيم» في آيتين).
   const out=new Set();
   const uw=mergeYaAyyuha(words.filter(w=>w&&w.length>0));
   if(!uw.length)return out;
-  const s0=findStart(uw);
-  const res=compareWords(uw,refWords.slice(s0,s0+uw.length+10));
-  for(let i=0;i<res.length;i++){if(res[i].status==='ok')out.add(s0+i);}
+  let p=findStart(uw);
+  const LOOK=3;
+  for(let k=0;k<uw.length;k++){
+    const u=norm(uw[k]);
+    if(!u)continue;
+    let hit=-1;
+    for(let q=p;q<Math.min(refWords.length,p+LOOK+1);q++){
+      if(norm(refWords[q])===u){hit=q;break;}
+    }
+    if(hit>=0){out.add(hit);p=hit+1;}
+  }
   return out;
 }
 function updateLiveView(){
@@ -2639,7 +2659,7 @@ function _dbgRaw(tr,fin){
 }
 function makeRec(){
   const r=new SpeechAPI();r.lang='ar-SA';r.continuous=true;r.interimResults=!!liveOn;let doneUpTo=0;
-  r.onstart=()=>{recognizing=true;currentText='';setBtn('rec');renderTranscript();};
+  r.onstart=()=>{recognizing=true;currentText='';_lastFinalN=[];setBtn('rec');renderTranscript();};
   r.onresult=e=>{
     let interim='';
     for(let i=e.resultIndex;i<e.results.length;i++){
@@ -2648,19 +2668,27 @@ function makeRec(){
       if(e.results[i].isFinal){
         if(i>=doneUpTo){
           doneUpTo=i+1;
-          addWords(tr.replace(/\b300\b|300/g,'ثلاث مائة').trim().split(/\s+/).filter(w=>w));
+          let _fw=tr.replace(/\b300\b|300/g,'ثلاث مائة').trim().split(/\s+/).filter(w=>w);
+          if(liveOn)_fw=_cumDedup(_fw);
+          if(_fw.length)addWords(_fw);
         }
       }else{
-        interim+=tr;
+        if(liveOn)interim=tr;else interim+=tr;   // مع العرض الفوري: آخر نتيجة مؤقتة فقط (هي الأحدث والتراكمية)
       }
     }
-    currentText=mergeYaAyyuha(interim.trim().split(/\s+/).filter(w=>w)).join(' ');
+    let _iw=interim.trim().split(/\s+/).filter(w=>w);
+    if(liveOn&&_lastFinalN.length){
+      const _in=_iw.map(norm);
+      if(_in.length>=_lastFinalN.length&&_lastFinalN.every((x,i)=>x===_in[i]))_iw=_iw.slice(_lastFinalN.length);
+    }
+    currentText=mergeYaAyyuha(_iw).join(' ');
     renderTranscript();updateBtns();
   };
   r.onerror=e=>{if(e.error!=='no-speech'&&e.error!=='aborted'){recognizing=false;setBtn(savedWords.length?'paused':'idle');if(['not-allowed','service-not-allowed','audio-capture','language-not-supported'].indexOf(e.error)!==-1){try{alert(darbiT('recite.err_speech_blocked'));}catch(_){}}}};
   r.onend=()=>{
     recognizing=false;
     if(currentText){addWords(currentText.trim().split(/\s+/).filter(w=>w));currentText='';}
+    _lastFinalN=[];
     renderTranscript();setBtn(savedWords.length?'paused':'idle');
     if(_helpPending){_helpPending=false;clearTimeout(_helpTimer);_doHelp();}
   };
