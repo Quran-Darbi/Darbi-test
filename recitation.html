@@ -1686,16 +1686,29 @@ function _nextRefIdx(){
 // قالها المستخدم فعلًا ولم تصل بعدُ كأنها «التالية». لذلك إن كان التسجيل شغّالًا نوقفه مؤقتًا لتصل الكلمات المعلّقة، ثم نكشف الكلمة.
 // ===== العرض الفوري (أكتوبر 2026): هيكل الصفحة ثابت، والكلمة الصحيحة تظهر خضراء في مكانها =====
 // النتائج المؤقتة (ظهور الكلمات أثناء القراءة) مفعّلة دائمًا
-const liveOn=true;
+const liveOn=!/[?&]live=0\b/.test(location.search);   // للطوارئ: أضف ?live=0 إلى الرابط لإيقاف الكتابة الفورية
 // متصفحات أندرويد مع النتائج المؤقتة قد تعيد النص النهائي تراكميًا («بسم» ثم «بسم الله» ثم «بسم الله الرحمن»…).
 // فإذا بدأ النص الجديد بالنص النهائي السابق نفسه أخذنا الجزء الزائد فقط. يعمل فقط مع «العرض الفوري».
-let _lastFinalN=[];
+let _lastFinalN=[];   // كل كلمات الجلسة الحالية للتعرّف (مُطبَّعة) بعد إزالة المكرر
+// يعيد عدد الكلمات التي تبدأ بها القائمة n وهي مكرَّرة من آخر ما كُتب في هذه الجلسة:
+// (1) تراكمي: القائمة تبدأ بكل ما سبق  (2) تداخل: تبدأ بآخر كلمتين فأكثر مما سبق  (3) إعادة تسليم: القائمة كلها (3 كلمات فأكثر) موجودة في ذيل ما سبق
+function _ovCount(n){
+  const s=_lastFinalN;
+  if(!s.length||!n.length)return 0;
+  if(n.length>s.length&&s.every((x,i)=>x===n[i]))return s.length;
+  const m=Math.min(s.length,n.length);
+  for(let k=m;k>=2;k--){
+    let ok=true;
+    for(let i=0;i<k;i++){if(s[s.length-k+i]!==n[i]){ok=false;break;}}
+    if(ok)return k;
+  }
+  return 0;
+}
 function _cumDedup(ws){
   const n=ws.map(norm);
-  const l=_lastFinalN;
-  let out=ws;
-  if(l.length&&n.length>=l.length&&l.every((x,i)=>x===n[i]))out=ws.slice(l.length);
-  if(n.length)_lastFinalN=n;
+  const c=_ovCount(n);
+  const out=ws.slice(c);
+  _lastFinalN=_lastFinalN.concat(n.slice(c));
   return out;
 }
 let _helpPending=false,_helpTimer=null;
@@ -2626,8 +2639,7 @@ function makeRec(){
     }
     let _iw=interim.trim().split(/\s+/).filter(w=>w);
     if(liveOn&&_lastFinalN.length){
-      const _in=_iw.map(norm);
-      if(_in.length>=_lastFinalN.length&&_lastFinalN.every((x,i)=>x===_in[i]))_iw=_iw.slice(_lastFinalN.length);
+      _iw=_iw.slice(_ovCount(_iw.map(norm)));
     }
     currentText=mergeYaAyyuha(_iw).join(' ');
     renderTranscript();updateBtns();
