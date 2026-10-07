@@ -141,6 +141,12 @@ html[data-theme="dark"] .w-help{color:#f0d88a;background:#3a3114;}
 html[data-theme="dark"] .help-chips span{background:#3a3114;color:#f0d88a;}
 .rec-word{border-bottom:2px dotted var(--gold);}
 .retry-wrong-btn{display:none;width:100%;margin-top:10px;padding:12px;border-radius:12px;border:1.5px solid var(--gold);background:var(--hint-btn-bg);color:var(--text);font-family:inherit;font-size:15px;cursor:pointer;}
+.tail-note{display:none;margin-bottom:12px;padding:10px 12px;border-radius:10px;border:1px solid var(--gold);background:var(--hint-btn-bg);color:var(--text);font-size:13px;text-align:center;line-height:1.7;}
+.tail-note button{margin-top:8px;padding:8px 14px;border-radius:10px;border:1.5px solid var(--gold);background:transparent;color:var(--text);font-family:inherit;font-size:14px;cursor:pointer;}
+.scope-switch{display:flex;gap:6px;margin-bottom:4px;}
+.scope-switch button{flex:1;padding:8px 6px;border-radius:10px;border:1.5px solid var(--border);background:transparent;color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;}
+.scope-switch button.on{border-color:var(--gold);background:var(--hint-btn-bg);font-weight:700;}
+.scope-hint{font-size:12px;opacity:.75;text-align:center;margin-bottom:10px;}
 .retry-banner{display:none;margin-bottom:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--gold);background:var(--hint-btn-bg);color:var(--text);font-size:14px;text-align:center;}
 .w-missing{color:#999;background:#f0f0f0;border-radius:4px;padding:1px 4px;margin:1px;text-decoration:line-through;}
 .retry-btn{width:100%;padding:11px;border-radius:11px;font-size:15px;font-family:inherit;cursor:pointer;background:var(--surface2);color:var(--accent);border:1.5px solid var(--border);margin-top:10px;}
@@ -599,6 +605,8 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 <div class="rec-card" id="recCard">
   <div class="rec-desc" data-i18n-html="recite.rec_desc_html">اضغط 🎤 وابدأ التلاوة من أي آية<br>توقف متى شئت — سنحدد موضعك تلقائياً<br>🟢 صح &nbsp;|&nbsp; 🔴 غلط &nbsp;|&nbsp; ➖ محذوف</div>
   <div class="retry-banner" id="retryBanner"></div>
+  <div class="scope-switch" id="scopeSwitch"><button type="button" id="scopeFullBtn" onclick="setScope(true)"></button><button type="button" id="scopePartBtn" onclick="setScope(false)"></button></div>
+  <div class="scope-hint" id="scopeHint"></div>
   <button class="rec-btn" id="recBtn" onclick="toggleRec()" data-i18n="recite.choose_surah_first">اختر سورة أولاً</button>
   <button class="reveal-btn" id="revealBtn" onclick="toggleReveal()" style="display:none;" data-i18n="recite.show_text_btn">📖 اعرض نص السورة</button>
   <button class="reveal-btn" id="hintBtn" onclick="showHint()" style="display:none;" data-i18n="hint.btn">💡 مساعدة (أول 3 كلمات)</button>
@@ -620,6 +628,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   </div>
   <div class="score-bar"><div class="score-fill" id="scoreFill" style="width:0%"></div></div>
   <div class="where-msg" id="whereMsg"></div>
+  <div class="tail-note" id="tailNote"><div id="tailNoteTxt"></div><button type="button" id="tailNoteBtn" onclick="checkRecitation(true)"></button></div>
   <div class="scope-note" data-i18n="recite.scope_note">ℹ️ هذا الاختبار يتحقق من الكلمات وترتيبها في حفظك، ولا يتحقق حالياً من دقة الحركات (التشكيل) أو أحكام التجويد والمدود — هذا الجزء قيد البحث والتطوير.</div>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#c3e6cb;border:1px solid #155724"></div><span data-i18n="recite.legend_correct">صحيحة</span></div>
@@ -914,8 +923,8 @@ const SURAH_NAMES = {
 let currentKey='',refWords=[];
 // ===== نصوص الميزات الجديدة (مساعدة تدريجية / توضيحات) — عربي وإنجليزي؛ باقي اللغات تأخذ الإنجليزي =====
 const _XT={
-  ar:{helpTitle:'كلمات احتجت إلى مساعدة فيها ({n})',helpLegend:'بمساعدة',editTip:'👆 اضغط على أي كلمة التقطها الجهاز خطأً لتحذفها أو تعيد تسجيلها',whereAyah:'بدأت من الآية {n}',retryWrong:'🎯 أعد الجزء الذي أخطأت فيه',retryBanner:'🎯 أعد التسميع من الآية {n} — موضع أول خطأ',retryBannerNoAyah:'🎯 أعد التسميع من موضع أول خطأ',retryBannerLeft:'🎯 أعد التسميع من الآية {n} — مواضع الخطأ المتبقية: {r}',retryNext:'➡️ الخطأ التالي: الآية {n} (المتبقي {r})',retryAgain:'🎯 أعد الآية {n} مرة أخرى',retryDone:'✅ أحسنت — صحّحتَ كل مواضع الخطأ',liveOn:'👁️ عرض فوري: يعمل',liveOff:'👁️ عرض فوري: متوقف',liveHint:'الكلمات التي تقرؤها صحيحة تظهر هنا في مكانها من الصفحة'},
-  en:{helpTitle:'Words you needed help with ({n})',helpLegend:'With help',editTip:'👆 Tap any word the device heard wrongly to delete it or re-record it',whereAyah:'You started from verse {n}',retryWrong:'🎯 Redo the part I got wrong',retryBanner:'🎯 Recite again from verse {n} — where your first mistake was',retryBannerNoAyah:'🎯 Recite again from where your first mistake was',retryBannerLeft:'🎯 Recite again from verse {n} — mistakes left: {r}',retryNext:'➡️ Next mistake: verse {n} ({r} left)',retryAgain:'🎯 Redo verse {n} again',retryDone:'✅ Well done — you fixed every mistake',liveOn:'👁️ Live view: on',liveOff:'👁️ Live view: off',liveHint:'Words you recite correctly appear here in their place on the page'}
+  ar:{helpTitle:'كلمات احتجت إلى مساعدة فيها ({n})',helpLegend:'بمساعدة',editTip:'👆 اضغط على أي كلمة التقطها الجهاز خطأً لتحذفها أو تعيد تسجيلها',whereAyah:'بدأت من الآية {n}',retryWrong:'🎯 أعد الجزء الذي أخطأت فيه',retryBanner:'🎯 أعد التسميع من الآية {n} — موضع أول خطأ',retryBannerNoAyah:'🎯 أعد التسميع من موضع أول خطأ',retryBannerLeft:'🎯 أعد التسميع من الآية {n} — مواضع الخطأ المتبقية: {r}',retryNext:'➡️ الخطأ التالي: الآية {n} (المتبقي {r})',retryAgain:'🎯 أعد الآية {n} مرة أخرى',retryDone:'✅ أحسنت — صحّحتَ كل مواضع الخطأ',tailNote:'⏹️ توقفتَ عند الآية {a}؛ لم تُقرأ {k} كلمة من آخر الصفحة (الآيات {f}–{t}) ولم تُحسب عليك.',tailNoteNoAyah:'⏹️ توقفتَ قبل آخر الصفحة؛ لم تُقرأ {k} كلمة ولم تُحسب عليك.',tailBtn:'أردتُ الصفحة كاملة — احسب الباقي نسيانًا',scopeFull:'🎯 الصفحة كاملة',scopePart:'📍 من أي مكان',scopeHintFull:'ما لم تقرأه من آخر الصفحة يُحسب نسيانًا',scopeHintPart:'تُحسب الكلمات التي قرأتَها فقط',liveOn:'👁️ عرض فوري: يعمل',liveOff:'👁️ عرض فوري: متوقف',liveHint:'الكلمات التي تقرؤها صحيحة تظهر هنا في مكانها من الصفحة'},
+  en:{helpTitle:'Words you needed help with ({n})',helpLegend:'With help',editTip:'👆 Tap any word the device heard wrongly to delete it or re-record it',whereAyah:'You started from verse {n}',retryWrong:'🎯 Redo the part I got wrong',retryBanner:'🎯 Recite again from verse {n} — where your first mistake was',retryBannerNoAyah:'🎯 Recite again from where your first mistake was',retryBannerLeft:'🎯 Recite again from verse {n} — mistakes left: {r}',retryNext:'➡️ Next mistake: verse {n} ({r} left)',retryAgain:'🎯 Redo verse {n} again',retryDone:'✅ Well done — you fixed every mistake',tailNote:'⏹️ You stopped at verse {a}; {k} words at the end of the page (verses {f}–{t}) were not read and not counted against you.',tailNoteNoAyah:'⏹️ You stopped before the end of the page; {k} words were not read and not counted.',tailBtn:'I meant the whole page — count the rest as forgotten',scopeFull:'🎯 Whole page',scopePart:'📍 From anywhere',scopeHintFull:'Whatever you do not recite to the end of the page counts as forgotten',scopeHintPart:'Only the words you recite are counted',liveOn:'👁️ Live view: on',liveOff:'👁️ Live view: off',liveHint:'Words you recite correctly appear here in their place on the page'}
 };
 function _tx(k,v){
   const lg=(window.darbiLang&&darbiLang())||'ar';
@@ -1704,6 +1713,7 @@ function onSelectSurah(){
   });
 }
 function applySurah(){
+  _renderScope();
   _retryQ=[];_retryTarget=-1;
   refWords=splitRefWords(TEXTS[currentKey]);
   if(currentKey!=='fatiha')refWords=stripLeadingBasmala(refWords);
@@ -2765,6 +2775,7 @@ function setBtn(state){
 function clearAll(){
   if(!_keepQ){_retryQ=[];_retryTarget=-1;}
   const _rb=document.getElementById('retryBanner');if(_rb)_rb.style.display='none';
+  const _tn=document.getElementById('tailNote');if(_tn)_tn.style.display='none';
   if(recognizing){try{recInst.stop();}catch(e){}recognizing=false;}
   recInst=null;savedWords=[];selWord=null;currentText='';_insertAt=null;
   _resetHelp();
@@ -2834,7 +2845,42 @@ function retryWrong(){
   document.getElementById('recCard').scrollIntoView({behavior:'smooth'});
 }
 
-function checkRecitation(){
+// لقطة من سجل التقدّم قبل حفظ النتيجة، لنستعيدها إن اختار المستخدم «أردتُ الصفحة كاملة» فلا تبقى درجة الجزء المقروء وحده
+// نطاق التسميع: الصفحة كاملة (الافتراضي: الباقي يُحسب نسيانًا) أو من أي مكان (تُحسب الكلمات المقروءة فقط)
+var _scopeFull=true;
+try{if(localStorage.getItem('darbi_rec_scope')==='part')_scopeFull=false;}catch(e){}
+function _renderScope(){
+  const f=document.getElementById('scopeFullBtn'),pb=document.getElementById('scopePartBtn'),h=document.getElementById('scopeHint');
+  if(!f||!pb)return;
+  f.textContent=_tx('scopeFull');pb.textContent=_tx('scopePart');
+  f.className=_scopeFull?'on':'';pb.className=_scopeFull?'':'on';
+  if(h)h.textContent=_tx(_scopeFull?'scopeHintFull':'scopeHintPart');
+}
+function setScope(full){
+  _scopeFull=!!full;
+  try{localStorage.setItem('darbi_rec_scope',_scopeFull?'full':'part');}catch(e){}
+  _renderScope();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',_renderScope);else _renderScope();
+var _recSnapData=null;
+function _recSnap(){
+  try{
+    var all=JSON.parse(localStorage.getItem('darbi_progress')||'{}');var k=darbiProgressKey(currentKey);
+    return {k:k,v:(all[k]&&all[k].recitation)?JSON.parse(JSON.stringify(all[k].recitation)):null};
+  }catch(e){return null;}
+}
+function _recRestore(sn){
+  try{
+    if(!sn)return;
+    var all=JSON.parse(localStorage.getItem('darbi_progress')||'{}');
+    if(!all[sn.k])all[sn.k]={};
+    if(sn.v)all[sn.k].recitation=sn.v;else delete all[sn.k].recitation;
+    localStorage.setItem('darbi_progress',JSON.stringify(all));
+  }catch(e){}
+}
+function checkRecitation(forceFull){
+  const _fromBtn=(forceFull===true);          // ضغط زر «أردتُ الصفحة كاملة» بعد نتيجة جزئية
+  forceFull=_fromBtn||(_scopeFull&&_retryTarget<0);   // وضع «الصفحة كاملة» (إلا أثناء إعادة موضع خطأ)
   if(recognizing){try{recInst.stop();}catch(e){}recognizing=false;}
   setBtn('idle');
   const userWords=mergeYaAyyuha(savedWords.filter(w=>w.length>0));
@@ -2848,6 +2894,7 @@ function checkRecitation(){
     const _it=_retryQ[0];
     if(userWords.length<=(_it.en-_it.st+1)+2)_refEnd=Math.min(_refEnd,_it.en+1+2);
   }
+  if(forceFull)_refEnd=refWords.length;   // «أردتُ الصفحة كاملة»: نقارن بكل ما بقي من الصفحة
   const ref=refWords.slice(startIdx,_refEnd);
   let results=compareWords(userWords,ref);
   // الشريحة بتاخد +10 كلمة زيادة عشان تمسك الكلمات المتخطّاة. لكن لو
@@ -2865,7 +2912,7 @@ function checkRecitation(){
     const _absTail=startIdx+_tailStart;
     // هل الذيل بيبدأ عند رأس آية؟ يبقى القارئ وقف عندها
     const _atAyahHead=ayahBounds.some(b=>b.start===_absTail);
-    if(_atAyahHead)results=results.slice(0,_tailStart);
+    if(_atAyahHead&&!forceFull)results=results.slice(0,_tailStart);
   }
   if(!results.length)return;
   // كلمة قُرئت صحيحة لكن بعد مساعدة: تُلوَّن بلون مختلف ولا تُحسب حفظًا كاملًا
@@ -2878,6 +2925,7 @@ function checkRecitation(){
   _renderRetryBtn();
   // محاولة «إعادة موضع خطأ» (آية واحدة مثلًا) لا تُحسب درجةً للصفحة: نُحدّث مواضع المراجعة فقط
   const _isRetryAttempt=_retryTarget>=0;
+  if(_fromBtn){_recRestore(_recSnapData);}else{_recSnapData=_recSnap();}
   if(!_isRetryAttempt)saveDarbiProgress('recitation',ok,total);
   saveRecitationDetail(pct,startIdx,results,_isRetryAttempt);
   let _ayN=0;
@@ -2885,6 +2933,17 @@ function checkRecitation(){
   let where=startIdx===0?darbiT('recite.where_start'):(_ayN>0?_tx('whereAyah',{n:_ayN}):darbiT('recite.where_approx',{n:startIdx+1}));
   document.getElementById('resultCard').style.display='block';
   document.getElementById('whereMsg').textContent=where;
+  // لو توقّف القارئ قبل نهاية الصفحة: نوضّح أن الباقي لم يُحسب، ونتيح له اختيار «أردتُ الصفحة كاملة»
+  (function(){
+    const nt=document.getElementById('tailNote');if(!nt)return;
+    const endAbs=startIdx+results.length,rem=refWords.length-endAbs;
+    if(forceFull||_isRetryAttempt||rem<=0){nt.style.display='none';return;}
+    const _ayAt=function(abs){let n=0;for(let i=0;i<ayahBounds.length;i++){if(ayahBounds[i].start<=abs)n=ayahBounds[i].num;}return n;};
+    const lastRead=_ayAt(Math.max(0,endAbs-1)),fromA=_ayAt(endAbs),toA=ayahBounds.length?ayahBounds[ayahBounds.length-1].num:0;
+    document.getElementById('tailNoteTxt').textContent=(lastRead>0&&fromA>0&&toA>0)?_tx('tailNote',{a:lastRead,k:rem,f:fromA,t:toA}):_tx('tailNoteNoAyah',{k:rem});
+    document.getElementById('tailNoteBtn').textContent=_tx('tailBtn');
+    nt.style.display='block';
+  })();
   document.getElementById('statOk').textContent='✓ '+ok;
   document.getElementById('statErr').textContent='✗ '+bad;
   document.getElementById('statPct').textContent=darbiT('recite.pct_label',{pct:pct});
