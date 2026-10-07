@@ -1692,22 +1692,37 @@ const liveOn=!/[?&]live=0\b/.test(location.search);   // للطوارئ: أضف 
 let _lastFinalN=[];   // كل كلمات الجلسة الحالية للتعرّف (مُطبَّعة) بعد إزالة المكرر
 // يعيد عدد الكلمات التي تبدأ بها القائمة n وهي مكرَّرة من آخر ما كُتب في هذه الجلسة:
 // (1) تراكمي: القائمة تبدأ بكل ما سبق  (2) تداخل: تبدأ بآخر كلمتين فأكثر مما سبق  (3) إعادة تسليم: القائمة كلها (3 كلمات فأكثر) موجودة في ذيل ما سبق
-// هل في نص هذه الصفحة تكرار فعلي متتالٍ لهذه الكلمة (مثل «صفًّا صفًّا» و«دكًّا دكًّا»)؟ إن كان فلا نحذف تكرارها
-function _refRepeats(w){
-  try{for(let i=0;i+1<refWords.length;i++){if(norm(refWords[i])===w&&norm(refWords[i+1])===w)return true;}}catch(_){}
+// هل في نص هذه الصفحة تكرار فعلي متتالٍ لهذه الكلمة أو العبارة (مثل «صفًّا صفًّا» و«دكًّا دكًّا» و«إن مع العسر يسرًا»)؟ إن كان فلا نحذف تكرارها
+function _refRepeats(run){
+  const r=Array.isArray(run)?run:[run];const k=r.length;
+  try{
+    const R=refWords.map(norm);
+    for(let i=0;i+2*k<=R.length;i++){
+      let ok=true;
+      for(let j=0;j<k;j++){if(R[i+j]!==r[j]||R[i+k+j]!==r[j]){ok=false;break;}}
+      if(ok)return true;
+    }
+  }catch(_){}
   return false;
 }
+// يعيد عدد الكلمات التي تبدأ بها n وهي تكرار لما كُتب قبلها. المرجع (base):
+//  - كلمات الجلسة الحالية إن وُجدت، وإلا ذيل ما كُتب سابقًا في الصفحة (عند التلاوة من جديد دون تحديد كلمة)
 function _ovCount(n){
   const s=_lastFinalN;
-  if(!s.length||!n.length)return 0;
-  // أول كلمة في الجلسة قد تصل مكرَّرة عدة مرات: ما دامت الجلسة كلمة واحدة نحذف كل تكرار لها في بداية النص الجديد
-  if(s.length===1&&n[0]===s[0]&&!_refRepeats(s[0])){let c=0;while(c<n.length&&n[c]===s[0])c++;return c;}
-  if(n.length>s.length&&s.every((x,i)=>x===n[i]))return s.length;
-  const m=Math.min(s.length,n.length);
-  for(let k=m;k>=2;k--){
+  if(!n.length)return 0;
+  let base=s,fromSaved=false;
+  if(!s.length){
+    if(selWord!==null||_insertAt!==null||!savedWords.length)return 0;
+    base=savedWords.slice(-12).map(norm);fromSaved=true;
+  }
+  // أول كلمة في الجلسة قد تصل مكرَّرة عدة مرات: ما دام المرجع كلمة واحدة نحذف كل تكرار لها
+  if(base.length===1&&n[0]===base[0]&&!_refRepeats(base[0])){let c=0;while(c<n.length&&n[c]===base[0])c++;return c;}
+  if(!fromSaved&&n.length>base.length&&base.every((x,i)=>x===n[i]))return base.length;
+  const m=Math.min(base.length,n.length);
+  for(let k=m;k>=1;k--){
     let ok=true;
-    for(let i=0;i<k;i++){if(s[s.length-k+i]!==n[i]){ok=false;break;}}
-    if(ok)return k;
+    for(let i=0;i<k;i++){if(base[base.length-k+i]!==n[i]){ok=false;break;}}
+    if(ok&&!_refRepeats(n.slice(0,k)))return k;   // k=1: أول كلمة في النص الجديد هي آخر كلمة سابقة (يكررها الهاتف عند بدء مقطع جديد)
   }
   return 0;
 }
@@ -2645,7 +2660,7 @@ function makeRec(){
       }
     }
     let _iw=interim.trim().split(/\s+/).filter(w=>w);
-    if(liveOn&&_lastFinalN.length){
+    if(liveOn&&_iw.length){
       _iw=_iw.slice(_ovCount(_iw.map(norm)));
     }
     currentText=mergeYaAyyuha(_iw).join(' ');
