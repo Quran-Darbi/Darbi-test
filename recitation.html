@@ -144,9 +144,16 @@ html[data-theme="dark"] .help-chips span{background:#3a3114;color:#f0d88a;}
 .tail-note{display:none;margin-bottom:12px;padding:10px 12px;border-radius:10px;border:1px solid var(--gold);background:var(--hint-btn-bg);color:var(--text);font-size:13px;text-align:center;line-height:1.7;}
 .tail-note button{margin-top:8px;padding:8px 14px;border-radius:10px;border:1.5px solid var(--gold);background:transparent;color:var(--text);font-family:inherit;font-size:14px;cursor:pointer;}
 .scope-switch{display:flex;gap:6px;margin-bottom:4px;}
-.scope-switch button{flex:1;padding:8px 6px;border-radius:10px;border:1.5px solid var(--border);background:transparent;color:var(--text);font-family:inherit;font-size:13px;cursor:pointer;}
-.scope-switch button.on{border-color:var(--gold);background:var(--hint-btn-bg);font-weight:700;}
+.scope-switch button{flex:1;padding:9px 6px;border-radius:12px;border:1.5px solid var(--border);background:transparent;color:var(--text);font-family:inherit;cursor:pointer;display:flex;flex-direction:column;gap:2px;align-items:center;line-height:1.35;}
+.scope-switch .sc-t{font-size:14px;font-weight:700;}
+.scope-switch .sc-ico{color:var(--accent);vertical-align:-2px;}
+.scope-switch button.on .sc-ico{color:inherit;}
+.scope-switch .sc-s{font-size:11px;opacity:.75;}
+.scope-switch button.on{border-color:var(--accent);background:var(--accent);color:#fff;}
+.scope-switch button.on .sc-s{opacity:.9;}
+html[data-theme="dark"] .scope-switch button.on{color:#10210f;}
 .scope-hint{font-size:12px;opacity:.75;text-align:center;margin-bottom:10px;}
+.help-why{font-size:12px;opacity:.8;margin:4px 0 8px;line-height:1.7;}
 .retry-banner{display:none;margin-bottom:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--gold);background:var(--hint-btn-bg);color:var(--text);font-size:14px;text-align:center;}
 .w-missing{color:#999;background:#f0f0f0;border-radius:4px;padding:1px 4px;margin:1px;text-decoration:line-through;}
 .retry-btn{width:100%;padding:11px;border-radius:11px;font-size:15px;font-family:inherit;cursor:pointer;background:var(--surface2);color:var(--accent);border:1.5px solid var(--border);margin-top:10px;}
@@ -637,7 +644,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
     <div class="legend-item" id="legendHelp" style="display:none"><div class="legend-dot" style="background:#fbefc8;border:1px solid #7a5a10"></div><span id="legendHelpTxt"></span></div>
   </div>
   <div class="ayah-display" id="ayahDisplay"></div>
-  <div class="help-result" id="helpResult"><div class="help-result-title" id="helpResultTitle"></div><div class="help-chips" id="helpChips"></div></div>
+  <div class="help-result" id="helpResult"><div class="help-result-title" id="helpResultTitle"></div><div class="help-why" id="helpWhy"></div><div class="help-chips" id="helpChips"></div></div>
   <button class="retry-wrong-btn" id="retryWrongBtn" onclick="retryWrong()"></button>
   <button class="retry-btn" onclick="retryRec()" data-i18n="recite.retry_btn">🔄 إعادة التسجيل</button>
 </div>
@@ -923,8 +930,8 @@ const SURAH_NAMES = {
 let currentKey='',refWords=[];
 // ===== نصوص الميزات الجديدة (مساعدة تدريجية / توضيحات) — عربي وإنجليزي؛ باقي اللغات تأخذ الإنجليزي =====
 const _XT={
-  ar:{helpTitle:'كلمات احتجت إلى مساعدة فيها ({n})',helpLegend:'بمساعدة',editTip:'👆 اضغط على أي كلمة التقطها الجهاز خطأً لتحذفها أو تعيد تسجيلها',whereAyah:'بدأت من الآية {n}',retryWrong:'🎯 أعد الجزء الذي أخطأت فيه',retryBanner:'🎯 أعد التسميع من الآية {n} — موضع أول خطأ',retryBannerNoAyah:'🎯 أعد التسميع من موضع أول خطأ',retryBannerLeft:'🎯 أعد التسميع من الآية {n} — مواضع الخطأ المتبقية: {r}',retryNext:'➡️ الخطأ التالي: الآية {n} (المتبقي {r})',retryAgain:'🎯 أعد الآية {n} مرة أخرى',retryDone:'✅ أحسنت — صحّحتَ كل مواضع الخطأ',tailNote:'⏹️ توقفتَ عند الآية {a}؛ لم تُقرأ {k} كلمة من آخر الصفحة (الآيات {f}–{t}) ولم تُحسب عليك.',tailNoteNoAyah:'⏹️ توقفتَ قبل آخر الصفحة؛ لم تُقرأ {k} كلمة ولم تُحسب عليك.',tailBtn:'أردتُ الصفحة كاملة — احسب الباقي نسيانًا',scopeFull:'🎯 الصفحة كاملة',scopePart:'📍 من أي آية في الصفحة',scopeHintFull:'ما لم تقرأه من آخر الصفحة يُحسب نسيانًا',scopeHintPart:'تُحسب الآيات التي قرأتَها فقط',liveOn:'👁️ عرض فوري: يعمل',liveOff:'👁️ عرض فوري: متوقف',liveHint:'الكلمات التي تقرؤها صحيحة تظهر هنا في مكانها من الصفحة'},
-  en:{helpTitle:'Words you needed help with ({n})',helpLegend:'With help',editTip:'👆 Tap any word the device heard wrongly to delete it or re-record it',whereAyah:'You started from verse {n}',retryWrong:'🎯 Redo the part I got wrong',retryBanner:'🎯 Recite again from verse {n} — where your first mistake was',retryBannerNoAyah:'🎯 Recite again from where your first mistake was',retryBannerLeft:'🎯 Recite again from verse {n} — mistakes left: {r}',retryNext:'➡️ Next mistake: verse {n} ({r} left)',retryAgain:'🎯 Redo verse {n} again',retryDone:'✅ Well done — you fixed every mistake',tailNote:'⏹️ You stopped at verse {a}; {k} words at the end of the page (verses {f}–{t}) were not read and not counted against you.',tailNoteNoAyah:'⏹️ You stopped before the end of the page; {k} words were not read and not counted.',tailBtn:'I meant the whole page — count the rest as forgotten',scopeFull:'🎯 Whole page',scopePart:'📍 From any verse on the page',scopeHintFull:'Whatever you do not recite to the end of the page counts as forgotten',scopeHintPart:'Only the verses you recite are counted',liveOn:'👁️ Live view: on',liveOff:'👁️ Live view: off',liveHint:'Words you recite correctly appear here in their place on the page'}
+  ar:{helpTitle:'كلمات احتجت إلى مساعدة فيها ({n})',helpLegend:'بمساعدة',editTip:'👆 اضغط على أي كلمة التقطها الجهاز خطأً لتحذفها أو تعيد تسجيلها',whereAyah:'بدأت من الآية {n}',retryWrong:'🎯 أعد الجزء الذي أخطأت فيه',retryBanner:'🎯 أعد التسميع من الآية {n} — موضع أول خطأ',retryBannerNoAyah:'🎯 أعد التسميع من موضع أول خطأ',retryBannerLeft:'🎯 أعد التسميع من الآية {n} — مواضع الخطأ المتبقية: {r}',retryNext:'➡️ الخطأ التالي: الآية {n} (المتبقي {r})',retryAgain:'🎯 أعد الآية {n} مرة أخرى',retryDone:'✅ أحسنت — صحّحتَ كل مواضع الخطأ',tailNote:'⏹️ توقفتَ عند الآية {a}؛ لم تُقرأ {k} كلمة من آخر الصفحة (الآيات {f}–{t}) ولم تُحسب عليك.',tailNoteNoAyah:'⏹️ توقفتَ قبل آخر الصفحة؛ لم تُقرأ {k} كلمة ولم تُحسب عليك.',tailBtn:'أردتُ الصفحة كاملة — احسب الباقي نسيانًا',helpWhy:'ℹ️ النسبة {p}٪ وليست ١٠٠٪ لأنك استعنتَ بالمساعدة في {n} من الكلمات. الكلمة الملمَّح لها تُحسب قراءةً صحيحة لكنها لا تُحسب حفظًا كاملًا، ولذلك لم يظهر الاحتفال. اقرأ الصفحة بلا مساعدة لتحصل على ١٠٠٪.',scopeFull:'📖 تسميع الصفحة كاملة',scopeFullSub:'من أول الصفحة إلى آخرها',scopePart:'تسميع آيات محددة',scopePartSub:'من أي آية، وتتوقف متى شئت',scopeHintFull:'ما لم تقرأه من آخر الصفحة يُحسب نسيانًا',scopeHintPart:'تُحسب الآيات التي قرأتَها فقط',liveOn:'👁️ عرض فوري: يعمل',liveOff:'👁️ عرض فوري: متوقف',liveHint:'الكلمات التي تقرؤها صحيحة تظهر هنا في مكانها من الصفحة'},
+  en:{helpTitle:'Words you needed help with ({n})',helpLegend:'With help',editTip:'👆 Tap any word the device heard wrongly to delete it or re-record it',whereAyah:'You started from verse {n}',retryWrong:'🎯 Redo the part I got wrong',retryBanner:'🎯 Recite again from verse {n} — where your first mistake was',retryBannerNoAyah:'🎯 Recite again from where your first mistake was',retryBannerLeft:'🎯 Recite again from verse {n} — mistakes left: {r}',retryNext:'➡️ Next mistake: verse {n} ({r} left)',retryAgain:'🎯 Redo verse {n} again',retryDone:'✅ Well done — you fixed every mistake',tailNote:'⏹️ You stopped at verse {a}; {k} words at the end of the page (verses {f}–{t}) were not read and not counted against you.',tailNoteNoAyah:'⏹️ You stopped before the end of the page; {k} words were not read and not counted.',tailBtn:'I meant the whole page — count the rest as forgotten',helpWhy:'ℹ️ Your score is {p}% rather than 100% because you used help on {n} word(s). A helped word counts as read correctly but not as fully memorized, so there is no celebration. Recite the page without help to reach 100%.',scopeFull:'📖 Recite the whole page',scopeFullSub:'From the start of the page to the end',scopePart:'Recite chosen verses',scopePartSub:'From any verse, stop whenever you like',scopeHintFull:'Whatever you do not recite to the end of the page counts as forgotten',scopeHintPart:'Only the verses you recite are counted',liveOn:'👁️ Live view: on',liveOff:'👁️ Live view: off',liveHint:'Words you recite correctly appear here in their place on the page'}
 };
 function _tx(k,v){
   const lg=(window.darbiLang&&darbiLang())||'ar';
@@ -933,7 +940,7 @@ function _tx(k,v){
   return t;
 }
 // المساعدة التدريجية: فهارس الكلمات (مطلقة في refWords) التي كُشفت، وقائمتها بالترتيب
-let helpIdx=[],helpWords=[];
+let helpIdx=[],helpWords=[],_startCue='';
 
 // ===== نظام تتبع التقدم الدائم (يوليو 2026) — نفس مفتاح localStorage
 // 'darbi_progress' المستخدم في صفحات الاختبار، تحت مستوى 'recitation' =====
@@ -1818,18 +1825,21 @@ function _doHelp(){
   if(muqRun&&muqRun.n&&idx<muqRun.n){
     word=muqRun.raw;idxs=[];for(let i=0;i<muqRun.n;i++)idxs.push(i);
   }else{word=refWords[idx];idxs=[idx];}
-  if(helpIdx.indexOf(idxs[0])<0){
+  if(idxs[0]===0){
+    // أول كلمة في الصفحة: تلميح بداية فقط (لا يدل على ضعف الحفظ) فتُعرض ولا تُحسب مساعدة ولا تمنع ١٠٠٪
+    _startCue=word;
+  }else if(helpIdx.indexOf(idxs[0])<0){
     idxs.forEach(i=>{if(helpIdx.indexOf(i)<0)helpIdx.push(i);});
     helpWords.push(word);
   }
   const box=document.getElementById('hintBox');
-  box.textContent=helpWords.join(' ');
+  box.textContent=[_startCue].concat(helpWords).filter(Boolean).join(' ');
   box.style.display='block';
   const btn=document.getElementById('hintBtn');
-  btn.textContent=darbiT('hint.btn')+' ('+helpWords.length+')';
+  btn.textContent=darbiT('hint.btn')+(helpWords.length?' ('+helpWords.length+')':'');
 }
 function _resetHelp(){
-  helpIdx=[];helpWords=[];
+  helpIdx=[];helpWords=[];_startCue='';
   const box=document.getElementById('hintBox');if(box)box.style.display='none';
   const btn=document.getElementById('hintBtn');
   if(btn){btn.disabled=false;btn.textContent=darbiT('hint.btn');}
@@ -2852,7 +2862,16 @@ try{if(localStorage.getItem('darbi_rec_scope')==='part')_scopeFull=false;}catch(
 function _renderScope(){
   const f=document.getElementById('scopeFullBtn'),pb=document.getElementById('scopePartBtn'),h=document.getElementById('scopeHint');
   if(!f||!pb)return;
-  f.textContent=_tx('scopeFull');pb.textContent=_tx('scopePart');
+  const _fill=function(b,t,sub){b.textContent='';const a=document.createElement('span');a.className='sc-t';a.textContent=_tx(t);const c=document.createElement('span');c.className='sc-s';c.textContent=_tx(sub);b.appendChild(a);b.appendChild(c);};
+  _fill(f,'scopeFull','scopeFullSub');_fill(pb,'scopePart','scopePartSub');
+  // فاصل الصفحة بلون أخضر (بدل إيموجي 🔖 الأحمر): أيقونة SVG تتبع لون الزر
+  (function(){
+    const t=pb.querySelector('.sc-t');if(!t||t.querySelector('svg'))return;
+    const NS='http://www.w3.org/2000/svg';
+    const sv=document.createElementNS(NS,'svg');sv.setAttribute('width','13');sv.setAttribute('height','16');sv.setAttribute('viewBox','0 0 14 16');sv.setAttribute('aria-hidden','true');sv.setAttribute('class','sc-ico');
+    const pa=document.createElementNS(NS,'path');pa.setAttribute('d','M2 1h10a1 1 0 0 1 1 1v13l-6-3.5L1 15V2a1 1 0 0 1 1-1z');pa.setAttribute('fill','currentColor');
+    sv.appendChild(pa);t.insertBefore(sv,t.firstChild);t.insertBefore(document.createTextNode(' '),sv.nextSibling);
+  })();
   f.className=_scopeFull?'on':'';pb.className=_scopeFull?'':'on';
   if(h)h.textContent=_tx(_scopeFull?'scopeHintFull':'scopeHintPart');
 }
@@ -2999,6 +3018,9 @@ function checkRecitation(forceFull){
   const _hr=document.getElementById('helpResult'),_hl=document.getElementById('legendHelp');
   if(helpWords.length){
     document.getElementById('helpResultTitle').textContent='💡 '+_tx('helpTitle',{n:helpWords.length});
+    const _hw=document.getElementById('helpWhy');
+    const _helpedN=total-ok-bad;
+    if(_hw){if(bad===0&&_helpedN>0&&pct<100){_hw.textContent=_tx('helpWhy',{p:pct,n:_helpedN});_hw.style.display='block';}else _hw.style.display='none';}
     const ch=document.getElementById('helpChips');ch.innerHTML='';
     helpWords.forEach(w=>{const c=document.createElement('span');c.textContent=w;ch.appendChild(c);});
     _hr.style.display='block';

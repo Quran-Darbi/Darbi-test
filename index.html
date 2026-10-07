@@ -17,6 +17,7 @@
 <title>دربي لحفظ القرآن</title>
 <meta name="description" content="اختبر حفظك للقرآن الكريم">
 <script src="lang.js"></script>
+<script src="darbi-keys.js"></script>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#4a7c4a">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -137,10 +138,23 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .surah-name{font-family:'Scheherazade New',serif;font-size:0.88rem;color:var(--green);font-weight:700;margin:10px 0 6px;}
 .surah-name:first-child{margin-top:2px;}
 .surah-card{font-family:inherit;cursor:pointer;text-align:start;width:100%;}
-.quiz-card.surah-card.sel{border-color:var(--green);background:var(--bg);box-shadow:0 0 0 2px var(--green) inset;}
-.surah-panel{display:none;grid-column:1/-1;margin:2px 0 4px;padding:8px;border:1px dashed var(--border);border-radius:11px;}
+.quiz-card.surah-card.sel{background:linear-gradient(135deg,#2E6B3E,#3A8C50);border-color:#2E6B3E;box-shadow:0 4px 12px rgba(46,107,62,.35);}
+.quiz-card.surah-card.sel .card-name{color:#fff;}
+.quiz-card.surah-card.sel .card-meta{color:rgba(255,255,255,.82);}
+.quiz-card.surah-card.sel .card-bar{background:rgba(255,255,255,.4);}
+.quiz-card.surah-card.sel::after{content:'';position:absolute;bottom:3px;left:50%;margin-left:-6px;border:6px solid transparent;border-top-color:rgba(255,255,255,.75);border-bottom-width:0;}
+.surah-panel{display:none;grid-column:1/-1;margin:4px 0 6px;padding:10px 9px 9px;background:var(--green3);border:1px solid var(--green2);border-top:3px solid #2E6B3E;border-radius:12px;}
+.surah-panel.open{animation:spIn .22s ease;}
+@keyframes spIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+.surah-panel .cards-grid{grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:6px;}
+.surah-panel .quiz-card{padding:6px 6px 6px;border-radius:9px;gap:2px;}
+.surah-panel .card-name{font-size:0.8rem;}
+.surah-panel .card-meta{font-size:0.62rem;}
+.surah-panel .card-bar{width:2px;}
+.surah-panel .lvl-dot{width:15px;height:15px;font-size:0.55rem;}
 .surah-panel.open{display:block;}
-.surah-panel-title{font-family:'Scheherazade New',serif;font-size:0.88rem;color:var(--green);font-weight:700;margin:0 0 6px;}
+.surah-panel-title{display:inline-block;font-family:'Scheherazade New',serif;font-size:0.8rem;color:#fff;background:#2E6B3E;font-weight:700;margin:0 0 8px;padding:2px 12px;border-radius:20px;}
+@media(max-width:560px){.surah-panel .cards-grid{grid-template-columns:repeat(4,1fr);}.surah-panel{padding:9px 7px 8px;}}
 
 .note-btn{margin-top:9px;width:100%;background:var(--green3);border:1px dashed var(--green2);color:var(--green);font-size:0.78rem;padding:8px;border-radius:10px;cursor:pointer;text-align:center;font-family:inherit;}
 .note-btn:hover{opacity:.85;}
@@ -392,6 +406,36 @@ const baqaraPages=[
   ['albaqara_p48.html','ص 48','آية الدَّين'],['albaqara_p49.html','ص 49','283–286'],
 ];
 
+const alimranPages=[
+  ['alimran_p50.html','ص 50','1–9'],
+  ['alimran_p51.html','ص 51','10–15'],
+  ['alimran_p52.html','ص 52','16–22'],
+  ['alimran_p53.html','ص 53','23–29'],
+  ['alimran_p54.html','ص 54','30–37'],
+  ['alimran_p55.html','ص 55','38–45'],
+  ['alimran_p56.html','ص 56','46–52'],
+  ['alimran_p57.html','ص 57','53–61'],
+  ['alimran_p58.html','ص 58','62–70'],
+  ['alimran_p59.html','ص 59','71–77'],
+  ['alimran_p60.html','ص 60','78–83'],
+  ['alimran_p61.html','ص 61','84–91'],
+  ['alimran_p62.html','ص 62','92–100'],
+  ['alimran_p63.html','ص 63','101–108'],
+  ['alimran_p64.html','ص 64','109–115'],
+  ['alimran_p65.html','ص 65','116–121'],
+  ['alimran_p66.html','ص 66','122–132'],
+  ['alimran_p67.html','ص 67','133–140'],
+  ['alimran_p68.html','ص 68','141–148'],
+  ['alimran_p69.html','ص 69','149–153'],
+  ['alimran_p70.html','ص 70','154–157'],
+  ['alimran_p71.html','ص 71','158–165'],
+  ['alimran_p72.html','ص 72','166–173'],
+  ['alimran_p73.html','ص 73','174–180'],
+  ['alimran_p74.html','ص 74','181–186'],
+  ['alimran_p75.html','ص 75','187–194'],
+  ['alimran_p76.html','ص 76','195–200'],
+];
+
 const kahfPages=[
   ['alkahf_p293.html','ص 293','1–4'],['alkahf_p294.html','ص 294','5–15'],
   ['alkahf_p295.html','ص 295','16–20'],['alkahf_p296.html','ص 296','21–27'],
@@ -429,6 +473,12 @@ const yaseenPages=[
   ['yaseen_p440.html','ص 440','1–12'],['yaseen_p441.html','ص 441','13–27'],
   ['yaseen_p442.html','ص 442','28–40'],['yaseen_p443.html','ص 443','41–54'],
   ['yaseen_p444.html','ص 444','55–70'],['yaseen_p445.html','ص 445','71–83'],
+];
+
+const fussilatPages=[
+  ['fussilat_p477.html','ص 477','1–11'],['fussilat_p478.html','ص 478','12–20'],
+  ['fussilat_p479.html','ص 479','21–29'],['fussilat_p480.html','ص 480','30–38'],
+  ['fussilat_p481.html','ص 481','39–46'],['fussilat_p482.html','ص 482','47–54'],
 ];
 
 const arrahmanPages=[
@@ -594,28 +644,115 @@ const JUZ_GROUPS = {
         { kind:'range', arr:baqaraPages, from:0, to:20, name:'سورة البقرة (البداية)', surah:'البقرة' }
       ] },
   2: { title:'البقرة', groups:[
-        { kind:'range', arr:baqaraPages, from:20, to:40, name:'سورة البقرة (يتبع)', surah:'البقرة' }
+        { kind:'range', arr:baqaraPages, from:20, to:40, name:'سورة البقرة (تابع)', surah:'البقرة' }
       ] },
   3: { title:'البقرة، آل عمران', groups:[
-        { kind:'range', arr:baqaraPages, from:40, to:48, name:'سورة البقرة (ختام الجزء)', surah:'البقرة' },
-        { kind:'soon', name:'آل عمران' }
+        { kind:'range', arr:baqaraPages, from:40, to:48, name:'سورة البقرة (تابع)', surah:'البقرة' },
+        { kind:'range', arr:alimranPages, from:0, to:12, name:'سورة آل عمران (1–91)', surah:'آل عمران', note:'سورة آل عمران تكمل في الجزء 4 ←', noteTarget:4 }
+      ] },
+  4: { title:'آل عمران، النساء', groups:[
+        { kind:'range', arr:alimranPages, from:12, to:27, name:'سورة آل عمران (92–200)', surah:'آل عمران', note:'◄ سورة آل عمران بدأت في الجزء 3', noteTarget:3 },
+        { kind:'soon', name:'النساء', page:77 }
+      ] },
+  5:{ title:'النساء', groups:[
+        { kind:'soon', name:'النساء (تابع)', page:82 }
+      ] },
+  6:{ title:'النساء، المائدة', groups:[
+        { kind:'soon', name:'النساء (تابع)', page:102 },
+        { kind:'soon', name:'المائدة', page:106 }
+      ] },
+  7:{ title:'المائدة، الأنعام', groups:[
+        { kind:'soon', name:'المائدة (تابع)', page:121 },
+        { kind:'soon', name:'الأنعام', page:128 }
+      ] },
+  8:{ title:'الأنعام، الأعراف', groups:[
+        { kind:'soon', name:'الأنعام (تابع)', page:142 },
+        { kind:'soon', name:'الأعراف', page:151 }
+      ] },
+  9:{ title:'الأعراف، الأنفال', groups:[
+        { kind:'soon', name:'الأعراف (تابع)', page:162 },
+        { kind:'soon', name:'الأنفال', page:177 }
+      ] },
+  10:{ title:'الأنفال، التوبة', groups:[
+        { kind:'soon', name:'الأنفال (تابع)', page:182 },
+        { kind:'soon', name:'التوبة', page:187 }
+      ] },
+  11:{ title:'التوبة، يونس، هود', groups:[
+        { kind:'soon', name:'التوبة (تابع)', page:201 },
+        { kind:'soon', name:'يونس', page:208 },
+        { kind:'soon', name:'هود', page:221 }
+      ] },
+  12:{ title:'هود، يوسف', groups:[
+        { kind:'soon', name:'هود (تابع)', page:221 },
+        { kind:'soon', name:'يوسف', page:235 }
+      ] },
+  13:{ title:'يوسف، الرعد، إبراهيم', groups:[
+        { kind:'soon', name:'يوسف (تابع)', page:242 },
+        { kind:'soon', name:'الرعد', page:249 },
+        { kind:'soon', name:'إبراهيم', page:255 }
+      ] },
+  14:{ title:'الحجر، النحل', groups:[
+        { kind:'soon', name:'الحجر', page:262 },
+        { kind:'soon', name:'النحل', page:267 }
       ] },
   15:{ title:'الإسراء، الكهف', groups:[
-        { kind:'soon', name:'الإسراء' },
+        { kind:'soon', name:'الإسراء', page:282 },
         { kind:'range', arr:kahfPages, from:0, to:9, name:'سورة الكهف (1–74)', surah:'الكهف', note:'سورة الكهف تكمل في الجزء 16 ←', noteTarget:16 }
       ] },
   16:{ title:'الكهف، مريم، طه', groups:[
-        { kind:'range', arr:kahfPages, from:9, to:12, name:'سورة الكهف (تتمة 75–110)', surah:'الكهف', note:'◄ سورة الكهف بدأت في الجزء 15', noteTarget:15 },
+        { kind:'range', arr:kahfPages, from:9, to:12, name:'سورة الكهف (تابع 75–110)', surah:'الكهف', note:'◄ سورة الكهف بدأت في الجزء 15', noteTarget:15 },
         { kind:'full', arr:maryamPages, name:'مريم', surah:'مريم' },
         { kind:'full', arr:tahaPages, name:'طه', surah:'طه' }
       ] },
-  22:{ title:'الأحزاب، يس', groups:[
-        { kind:'soon', name:'الأحزاب' },
+  17:{ title:'الأنبياء، الحج', groups:[
+        { kind:'soon', name:'الأنبياء', page:322 },
+        { kind:'soon', name:'الحج', page:332 }
+      ] },
+  18:{ title:'المؤمنون، النور، الفرقان', groups:[
+        { kind:'soon', name:'المؤمنون', page:342 },
+        { kind:'soon', name:'النور', page:350 },
+        { kind:'soon', name:'الفرقان', page:359 }
+      ] },
+  19:{ title:'الفرقان، الشعراء، النمل', groups:[
+        { kind:'soon', name:'الفرقان (تابع)', page:362 },
+        { kind:'soon', name:'الشعراء', page:367 },
+        { kind:'soon', name:'النمل', page:377 }
+      ] },
+  20:{ title:'النمل، القصص، العنكبوت', groups:[
+        { kind:'soon', name:'النمل (تابع)', page:382 },
+        { kind:'soon', name:'القصص', page:385 },
+        { kind:'soon', name:'العنكبوت', page:396 }
+      ] },
+  21:{ title:'العنكبوت، الروم، لقمان، السجدة، الأحزاب', groups:[
+        { kind:'soon', name:'العنكبوت (تابع)', page:402 },
+        { kind:'soon', name:'الروم', page:404 },
+        { kind:'soon', name:'لقمان', page:411 },
+        { kind:'soon', name:'السجدة', page:415 },
+        { kind:'soon', name:'الأحزاب', page:418 }
+      ] },
+  22:{ title:'الأحزاب، سبأ، فاطر، يس', groups:[
+        { kind:'soon', name:'الأحزاب (تابع)', page:422 },
+        { kind:'soon', name:'سبأ', page:428 },
+        { kind:'soon', name:'فاطر', page:434 },
         { kind:'range', arr:yaseenPages, from:0, to:2, name:'سورة يس (1–27)', surah:'يس', note:'سورة يس تكمل في الجزء 23 ←', noteTarget:23 }
       ] },
-  23:{ title:'يس، الزمر', groups:[
+  23:{ title:'يس، الصافات، ص، الزمر', groups:[
         { kind:'range', arr:yaseenPages, from:2, to:6, name:'سورة يس (28–83)', surah:'يس', note:'◄ سورة يس بدأت في الجزء 22', noteTarget:22 },
-        { kind:'soon', name:'الزمر' }
+        { kind:'soon', name:'الصافات', page:446 },
+        { kind:'soon', name:'ص', page:453 },
+        { kind:'soon', name:'الزمر', page:458 }
+      ] },
+  24:{ title:'الزمر، غافر، فصلت', groups:[
+        { kind:'soon', name:'الزمر (تابع)', page:462 },
+        { kind:'soon', name:'غافر', page:467 },
+        { kind:'range', arr:fussilatPages, from:0, to:5, name:'سورة فصلت (1–46)', surah:'فصلت', note:'سورة فصلت تكمل في الجزء 25 ←', noteTarget:25 }
+      ] },
+  25:{ title:'فصلت، الشورى، الزخرف، الدخان، الجاثية', groups:[
+        { kind:'range', arr:fussilatPages, from:5, to:6, name:'سورة فصلت (47–54)', surah:'فصلت', note:'◄ سورة فصلت بدأت في الجزء 24', noteTarget:24 },
+        { kind:'soon', name:'الشورى', page:483 },
+        { kind:'soon', name:'الزخرف', page:489 },
+        { kind:'soon', name:'الدخان', page:496 },
+        { kind:'soon', name:'الجاثية', page:499 }
       ] },
   26:{ title:'الأحقاف، الذاريات', groups:[
         { kind:'full', arr:alahqafPages, name:'الأحقاف', surah:'الأحقاف' },
@@ -626,7 +763,7 @@ const JUZ_GROUPS = {
         { kind:'range', arr:azzariyatPages, from:0, to:2, name:'سورة الذاريات (البداية)', surah:'الذاريات' }
       ] },
   27:{ title:'الذاريات، الحديد', groups:[
-        { kind:'range', arr:azzariyatPages, from:2, to:4, name:'سورة الذاريات (يتبع)', surah:'الذاريات' },
+        { kind:'range', arr:azzariyatPages, from:2, to:4, name:'سورة الذاريات (تابع)', surah:'الذاريات' },
         { kind:'full', arr:atturPages, name:'الطور', surah:'الطور' },
         { kind:'full', arr:annajmPages, name:'النجم', surah:'النجم' },
         { kind:'full', arr:alqamarPages, name:'القمر', surah:'القمر' },
@@ -694,33 +831,35 @@ function groupPageKeys(g){
 
 function groupCardsHtml(g){
   if(g.kind==='single') return card(g.href,g.name,g.meta,true,g.name);
-  if(g.kind==='soon') return card('',g.name,'قريباً',false,g.name);
+  if(g.kind==='soon') return card('',g.name,g.page?('ص '+g.page):darbiT('home.juz_soon'),false,g.name);
   if(g.kind==='amma') return ammaData.map(p=>card(p[0],p[1],p[2],p[3])).join('');
   const arr=g.arr, from=('from' in g)?g.from:0, to=('to' in g)?g.to:arr.length;
   return arr.slice(from,to).map(p=>card(p[0],p[1],p[2],true,g.surah)).join('');
 }
 
 function buildAccBody(meta){
-  const multi = meta.groups.length>1;
   let out='', cards='', panels='';
   const flush=()=>{
     if(cards){ out+=`<div class="cards-grid surah-cards">${cards}${panels}</div>`; cards=''; panels=''; }
   };
   meta.groups.forEach((g,gi)=>{
     const noteBtn = g.note ? `<button class="note-btn" onclick="goJuz(${g.noteTarget})">${g.note}</button>` : '';
-    if(multi && g.kind==='full' && g.name){
+    if(g.kind==='soon'||g.kind==='single'){ cards+=groupCardsHtml(g); return; }
+    if(g.kind==='full'||g.kind==='range'){
       const arr=g.arr, from=('from' in g)?g.from:0, to=('to' in g)?g.to:arr.length;
       const pages=arr.slice(from,to);
+      const label=(g.name||'').replace(/^سورة /,'');
       if(pages.length>1){
         const id='sp'+gi+'_'+Math.random().toString(36).slice(2,7);
-        cards+=`<button type="button" class="quiz-card surah-card" data-panel="${id}" aria-expanded="false" onclick="toggleSurah(this)"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${g.name}</div><div class="card-meta">${pages[0][1]}</div></button>`;
-        panels+=`<div class="surah-panel" id="${id}"><div class="surah-panel-title notranslate" translate="no">${g.name}</div><div class="cards-grid">${groupCardsHtml(g)}</div>${noteBtn}</div>`;
-        return;
+        cards+=`<button type="button" class="quiz-card surah-card" data-panel="${id}" aria-expanded="false" onclick="toggleSurah(this)"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${label}</div><div class="card-meta">${pages[0][1]}</div></button>`;
+        panels+=`<div class="surah-panel" id="${id}"><div class="surah-panel-title notranslate" translate="no">${label}</div><div class="cards-grid">${groupCardsHtml(g)}</div>${noteBtn}</div>`;
+      } else if(pages.length===1){
+        cards+=card(pages[0][0],label,pages[0][1],true,g.surah);
       }
+      return;
     }
     flush();
-    const heading = (multi && g.name) ? `<div class="surah-name notranslate" translate="no">${g.name}</div>` : '';
-    out+=`${heading}<div class="cards-grid">${groupCardsHtml(g)}</div>${noteBtn}`;
+    out+=`<div class="cards-grid">${groupCardsHtml(g)}</div>${noteBtn}`;
   });
   flush();
   return out;
@@ -749,16 +888,17 @@ function buildJuzRow(n){
   const id='acc-juz'+n;
   const meta=JUZ_GROUPS[n];
 
-  if(!meta){
+  const hasBuilt = !!meta && meta.groups.some(g=>g.kind!=='soon');
+  if(!hasBuilt){
     const s=SOON_JUZ[n];
-    const label=s?s[0]:darbiT('home.juz_soon');
+    const label=meta?juzRange(meta.title):(s?s[0]:darbiT('home.juz_soon'));
     const startPage=s?s[1]:'';
     return `<div class="acc" id="${id}" data-state="soon">
   <button class="acc-btn" onclick="toggleAcc(this)">
     <div class="acc-left"><div class="acc-left-top"><div class="juz-badge soon">${darbiT('home.juz_prefix')} ${n}</div><div class="juz-title notranslate" translate="no">${label}</div></div></div>
     <div class="acc-right"><div class="juz-prog">${darbiT('home.juz_soon')}</div><span class="acc-arrow">▾</span></div>
   </button>
-  <div class="acc-body"><div class="cards-grid">${card('',label.split('—')[0].trim(),startPage||darbiT('home.juz_soon'),false)}</div></div>
+  <div class="acc-body">${meta?buildAccBody(meta):`<div class="cards-grid">${card('',label.split('—')[0].trim(),startPage||darbiT('home.juz_soon'),false)}</div>`}</div>
 </div>`;
   }
 
@@ -805,13 +945,16 @@ function darbiPageComplete(entry){
 function renderDarbiProgress(){
   let all={};
   try{all=JSON.parse(localStorage.getItem('darbi_progress')||'{}');}catch(e){}
+  if(window.darbiNormProgress)all=darbiNormProgress(all);
 
   const nameByKey={alfatiha:'الفاتحة'};
   baqaraPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة البقرة '+p[1];});
+  alimranPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة آل عمران '+p[1];});
   kahfPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الكهف '+p[1];});
   maryamPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة مريم '+p[1];});
   tahaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة طه '+p[1];});
   yaseenPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة يس '+p[1];});
+  fussilatPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة فصلت '+p[1];});
   arrahmanPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الرحمن '+p[1];});
   alwaqiahPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الواقعة '+p[1];});
   almulkPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الملك '+p[1];});
@@ -873,7 +1016,7 @@ function renderDarbiProgress(){
 
   if(!Object.keys(all).length)return;
 
-  const totalPages=1+baqaraPages.length+kahfPages.length+maryamPages.length+tahaPages.length+yaseenPages.length+arrahmanPages.length+alwaqiahPages.length+almulkPages.length+alqalamPages.length+alhaqqaPages.length+almaarijPages.length+nuhPages.length+aljinnPages.length+almuzzammilPages.length+almudaththirPages.length+alqiyamaPages.length+alinsanPages.length+almursalatPages.length+alahqafPages.length+muhammadPages.length+alfathPages.length+alhujuratPages.length+qafPages.length+azzariyatPages.length+atturPages.length+annajmPages.length+alqamarPages.length+alhadidPages.length+almujadilaPages.length+alhashrPages.length+almumtahanaPages.length+alsaffPages.length+aljumuaPages.length+almunafiqunPages.length+attaghabunPages.length+attalaqPages.length+attahrimPages.length+ammaData.filter(p=>p[3]).length;
+  const totalPages=1+baqaraPages.length+alimranPages.length+kahfPages.length+maryamPages.length+tahaPages.length+yaseenPages.length+fussilatPages.length+arrahmanPages.length+alwaqiahPages.length+almulkPages.length+alqalamPages.length+alhaqqaPages.length+almaarijPages.length+nuhPages.length+aljinnPages.length+almuzzammilPages.length+almudaththirPages.length+alqiyamaPages.length+alinsanPages.length+almursalatPages.length+alahqafPages.length+muhammadPages.length+alfathPages.length+alhujuratPages.length+qafPages.length+azzariyatPages.length+atturPages.length+annajmPages.length+alqamarPages.length+alhadidPages.length+almujadilaPages.length+alhashrPages.length+almumtahanaPages.length+alsaffPages.length+aljumuaPages.length+almunafiqunPages.length+attaghabunPages.length+attalaqPages.length+attahrimPages.length+ammaData.filter(p=>p[3]).length;
   let doneCount=0;
   Object.keys(nameByKey).forEach(k=>{ if(darbiPageComplete(all[k])) doneCount++; });
 
@@ -903,7 +1046,7 @@ renderDarbiProgress();
 // كل مرة يتضاف جزء جديد.
 (function updateHstatPartsCount(){
   const el=document.getElementById('hstat-parts-count');
-  if(el) el.textContent=Object.keys(JUZ_GROUPS).length;
+  if(el) el.textContent=Object.values(JUZ_GROUPS).filter(m=>m.groups.some(g=>g.kind!=='soon')).length;
 })();
 
 // عدد "الاختبارات" و"السور" بيتحسبوا تلقائيًا من JUZ_GROUPS (الصفحات المتاحة فعليًا، بدون المقاطع "قريبًا")
