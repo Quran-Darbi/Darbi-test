@@ -914,8 +914,8 @@ const SURAH_NAMES = {
 let currentKey='',refWords=[];
 // ===== نصوص الميزات الجديدة (مساعدة تدريجية / توضيحات) — عربي وإنجليزي؛ باقي اللغات تأخذ الإنجليزي =====
 const _XT={
-  ar:{helpTitle:'كلمات احتجت إلى مساعدة فيها ({n})',helpLegend:'بمساعدة',editTip:'👆 اضغط على أي كلمة التقطها الجهاز خطأً لتحذفها أو تعيد تسجيلها',whereAyah:'بدأت من الآية {n}',retryWrong:'🎯 أعد الجزء الذي أخطأت فيه',retryBanner:'🎯 أعد التسميع من الآية {n} — موضع أول خطأ',retryBannerNoAyah:'🎯 أعد التسميع من موضع أول خطأ',liveOn:'👁️ عرض فوري: يعمل',liveOff:'👁️ عرض فوري: متوقف',liveHint:'الكلمات التي تقرؤها صحيحة تظهر هنا في مكانها من الصفحة'},
-  en:{helpTitle:'Words you needed help with ({n})',helpLegend:'With help',editTip:'👆 Tap any word the device heard wrongly to delete it or re-record it',whereAyah:'You started from verse {n}',retryWrong:'🎯 Redo the part I got wrong',retryBanner:'🎯 Recite again from verse {n} — where your first mistake was',retryBannerNoAyah:'🎯 Recite again from where your first mistake was',liveOn:'👁️ Live view: on',liveOff:'👁️ Live view: off',liveHint:'Words you recite correctly appear here in their place on the page'}
+  ar:{helpTitle:'كلمات احتجت إلى مساعدة فيها ({n})',helpLegend:'بمساعدة',editTip:'👆 اضغط على أي كلمة التقطها الجهاز خطأً لتحذفها أو تعيد تسجيلها',whereAyah:'بدأت من الآية {n}',retryWrong:'🎯 أعد الجزء الذي أخطأت فيه',retryBanner:'🎯 أعد التسميع من الآية {n} — موضع أول خطأ',retryBannerNoAyah:'🎯 أعد التسميع من موضع أول خطأ',retryBannerLeft:'🎯 أعد التسميع من الآية {n} — مواضع الخطأ المتبقية: {r}',retryNext:'➡️ الخطأ التالي: الآية {n} (المتبقي {r})',retryAgain:'🎯 أعد الآية {n} مرة أخرى',retryDone:'✅ أحسنت — صحّحتَ كل مواضع الخطأ',liveOn:'👁️ عرض فوري: يعمل',liveOff:'👁️ عرض فوري: متوقف',liveHint:'الكلمات التي تقرؤها صحيحة تظهر هنا في مكانها من الصفحة'},
+  en:{helpTitle:'Words you needed help with ({n})',helpLegend:'With help',editTip:'👆 Tap any word the device heard wrongly to delete it or re-record it',whereAyah:'You started from verse {n}',retryWrong:'🎯 Redo the part I got wrong',retryBanner:'🎯 Recite again from verse {n} — where your first mistake was',retryBannerNoAyah:'🎯 Recite again from where your first mistake was',retryBannerLeft:'🎯 Recite again from verse {n} — mistakes left: {r}',retryNext:'➡️ Next mistake: verse {n} ({r} left)',retryAgain:'🎯 Redo verse {n} again',retryDone:'✅ Well done — you fixed every mistake',liveOn:'👁️ Live view: on',liveOff:'👁️ Live view: off',liveHint:'Words you recite correctly appear here in their place on the page'}
 };
 function _tx(k,v){
   const lg=(window.darbiLang&&darbiLang())||'ar';
@@ -962,7 +962,7 @@ function saveDarbiProgress(level,correct,total){
 //   fs   = أفضل نسبة بين المحاولات التي بلغت cov ≥ 90 (صفحة كاملة تقريبًا)
 //   last = آخر محاولة {p: النسبة، a: آخر آية وصل إليها، c: نسبة ما قُرئ، t: الوقت}
 // تُقرأ في صفحة «تقدّمي». done وscore كما هما دون تغيير.
-function saveRecitationDetail(pct,startIdx,results){
+function saveRecitationDetail(pct,startIdx,results,retryOnly){
   try{
     // آخر كلمة نُطقت فعلًا (ok أو err) — الكلمات الناقصة في الذيل لم يصل إليها القارئ
     var covered=0;
@@ -977,10 +977,12 @@ function saveRecitationDetail(pct,startIdx,results){
     var endIdx=startIdx+covered;
     var ayahNo=0;
     for(var i=0;i<ayahBounds.length;i++){if(ayahBounds[i].start<=endIdx-1)ayahNo=ayahBounds[i].num;}
-    rec.n=(rec.n||0)+1;
-    rec.cov=Math.max(rec.cov||0,cov);
-    if(cov>=90)rec.fs=Math.max(rec.fs||0,pct);
-    rec.last={p:pct,a:ayahNo,c:cov,t:new Date().toISOString()};
+    if(!retryOnly){
+      rec.n=(rec.n||0)+1;
+      rec.cov=Math.max(rec.cov||0,cov);
+      if(cov>=90)rec.fs=Math.max(rec.fs||0,pct);
+      rec.last={p:pct,a:ayahNo,c:cov,t:new Date().toISOString()};
+    }
     // ===== مواضع المراجعة (أكتوبر 2026): rec.w = { فهرس الكلمة: {w:الكلمة, a:الآية, c:عدد مرات التعثر, h:1 إن كانت بمساعدة} } =====
     // الكلمة الخاطئة أو الناقصة أو التي احتاجت مساعدة تُضاف أو يزيد عدّادها، والكلمة التي قُرئت صحيحة دون مساعدة تُحذف من القائمة
     var W=rec.w||{};
@@ -1702,6 +1704,7 @@ function onSelectSurah(){
   });
 }
 function applySurah(){
+  _retryQ=[];_retryTarget=-1;
   refWords=splitRefWords(TEXTS[currentKey]);
   if(currentKey!=='fatiha')refWords=stripLeadingBasmala(refWords);
   muqRun=captureMuqattaat(refWords);
@@ -2760,6 +2763,7 @@ function setBtn(state){
 }
 
 function clearAll(){
+  if(!_keepQ){_retryQ=[];_retryTarget=-1;}
   const _rb=document.getElementById('retryBanner');if(_rb)_rb.style.display='none';
   if(recognizing){try{recInst.stop();}catch(e){}recognizing=false;}
   recInst=null;savedWords=[];selWord=null;currentText='';_insertAt=null;
@@ -2775,15 +2779,57 @@ function clearAll(){
   }
 }
 function retryRec(){clearAll();}
-// أول موضع خطأ في آخر نتيجة (فهرس مطلق في refWords) — يضبطه checkRecitation
-let _firstErrAbs=-1;
+// قائمة مواضع الخطأ (آيات فيها أخطاء لم تُصحَّح بعد) بترتيب الصفحة: [{ay,st,en}]
+// تُحدَّث بعد كل «تحقق»: الآيات التي قُرئت كاملةً وصحّت تُحذف، والآيات التي فيها أخطاء تُضاف
+var _retryQ=[],_retryTarget=-1,_keepQ=false,_firstErrAbs=-1;
+function _ayahSpan(abs){
+  for(let i=ayahBounds.length-1;i>=0;i--){
+    if(ayahBounds[i].start<=abs){
+      const en=((i+1<ayahBounds.length)?ayahBounds[i+1].start:refWords.length)-1;
+      return {ay:ayahBounds[i].num,st:ayahBounds[i].start,en:en};
+    }
+  }
+  return {ay:0,st:abs,en:abs};
+}
+function _updateRetryQueue(startIdx,results){
+  const covStart=startIdx,covEnd=startIdx+results.length-1;
+  // 1) نُبقي من القائمة ما لم يُقرأ كاملًا في هذه المحاولة
+  let q=_retryQ.filter(it=>!(it.st>=covStart&&it.en<=covEnd));
+  // 2) نُضيف آيات هذه المحاولة التي فيها أخطاء
+  const seen={};q.forEach(it=>{seen[it.st]=1;});
+  for(let i=0;i<results.length;i++){
+    if(results[i].status!=='ok'){
+      const sp=_ayahSpan(startIdx+i);
+      if(!seen[sp.st]){seen[sp.st]=1;q.push(sp);}
+    }
+  }
+  q.sort((x,y)=>x.st-y.st);
+  _retryQ=q;
+}
+function _renderRetryBtn(){
+  const btn=document.getElementById('retryWrongBtn');if(!btn)return;
+  const q=_retryQ,inRetry=_retryTarget>=0;
+  const _bn=document.getElementById('retryBanner');
+  if(_bn&&inRetry&&(!q.length||q[0].st!==_retryTarget))_bn.style.display='none';
+  if(!q.length){
+    if(inRetry){btn.textContent=_tx('retryDone');btn.style.display='block';btn.onclick=null;btn.style.cursor='default';}
+    else btn.style.display='none';
+    return;
+  }
+  btn.style.cursor='pointer';btn.onclick=retryWrong;
+  const first=q[0],rest=q.length-1;
+  if(!inRetry)btn.textContent=_tx('retryWrong')+(q.length>1?' ('+q.length+')':'');
+  else if(first.st===_retryTarget)btn.textContent=_tx('retryAgain',{n:first.ay||''});
+  else btn.textContent=_tx('retryNext',{n:first.ay||'',r:q.length});
+  btn.style.display='block';
+}
 function retryWrong(){
-  if(_firstErrAbs<0)return;
-  let ay=0;
-  for(let i=0;i<ayahBounds.length;i++){if(ayahBounds[i].start<=_firstErrAbs)ay=ayahBounds[i].num;}
-  clearAll();
+  if(!_retryQ.length)return;
+  const it=_retryQ[0];
+  _keepQ=true;clearAll();_keepQ=false;
+  _retryTarget=it.st;
   const b=document.getElementById('retryBanner');
-  b.textContent=ay>0?_tx('retryBanner',{n:ay}):_tx('retryBannerNoAyah');
+  b.textContent=it.ay>0?(_retryQ.length>1?_tx('retryBannerLeft',{n:it.ay,r:_retryQ.length}):_tx('retryBanner',{n:it.ay})):_tx('retryBannerNoAyah');
   b.style.display='block';
   document.getElementById('recCard').scrollIntoView({behavior:'smooth'});
 }
@@ -2793,8 +2839,16 @@ function checkRecitation(){
   setBtn('idle');
   const userWords=mergeYaAyyuha(savedWords.filter(w=>w.length>0));
   if(!userWords.length)return;
-  const startIdx=findStart(userWords);
-  const ref=refWords.slice(startIdx,startIdx+userWords.length+10);
+  let startIdx=findStart(userWords);
+  // أثناء إعادة موضع خطأ: نعرف الآية المقصودة، فإن بدأ القارئ بأول كلمة فيها نثبّت البداية عليها (الآيات القصيرة قد يلتبس موضعها)
+  if(_retryTarget>=0&&_retryQ.length&&_retryQ[0].st===_retryTarget&&norm(userWords[0])===norm(refWords[_retryTarget]))startIdx=_retryTarget;
+  let _refEnd=startIdx+userWords.length+10;
+  // إعادة آية واحدة: نحصر المقارنة في الآية المقصودة (+ كلمتين زيادة) كي لا تتطابق كلمة أخيرة مكرَّرة («أحد»…) مع آية لاحقة
+  if(_retryTarget>=0&&startIdx===_retryTarget&&_retryQ.length&&_retryQ[0].st===_retryTarget){
+    const _it=_retryQ[0];
+    if(userWords.length<=(_it.en-_it.st+1)+2)_refEnd=Math.min(_refEnd,_it.en+1+2);
+  }
+  const ref=refWords.slice(startIdx,_refEnd);
   let results=compareWords(userWords,ref);
   // الشريحة بتاخد +10 كلمة زيادة عشان تمسك الكلمات المتخطّاة. لكن لو
   // القارئ وقف قبل آخر الصفحة، الكلمات اللي ما وصلهاش ما ينفعش
@@ -2820,12 +2874,12 @@ function checkRecitation(){
   const bad=results.filter(r=>r.status!=='ok').length;
   const total=results.length;
   const pct=Math.round(ok/total*100);
-  _firstErrAbs=-1;
-  for(let _i=0;_i<results.length;_i++){if(results[_i].status!=='ok'){_firstErrAbs=startIdx+_i;break;}}
-  const _rw=document.getElementById('retryWrongBtn');
-  if(_rw){_rw.textContent=_tx('retryWrong');_rw.style.display=_firstErrAbs>=0?'block':'none';}
-  saveDarbiProgress('recitation',ok,total);
-  saveRecitationDetail(pct,startIdx,results);
+  _updateRetryQueue(startIdx,results);
+  _renderRetryBtn();
+  // محاولة «إعادة موضع خطأ» (آية واحدة مثلًا) لا تُحسب درجةً للصفحة: نُحدّث مواضع المراجعة فقط
+  const _isRetryAttempt=_retryTarget>=0;
+  if(!_isRetryAttempt)saveDarbiProgress('recitation',ok,total);
+  saveRecitationDetail(pct,startIdx,results,_isRetryAttempt);
   let _ayN=0;
   for(let i=0;i<ayahBounds.length;i++){if(ayahBounds[i].start<=startIdx)_ayN=ayahBounds[i].num;}
   let where=startIdx===0?darbiT('recite.where_start'):(_ayN>0?_tx('whereAyah',{n:_ayN}):darbiT('recite.where_approx',{n:startIdx+1}));
