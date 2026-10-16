@@ -2,7 +2,7 @@
    الاستراتيجية: Network First with Cache Fallback
    الشبكة أولًا حتى تصل التعديلات الجديدة فورًا، والكاش احتياطي عند انقطاع الاتصال. */
 
-const CACHE = 'darbi-v3';
+const CACHE = 'darbi-v4';
 
 /* المسارات نسبية عمدًا: تعمل على الدومين المخصص وعلى github.io بلا تعديل */
 const BASE = new URL('./', self.registration.scope).pathname;
@@ -12,6 +12,8 @@ const PRECACHE = [
   BASE + 'manifest.json',
   BASE + 'icons/icon-192x192.png',
   BASE + 'engine/engine1.js',
+  BASE + 'lang.js',
+  BASE + 'voice-engine.js',
   BASE + 'assets/quiz.css'
 ];
 
