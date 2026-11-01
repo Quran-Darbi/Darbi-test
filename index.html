@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google" content="notranslate">
-<title>Quran-Darbi | دربي لحفظ القرآن</title>
+<title>Quran-darbi.com | دربي لحفظ القرآن</title>
 <meta name="description" content="اختبر حفظك للقرآن الكريم">
 <script src="lang.js"></script>
 <script src="darbi-keys.js"></script>
@@ -36,13 +36,13 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="دربي لحفظ القرآن — اختبارات تفاعلية لحفظ كتاب الله ومراجعته">
-<meta property="og:site_name" content="Quran-Darbi">
+<meta property="og:site_name" content="Quran-darbi.com">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Quran-Darbi",
-  "alternateName": ["دربي لحفظ القرآن"],
+  "name": "Quran-darbi.com",
+  "alternateName": ["دربي لحفظ القرآن", "Quran-Darbi"],
   "url": "https://quran-darbi.com/"
 }
 </script>
@@ -81,35 +81,70 @@ nav{background:var(--nav);border-bottom:1.5px solid var(--border);padding:10px 1
 .rec-btn:hover{opacity:.88;}
 
 /* ===== HERO ===== */
-.hero{background:linear-gradient(160deg,#2E6B3E 0%,#3A8C50 60%,#4AA060 100%);padding:20px 20px 24px;text-align:center;position:relative;overflow:hidden;}
+.hero{background:linear-gradient(160deg,#2E6B3E 0%,#3A8C50 60%,#4AA060 100%);padding:28px 20px 20px;text-align:center;position:relative;overflow:hidden;}
+/* الوضع الليلي: الجزء العلوي بنفس لغة ألوان باقي الصفحة (بطاقات داكنة + أخضر الإبراز) وينتهي بلون الخلفية */
+html[data-theme="dark"] .hero{background:linear-gradient(180deg,var(--card) 0%,var(--bg) 100%);border-bottom:1.5px solid var(--border);}
+html[data-theme="dark"] .hero-title{color:var(--text);}
+html[data-theme="dark"] .hero-bismillah,html[data-theme="dark"] .hero-sub{color:var(--soft);}
+html[data-theme="dark"] .hero-start-btn{background:var(--green);color:#0f1f10;}
+html[data-theme="dark"] .hero-rec-btn,html[data-theme="dark"] .hero-progress-btn,html[data-theme="dark"] .hero-continue{background:var(--green3);color:var(--green);border:1.5px solid var(--green2);}
+html[data-theme="dark"] .hero-type,html[data-theme="dark"] .hstat,html[data-theme="dark"] .hero .ayah-banner{background:var(--green3);border-color:var(--border);}
+html[data-theme="dark"] .hero-type,html[data-theme="dark"] .hstat,html[data-theme="dark"] .hstat b,html[data-theme="dark"] .hero-resume-last,html[data-theme="dark"] .hero .ayah-text{color:var(--text);}
+html[data-theme="dark"] .hero-resume-count,html[data-theme="dark"] .hero .ayah-ref{color:var(--soft);}
+html[data-theme="dark"] .hero-resume-bar{background:var(--border);}
+html[data-theme="dark"] #hero-progress-fill{background:var(--green)!important;}
 /* زخرفة دوائر خلفية */
 .hero::before{content:'';position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.08);pointer-events:none;}
 .hero::after{content:'';position:absolute;bottom:-80px;right:-40px;width:280px;height:280px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.06);pointer-events:none;}
 /* زخرفة نقاط */
-.hero-stars-bottom{text-align:center;color:rgba(255,255,255,0.18);font-size:1.4rem;letter-spacing:6px;pointer-events:none;margin-top:20px;}
+.hero-stars-bottom{text-align:center;color:rgba(255,255,255,0.18);font-size:1.4rem;letter-spacing:6px;pointer-events:none;margin-top:18px;line-height:1.2;}
 .hero-inner{position:relative;z-index:1;}
-.hero-bismillah{font-family:'Scheherazade New',serif;font-size:1.1rem;color:rgba(255,255,255,0.75);margin-bottom:10px;letter-spacing:1px;}
-.hero-title{font-family:'Scheherazade New',serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:6px;}
-.hero-sub{text-wrap:balance;font-size:0.88rem;color:rgba(255,255,255,0.78);margin-bottom:12px;}
+.hero-bismillah{font-family:'Scheherazade New',serif;font-size:1.1rem;color:rgba(255,255,255,0.75);margin-bottom:16px;letter-spacing:1px;}
+.hero-title{font-family:'Scheherazade New',serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;}
+.hero-sub{text-wrap:balance;font-size:1.02rem;line-height:1.7;color:rgba(255,255,255,0.78);margin-bottom:20px;}
 /* بطاقة الآية */
 .ayah-banner{display:inline-flex;flex-direction:column;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:14px;padding:10px 18px;margin-bottom:12px;backdrop-filter:blur(6px);max-width:340px;}
 .ayah-text{font-family:'Scheherazade New',serif;font-size:1.05rem;color:#fff;line-height:1.9;margin-bottom:4px;}
 .ayah-ref{font-size:0.72rem;color:rgba(255,255,255,0.6);letter-spacing:.5px;}
 /* زر التلاوة */
-.hero-rec-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--green);border:none;border-radius:22px;padding:10px 24px;font-size:0.95rem;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.15);transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.hero-rec-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:8px 22px;font-size:0.9rem;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,0.12);transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .hero-rec-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,0.2);}
-.hero-btn-row{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.hero-rec-btn::after{content:"→";display:inline-block;font-size:1.05rem;opacity:.75;}
+.hero-btn-row{display:flex;flex-direction:column;align-items:center;gap:13px;}
+/* زر البدء الرئيسي + شارات أنواع الاختبارات */
+.hero-start-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:14px 38px;font-size:1.22rem;min-width:240px;justify-content:center;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.hero-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,0.25);}
+.hero-types{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 5px;margin:0 -14px 20px;padding:0;}
+.hero-type{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);color:#fff;border-radius:14px;padding:2px 8px;font-size:clamp(0.62rem,3.3vw,0.8rem);line-height:1.7;white-space:nowrap;}
+.hero-progress{margin-top:20px;}
+.hero-resume{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;max-width:300px;margin:0 auto;padding:0;}
+.hero-resume-last{font-size:0.88rem;color:#fff;line-height:1.5;}
+.hero-resume-count{font-size:0.76rem;color:rgba(255,255,255,0.78);margin-top:2px;}
+.hero-resume-bar{width:100%;height:4px;margin:9px 0 12px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;}
+.hero-continue{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.6);color:#fff;border-radius:16px;padding:6px 14px;font-size:0.85rem;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;}
+.hero-continue:hover{background:rgba(255,255,255,0.28);transform:translateY(-2px);}
+.hero-continue::after{content:"→";}
+html[dir="rtl"] .hero-continue::after{content:"←";}
+html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{content:"←";}
+#main{scroll-margin-top:130px;}
+.hero-start-btn::after{content:"→";display:inline-block;font-size:1.05rem;opacity:.75;}
+.hero-inner .ayah-banner{margin-top:10px;margin-bottom:0;}
 .hero-progress-btn{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,0.16);color:#fff;border:1.5px solid rgba(255,255,255,0.55);border-radius:18px;padding:9px 24px;font-size:0.95rem;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;cursor:pointer;}
 .hero-progress-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.26);}
 .hero-progress-btn-sub{font-size:0.68rem;font-weight:400;opacity:0.85;text-decoration:underline;}
 /* إحصائيات */
-.hero-stats{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.hero-stats{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;}
 .hstat{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:6px 14px;text-align:center;color:rgba(255,255,255,0.9);}
 .hstat b{display:block;font-size:1.05rem;color:#fff;}
 .hstat small{font-size:0.72rem;opacity:.8;}
 
 /* ===== SEARCH ===== */
 .search-wrap{background:var(--bg);padding:12px 16px 8px;position:sticky;top:55px;z-index:150;}
+/* الشاشة الأولى: الهيرو + الملاحظات تملآن الشاشة حتى مربع البحث، والفهرس يبدأ بعده */
+.home-first{min-height:calc(100vh - 55px - 64px);min-height:calc(100svh - 55px - 64px);display:flex;flex-direction:column;}
+.home-first .hero{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;}
+.home-first .beta-note{width:100%;margin:0 auto;padding-top:14px;padding-bottom:4px;box-sizing:border-box;}
+#juz-index{scroll-margin-top:125px;}
 .search-input{font-family:'Amiri',serif;font-size:1rem;width:100%;max-width:580px;display:block;margin:0 auto;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:24px;background:var(--card);color:var(--text);outline:none;text-align:right;direction:rtl;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A7A55' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;}
 .search-input:focus{border-color:var(--green);}
 .search-input::placeholder{color:var(--soft);opacity:.7;}
@@ -306,20 +341,24 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 </div>  </div>
 </nav>
 
+<div class="home-first">
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-bismillah notranslate" translate="no">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
     <div class="hero-title" data-i18n="home.title">دربي لحفظ القرآن</div>
     <div class="hero-sub" data-i18n="home.subtitle">اختبر حفظك صفحةً بصفحة — اختبارات تفاعلية لمراجعة الحفظ وتثبيته</div>
-    <div class="ayah-banner">
-      <div class="ayah-text notranslate" translate="no">﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلاً ﴾</div>
-      <div class="ayah-ref notranslate" translate="no">سورة المزمل — آية 4</div>
+    <div class="hero-types" aria-label="أنواع الاختبارات">
+      <span class="hero-type">🌱 <span data-i18n="level.easy_name">سهل</span></span>
+      <span class="hero-type">🌿 <span data-i18n="level.medium_name">متوسط</span></span>
+      <span class="hero-type">🌳 <span data-i18n="level.hard_name">صعب</span></span>
+      <span class="hero-type">🔀 <span data-i18n="level.order_name">ترتيب</span></span>
+      <span class="hero-type">🎤 <span data-i18n="home.chip_voice">صوتي</span></span>
     </div>
     <div class="hero-btn-row">
+      <a href="#juz-index" class="hero-start-btn" id="hero-start-btn" data-i18n="home.cta_start">🌱 ابدأ الاختبارات</a>
       <a href="recitation.html" class="hero-rec-btn" data-i18n="home.recite_btn">🎤 اختبر حفظك</a>
       <a href="progress.html" class="hero-progress-btn">
         <span data-i18n="home.progress_btn">📊 تقدّمي</span>
-        <span class="hero-progress-btn-sub" data-i18n="home.progress_btn_sub">تقدّمي بالتفصيل ◀</span>
       </a>
     </div>
     <div class="hero-stats">
@@ -327,14 +366,19 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <div class="hstat"><b id="hstat-parts-count">4</b><small data-i18n="home.stat_parts">أجزاء</small></div>
       <div class="hstat"><b id="hstat-surahs-count">109</b><small data-i18n="home.stat_surahs">سورة</small></div>
     </div>
-    <div class="hero-progress" id="hero-progress" style="display:none;margin-top:16px;">
-      <div style="background:rgba(255,255,255,0.2);border-radius:8px;height:8px;overflow:hidden;max-width:300px;margin:0 auto 6px;">
-        <div id="hero-progress-fill" style="height:100%;background:#fff;border-radius:8px;width:0%;transition:width .5s;"></div>
+    <div class="hero-progress" id="hero-progress" style="display:none;">
+      <div class="hero-resume">
+        <div class="hero-resume-last notranslate" id="hero-last-visited" translate="no"></div>
+        <div class="hero-resume-count" id="hero-progress-text"></div>
+        <div class="hero-resume-bar"><div id="hero-progress-fill" style="height:100%;background:#fff;border-radius:4px;width:0%;transition:width .5s;"></div></div>
+        <a class="hero-continue" id="hero-continue" href="alfatiha.html" style="display:none" data-i18n="home.continue_btn">تابع من حيث توقفت</a>
       </div>
-      <div style="font-size:0.78rem;color:rgba(255,255,255,0.9);" id="hero-progress-text"></div>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.7);margin-top:4px;" id="hero-last-visited"></div>
     </div>
     <div class="hero-stars-bottom">✦ ✦ ✦</div>
+    <div class="ayah-banner">
+      <div class="ayah-text notranslate" translate="no">﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلاً ﴾</div>
+      <div class="ayah-ref notranslate" translate="no">سورة المزمل — آية 4</div>
+    </div>
   </div>
 </div>
 
@@ -344,12 +388,13 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
     <span class="beta-text"><span data-i18n="home.beta_text_prefix">نرحب بـ</span><button type="button" class="beta-link" onclick="fdbkOpen()" data-i18n="home.beta_link">ملاحظاتكم واقتراحاتكم</button></span>
   </div>
 </div>
+</div>
 
 <div class="search-wrap">
   <input class="search-input" type="text" data-i18n-placeholder="home.search_placeholder" placeholder="ابحث عن سورة أو صفحة..." oninput="doSearch(this.value)" />
 </div>
 
-<div class="juz-filter-row">
+<div class="juz-filter-row" id="juz-index">
   <button type="button" class="juz-filter-chip active" data-mode="all" onclick="setJuzFilter('all',this)" data-i18n="home.filter_all">كل الأجزاء</button>
   <button type="button" class="juz-filter-chip" data-mode="built" onclick="setJuzFilter('built',this)" data-i18n="home.filter_built">متاح الآن</button>
   <button type="button" class="juz-filter-chip" data-mode="soon" onclick="setJuzFilter('soon',this)" data-i18n="home.filter_soon">قريبًا</button>
@@ -385,9 +430,21 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   <div class="footer-ayah notranslate" translate="no">﴿ إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ ﴾</div>
   <div class="footer-ref notranslate" translate="no">سورة الحجر — آية 9</div>
   <div class="footer-copy">© 2026<span id="copy-year"></span> <span data-i18n="home.footer_copy">دربي لحفظ القرآن — جميع الحقوق محفوظة</span></div>
+  <div class="footer-copy" style="margin-top:6px"><a href="privacy.html" data-i18n="home.privacy_link" style="color:inherit;text-decoration:underline">سياسة الخصوصية</a></div>
 </footer>
 
 <script>
+(function(){
+  var b=document.getElementById('hero-start-btn');
+  if(!b)return;
+  b.addEventListener('click',function(e){
+    var t=document.getElementById('juz-index');
+    if(!t)return;
+    e.preventDefault();
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  });
+})();
 const baqaraPages=[
   ['albaqara_p2.html','ص 2','1–5'],['albaqara_p3.html','ص 3','6–16'],
   ['albaqara_p4.html','ص 4','17–24'],['albaqara_p5.html','ص 5','25–29'],
@@ -667,6 +724,33 @@ const ibrahimPages=[
   ['ibrahim_p261.html','ص 261','43–52'],
 ];
 
+const alhijrPages=[
+  ['alhijr_p262.html','ص 262','1–15'],
+  ['alhijr_p263.html','ص 263','16–31'],
+  ['alhijr_p264.html','ص 264','32–51'],
+  ['alhijr_p265.html','ص 265','52–70'],
+  ['alhijr_p266.html','ص 266','71–90'],
+  ['alhijr_p267.html','ص 267','91–99'],
+];
+
+const annahlPages=[
+  ['annahl_p267.html','ص 267','1–6'],
+  ['annahl_p268.html','ص 268','7–14'],
+  ['annahl_p269.html','ص 269','15–26'],
+  ['annahl_p270.html','ص 270','27–34'],
+  ['annahl_p271.html','ص 271','35–42'],
+  ['annahl_p272.html','ص 272','43–54'],
+  ['annahl_p273.html','ص 273','55–64'],
+  ['annahl_p274.html','ص 274','65–72'],
+  ['annahl_p275.html','ص 275','73–79'],
+  ['annahl_p276.html','ص 276','80–87'],
+  ['annahl_p277.html','ص 277','88–93'],
+  ['annahl_p278.html','ص 278','94–102'],
+  ['annahl_p279.html','ص 279','103–110'],
+  ['annahl_p280.html','ص 280','111–118'],
+  ['annahl_p281.html','ص 281','119–128'],
+];
+
 const kahfPages=[
   ['alkahf_p293.html','ص 293','1–4'],['alkahf_p294.html','ص 294','5–15'],
   ['alkahf_p295.html','ص 295','16–20'],['alkahf_p296.html','ص 296','21–27'],
@@ -698,6 +782,117 @@ const tahaPages=[
   ['taha_p319.html','ص 319','99–113'],
   ['taha_p320.html','ص 320','114–125'],
   ['taha_p321.html','ص 321','126–135'],
+];
+
+const anbiyaPages=[
+  ['alanbiya_p322.html','ص 322','1–10'],
+  ['alanbiya_p323.html','ص 323','11–24'],
+  ['alanbiya_p324.html','ص 324','25–35'],
+  ['alanbiya_p325.html','ص 325','36–44'],
+  ['alanbiya_p326.html','ص 326','45–57'],
+  ['alanbiya_p327.html','ص 327','58–72'],
+  ['alanbiya_p328.html','ص 328','73–81'],
+  ['alanbiya_p329.html','ص 329','82–90'],
+  ['alanbiya_p330.html','ص 330','91–101'],
+  ['alanbiya_p331.html','ص 331','102–112'],
+];
+
+const hajjPages=[
+  ['alhajj_p332.html','ص 332','1–5'],
+  ['alhajj_p333.html','ص 333','6–15'],
+  ['alhajj_p334.html','ص 334','16–23'],
+  ['alhajj_p335.html','ص 335','24–30'],
+  ['alhajj_p336.html','ص 336','31–38'],
+  ['alhajj_p337.html','ص 337','39–46'],
+  ['alhajj_p338.html','ص 338','47–55'],
+  ['alhajj_p339.html','ص 339','56–64'],
+  ['alhajj_p340.html','ص 340','65–72'],
+  ['alhajj_p341.html','ص 341','73–78'],
+];
+
+const muminunPages=[
+  ['almuminun_p342.html','ص 342','1–17'],
+  ['almuminun_p343.html','ص 343','18–27'],
+  ['almuminun_p344.html','ص 344','28–42'],
+  ['almuminun_p345.html','ص 345','43–59'],
+  ['almuminun_p346.html','ص 346','60–74'],
+  ['almuminun_p347.html','ص 347','75–89'],
+  ['almuminun_p348.html','ص 348','90–104'],
+  ['almuminun_p349.html','ص 349','105–118'],
+];
+
+const nurPages=[
+  ['annur_p350.html','ص 350','1–10'],
+  ['annur_p351.html','ص 351','11–20'],
+  ['annur_p352.html','ص 352','21–27'],
+  ['annur_p353.html','ص 353','28–31'],
+  ['annur_p354.html','ص 354','32–36'],
+  ['annur_p355.html','ص 355','37–43'],
+  ['annur_p356.html','ص 356','44–53'],
+  ['annur_p357.html','ص 357','54–58'],
+  ['annur_p358.html','ص 358','59–61'],
+  ['annur_p359.html','ص 359','62–64'],
+];
+
+const furqanPages=[
+  ['alfurqan_p359.html','ص 359','1–2'],
+  ['alfurqan_p360.html','ص 360','3–11'],
+  ['alfurqan_p361.html','ص 361','12–20'],
+  ['alfurqan_p362.html','ص 362','21–32'],
+  ['alfurqan_p363.html','ص 363','33–43'],
+  ['alfurqan_p364.html','ص 364','44–55'],
+  ['alfurqan_p365.html','ص 365','56–67'],
+  ['alfurqan_p366.html','ص 366','68–77'],
+];
+
+const ashshuaraPages=[
+  ['ashshuara_p367.html','ص 367','1–19'],
+  ['ashshuara_p368.html','ص 368','20–39'],
+  ['ashshuara_p369.html','ص 369','40–60'],
+  ['ashshuara_p370.html','ص 370','61–83'],
+  ['ashshuara_p371.html','ص 371','84–111'],
+  ['ashshuara_p372.html','ص 372','112–136'],
+  ['ashshuara_p373.html','ص 373','137–159'],
+  ['ashshuara_p374.html','ص 374','160–183'],
+  ['ashshuara_p375.html','ص 375','184–206'],
+  ['ashshuara_p376.html','ص 376','207–227'],
+];
+
+const annamlPages=[
+  ['annaml_p377.html','ص 377','1–13'],
+  ['annaml_p378.html','ص 378','14–22'],
+  ['annaml_p379.html','ص 379','23–35'],
+  ['annaml_p380.html','ص 380','36–44'],
+  ['annaml_p381.html','ص 381','45–55'],
+];
+
+const alahzabPages=[
+  ['alahzab_p422.html','ص 422','31–35'],
+  ['alahzab_p423.html','ص 423','36–43'],
+  ['alahzab_p424.html','ص 424','44–50'],
+  ['alahzab_p425.html','ص 425','51–54'],
+  ['alahzab_p426.html','ص 426','55–62'],
+  ['alahzab_p427.html','ص 427','63–73'],
+];
+
+const sabaPages=[
+  ['saba_p428.html','ص 428','1–7'],
+  ['saba_p429.html','ص 429','8–14'],
+  ['saba_p430.html','ص 430','15–22'],
+  ['saba_p431.html','ص 431','23–31'],
+  ['saba_p432.html','ص 432','32–39'],
+  ['saba_p433.html','ص 433','40–48'],
+  ['saba_p434.html','ص 434','49–54'],
+];
+
+const fatirPages=[
+  ['fatir_p434.html','ص 434','1–3'],
+  ['fatir_p435.html','ص 435','4–11'],
+  ['fatir_p436.html','ص 436','12–18'],
+  ['fatir_p437.html','ص 437','19–30'],
+  ['fatir_p438.html','ص 438','31–38'],
+  ['fatir_p439.html','ص 439','39–44'],
+  ['fatir_p440.html','ص 440','45'],
 ];
 
 const yaseenPages=[
@@ -941,8 +1136,8 @@ const JUZ_GROUPS = {
         { kind:'full', arr:ibrahimPages, name:'إبراهيم', surah:'إبراهيم' }
       ] },
   14:{ title:'الحجر، النحل', groups:[
-        { kind:'soon', name:'الحجر', page:262 },
-        { kind:'soon', name:'النحل', page:267 }
+        { kind:'full', arr:alhijrPages, name:'الحجر', surah:'الحجر' },
+        { kind:'full', arr:annahlPages, name:'النحل', surah:'النحل' }
       ] },
   15:{ title:'الإسراء، الكهف', groups:[
         { kind:'soon', name:'الإسراء', page:282 },
@@ -954,18 +1149,18 @@ const JUZ_GROUPS = {
         { kind:'full', arr:tahaPages, name:'طه', surah:'طه' }
       ] },
   17:{ title:'الأنبياء، الحج', groups:[
-        { kind:'soon', name:'الأنبياء', page:322 },
-        { kind:'soon', name:'الحج', page:332 }
+        { kind:'full', arr:anbiyaPages, name:'الأنبياء', surah:'الأنبياء' },
+        { kind:'full', arr:hajjPages, name:'الحج', surah:'الحج' }
       ] },
   18:{ title:'المؤمنون، النور، الفرقان', groups:[
-        { kind:'soon', name:'المؤمنون', page:342 },
-        { kind:'soon', name:'النور', page:350 },
-        { kind:'soon', name:'الفرقان', page:359 }
+        { kind:'full', arr:muminunPages, name:'المؤمنون', surah:'المؤمنون' },
+        { kind:'full', arr:nurPages, name:'النور', surah:'النور' },
+        { kind:'range', arr:furqanPages, from:0, to:3, name:'سورة الفرقان (1–20)', surah:'الفرقان', note:'سورة الفرقان تكمل في الجزء 19 ←', noteTarget:19 }
       ] },
   19:{ title:'الفرقان، الشعراء، النمل', groups:[
-        { kind:'soon', name:'الفرقان (تابع)', page:362 },
-        { kind:'soon', name:'الشعراء', page:367 },
-        { kind:'soon', name:'النمل', page:377 }
+        { kind:'range', arr:furqanPages, from:3, to:8, name:'سورة الفرقان (21–77)', surah:'الفرقان', note:'◄ سورة الفرقان بدأت في الجزء 18', noteTarget:18 },
+        { kind:'full', arr:ashshuaraPages, name:'الشعراء', surah:'الشعراء' },
+        { kind:'full', arr:annamlPages, name:'سورة النمل (1–55)', surah:'النمل', note:'سورة النمل تكمل في الجزء 20 ←', noteTarget:20 }
       ] },
   20:{ title:'النمل، القصص، العنكبوت', groups:[
         { kind:'soon', name:'النمل (تابع)', page:382 },
@@ -980,9 +1175,9 @@ const JUZ_GROUPS = {
         { kind:'soon', name:'الأحزاب', page:418 }
       ] },
   22:{ title:'الأحزاب، سبأ، فاطر، يس', groups:[
-        { kind:'soon', name:'الأحزاب (تابع)', page:422 },
-        { kind:'soon', name:'سبأ', page:428 },
-        { kind:'soon', name:'فاطر', page:434 },
+        { kind:'range', arr:alahzabPages, from:0, to:6, name:'سورة الأحزاب (31–73)', surah:'الأحزاب', note:'◄ سورة الأحزاب بدأت في الجزء 21', noteTarget:21 },
+        { kind:'full', arr:sabaPages, name:'سبأ', surah:'سبأ' },
+        { kind:'full', arr:fatirPages, name:'فاطر', surah:'فاطر' },
         { kind:'range', arr:yaseenPages, from:0, to:2, name:'سورة يس (1–27)', surah:'يس', note:'سورة يس تكمل في الجزء 23 ←', noteTarget:23 }
       ] },
   23:{ title:'يس، الصافات، ص، الزمر', groups:[
@@ -1203,15 +1398,24 @@ function renderDarbiProgress(){
   kahfPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الكهف '+p[1];});
   maryamPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة مريم '+p[1];});
   tahaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة طه '+p[1];});
+  anbiyaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الأنبياء '+p[1];});
+  hajjPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الحج '+p[1];});
   yunusPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة يونس '+p[1];});
   yusufPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة يوسف '+p[1];});
   arraadPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الرعد '+p[1];});
   ibrahimPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة إبراهيم '+p[1];});
+  alhijrPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الحجر '+p[1];});
+  annahlPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة النحل '+p[1];});
+  alahzabPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الأحزاب '+p[1];});
+  sabaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة سبأ '+p[1];});
+  fatirPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة فاطر '+p[1];});
   yaseenPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة يس '+p[1];});
   fussilatPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة فصلت '+p[1];});
   shuraPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الشورى '+p[1];});
   zukhrufPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الزخرف '+p[1];});
   dukhanPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الدخان '+p[1];});
+  ashshuaraPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الشعراء '+p[1];});
+  annamlPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة النمل '+p[1];});
   arrahmanPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الرحمن '+p[1];});
   alwaqiahPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الواقعة '+p[1];});
   almulkPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الملك '+p[1];});
@@ -1245,6 +1449,15 @@ function renderDarbiProgress(){
   alqalamPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة القلم '+p[1];});
   alhaqqaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الحاقة '+p[1];});
   nuhPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة نوح '+p[1];});
+  maidaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة المائدة '+p[1];});
+  anamPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الأنعام '+p[1];});
+  araafPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الأعراف '+p[1];});
+  anfalPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الأنفال '+p[1];});
+  tawbaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة التوبة '+p[1];});
+  hudPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة هود '+p[1];});
+  muminunPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة المؤمنون '+p[1];});
+  nurPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة النور '+p[1];});
+  furqanPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الفرقان '+p[1];});
   ammaData.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة '+p[1];});
 
   // تقدّم كل جزء — عدد الصفحات المتاحة فيه اللي اجتاز المستخدم اختباراتها فعليًا
@@ -1274,7 +1487,7 @@ function renderDarbiProgress(){
 
   if(!Object.keys(all).length)return;
 
-  const totalPages=1+baqaraPages.length+alimranPages.length+nisaPages.length+maidaPages.length+anamPages.length+araafPages.length+anfalPages.length+tawbaPages.length+kahfPages.length+maryamPages.length+tahaPages.length+yunusPages.length+yusufPages.length+arraadPages.length+ibrahimPages.length+yaseenPages.length+fussilatPages.length+shuraPages.length+zukhrufPages.length+dukhanPages.length+jathiyaPages.length+arrahmanPages.length+alwaqiahPages.length+almulkPages.length+alqalamPages.length+alhaqqaPages.length+almaarijPages.length+nuhPages.length+aljinnPages.length+almuzzammilPages.length+almudaththirPages.length+alqiyamaPages.length+alinsanPages.length+almursalatPages.length+alahqafPages.length+muhammadPages.length+alfathPages.length+alhujuratPages.length+qafPages.length+azzariyatPages.length+atturPages.length+annajmPages.length+alqamarPages.length+alhadidPages.length+almujadilaPages.length+alhashrPages.length+almumtahanaPages.length+alsaffPages.length+aljumuaPages.length+almunafiqunPages.length+attaghabunPages.length+attalaqPages.length+attahrimPages.length+ammaData.filter(p=>p[3]).length;
+  const totalPages=1+baqaraPages.length+alimranPages.length+nisaPages.length+maidaPages.length+anamPages.length+araafPages.length+anfalPages.length+tawbaPages.length+hudPages.length+kahfPages.length+maryamPages.length+tahaPages.length+anbiyaPages.length+hajjPages.length+yunusPages.length+yusufPages.length+arraadPages.length+ibrahimPages.length+alhijrPages.length+annahlPages.length+yaseenPages.length+fussilatPages.length+shuraPages.length+zukhrufPages.length+dukhanPages.length+jathiyaPages.length+arrahmanPages.length+alwaqiahPages.length+almulkPages.length+alqalamPages.length+alhaqqaPages.length+almaarijPages.length+nuhPages.length+aljinnPages.length+almuzzammilPages.length+almudaththirPages.length+alqiyamaPages.length+alinsanPages.length+almursalatPages.length+alahqafPages.length+muhammadPages.length+alfathPages.length+alhujuratPages.length+qafPages.length+azzariyatPages.length+atturPages.length+annajmPages.length+alqamarPages.length+alhadidPages.length+almujadilaPages.length+alhashrPages.length+almumtahanaPages.length+alsaffPages.length+aljumuaPages.length+almunafiqunPages.length+attaghabunPages.length+attalaqPages.length+attahrimPages.length+ashshuaraPages.length+annamlPages.length+alahzabPages.length+sabaPages.length+fatirPages.length+muminunPages.length+nurPages.length+furqanPages.length+ammaData.filter(p=>p[3]).length;
   let doneCount=0;
   Object.keys(nameByKey).forEach(k=>{ if(darbiPageComplete(all[k])) doneCount++; });
 
@@ -1282,6 +1495,8 @@ function renderDarbiProgress(){
     const pct=Math.round(doneCount/totalPages*100);
     const heroProg=document.getElementById('hero-progress');
     if(heroProg)heroProg.style.display='block';
+    const heroStats=document.querySelector('.hero-stats');
+    if(heroStats)heroStats.style.display='none';
     const fill=document.getElementById('hero-progress-fill');
     if(fill)fill.style.width=pct+'%';
     const text=document.getElementById('hero-progress-text');
@@ -1294,7 +1509,15 @@ function renderDarbiProgress(){
       }
     });
     const lv=document.getElementById('hero-last-visited');
-    if(lv&&lastKey)lv.textContent=darbiT('home.hero_last_visited',{name:(nameByKey[lastKey]||lastKey)});
+    const cont=document.getElementById('hero-continue');
+    const lastName=lastKey?(nameByKey[lastKey]||lastKey):'';
+    let hasCont=false;
+    if(cont&&lastKey){
+      const card=document.querySelector('a.quiz-card[data-key="'+lastKey+'"]');
+      const href=card&&card.getAttribute('href');
+      if(href){cont.setAttribute('href',href);cont.style.display='inline-flex';hasCont=true;}
+    }
+    if(lv&&lastKey)lv.textContent=darbiT('home.hero_last_visited',{name:(window.darbiDisplayName&&darbiDisplayName(lastName))||lastName});
   }
 }
 renderDarbiProgress();
