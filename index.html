@@ -248,6 +248,31 @@ html[data-theme="dark"] .beta-text{color:var(--soft);}
 @media(max-width:380px){.beta-note-inner{padding:9px 12px;}.beta-text{font-size:0.76rem;}}
 
 .about-dua{margin-top:14px;font-family:'Scheherazade New',serif;font-size:1.02rem;line-height:1.9;color:var(--green);text-align:center;}
+/* ضغط الشاشة الأولى حتى يظهر مربع البحث كاملًا على الهواتف الأقصر */
+@media(max-height:860px){
+  .home-first .hero{padding-top:16px;padding-bottom:12px;}
+  .home-first .hero-bismillah{margin-bottom:8px;}
+  .home-first .hero-title{margin-bottom:6px;}
+  .home-first .hero-sub{margin-bottom:12px;line-height:1.55;}
+  .home-first .hero-types{margin-bottom:12px;}
+  .home-first .hero-btn-row{gap:9px;}
+  .home-first .hero-start-btn{padding:10px 38px;}
+  .home-first .hero-progress-btn{padding:6px 24px;}
+  .home-first .hero-stats{margin-top:12px;gap:8px;}
+  .home-first .hstat{padding:3px 12px;}
+  .home-first .hero-progress{margin-top:12px;}
+  .home-first .hero-stars-bottom{margin-top:6px;font-size:1.1rem;}
+  .home-first .hero-inner .ayah-banner{margin-top:4px;padding:6px 16px;}
+  .home-first .ayah-text{line-height:1.6;margin-bottom:0;}
+  .home-first .beta-note{padding-top:10px;padding-bottom:0;}
+  .home-first .beta-note-inner{padding:6px 14px;}
+}
+@media(max-height:740px){
+  .home-first .hero-types{margin-bottom:8px;}
+  .home-first .hero-stats{margin-top:8px;}
+  .home-first .hero-stars-bottom{display:none;}
+  .home-first .hero-bismillah{display:none;}
+}
 </style>
 <link rel="canonical" href="https://quran-darbi.com/">
 <script>

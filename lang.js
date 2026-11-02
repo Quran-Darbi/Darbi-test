@@ -54,6 +54,9 @@ ar: {
   'home.title':'دربي لحفظ القرآن',
   'home.subtitle':'اختبر حفظك صفحةً بصفحة — اختبارات تفاعلية لمراجعة الحفظ وتثبيته',
   'home.recite_btn':'🎤 اختبر حفظك',
+  'home.cta_start':'🌱 ابدأ الاختبارات',
+  'home.continue_btn':'تابع من حيث توقفت',
+  'home.chip_voice':'صوتي',
   'home.progress_btn':'📊 تقدّمي',
   'home.progress_btn_sub':'تقدّمي بالتفصيل ◀',
   'home.stat_tests':'اختباراً متاحاً',
@@ -86,6 +89,7 @@ ar: {
   'about.role_p1':'هذا الموقع أداة مساعدة لتثبيت حفظ القرآن ومتشابهاته، ولا يُغني عن التلقي من شيخ مُتقِن؛ فالتشكيل وأحكام التجويد تُؤخذ بالسماع والمشافهة.',
   'about.role_p2':'فليكن مُعِينًا لك على الإتقان، لا بديلًا عن القراءة على أهل الإتقان.',
   'home.footer_copy':'دربي لحفظ القرآن — جميع الحقوق محفوظة',
+  'home.privacy_link':"سياسة الخصوصية",
 
   // ===== نافذة الملاحظات =====
   'fdbk.title':'💬 شاركنا رأيك',
@@ -146,6 +150,8 @@ ar: {
   'quiz.hard_placeholder_plural':'اكتب الآيات كاملة...',
   'quiz.submit_check':'تحقق ✓',
   'quiz.ayah_label':'الآية {n}',
+  'quiz.hard_from':'من',
+  'quiz.hard_to':'إلى',
 
   // ===== الترتيب =====
   'order.instruction':'رتّب الآيات — اضغط على الآية فتُوضَع بالتسلسل. تريد تخطّي خانة؟ اضغط على الخانة التي تريد المتابعة منها',
@@ -187,6 +193,7 @@ ar: {
 
   // ===== المساعدة (صعب) =====
   'hint.btn':'💡 مساعدة',
+  'hint.btn_rec':'💡 مساعدة',
   'voice.record_btn':'🎤 تسجيل صوتي',
   'voice.text_btn':'⌨️ كتابة',
   'reminder.banner':'🌙 لم تبدأ وردك اليوم بعد — أكمل حفظك الآن',
@@ -382,6 +389,9 @@ en: {
   'home.title':'Quran Darbi',
   'home.subtitle':'Test your memorization page by page — interactive quizzes to review and reinforce it',
   'home.recite_btn':'🎤 Recitation Test',
+  'home.cta_start':'🌱 Start the quizzes',
+  'home.continue_btn':'Continue where you left off',
+  'home.chip_voice':'Voice',
   'home.progress_btn':'📊 My Progress',
   'home.progress_btn_sub':'Full progress details ◀',
   'home.stat_tests':'quizzes available',
@@ -414,6 +424,7 @@ en: {
   'about.role_p1':'This site is a helping tool for consolidating your memorization of the Quran and its similar verses (mutashabihat). It is not a substitute for learning from a qualified teacher (shaykh): vocalization and the rules of tajweed are taken through listening and direct oral transmission.',
   'about.role_p2':'Let it be an aid toward mastery, not a replacement for reciting to those who have mastered it.',
   'home.footer_copy':'Darbi — Quran Memorization. All rights reserved',
+  'home.privacy_link':"Privacy Policy",
 
   // ===== Feedback modal =====
   'fdbk.title':'💬 Share your feedback',
@@ -474,6 +485,8 @@ en: {
   'quiz.hard_placeholder_plural':'Type the full ayahs...',
   'quiz.submit_check':'Check ✓',
   'quiz.ayah_label':'Ayah {n}',
+  'quiz.hard_from':'From',
+  'quiz.hard_to':'To',
 
   // ===== Ordering =====
   'order.instruction':'Put the ayahs in order — tap an ayah to place it in sequence. Want to skip a slot? Tap the slot you want to continue from.',
@@ -515,6 +528,7 @@ en: {
 
   // ===== Hint (hard level) =====
   'hint.btn':'💡 Help',
+  'hint.btn_rec':'💡 Help',
   'voice.record_btn':'🎤 Voice recording',
   'voice.text_btn':'⌨️ Typing',
   'reminder.banner':'🌙 You haven’t started today’s portion yet — continue your memorization now',
@@ -705,6 +719,9 @@ fr: {
   'home.title':'Quran Darbi',
   'home.subtitle':'Testez votre mémorisation page par page — des quiz interactifs pour réviser et consolider',
   'home.recite_btn':'🎤 Test de récitation',
+  'home.cta_start':'🌱 Commencer les tests',
+  'home.continue_btn':'Reprendre où vous en étiez',
+  'home.chip_voice':'Voix',
   'home.progress_btn':'📊 Mes progrès',
   'home.progress_btn_sub':'Voir le détail de mes progrès ◀',
   'home.stat_tests':'quiz disponibles',
@@ -737,6 +754,7 @@ fr: {
   'about.role_p1':'Ce site est un outil d’aide pour consolider la mémorisation du Coran et de ses versets similaires (mutashabihat). Il ne remplace pas l’apprentissage auprès d’un maître qualifié (cheikh) : la vocalisation et les règles du tajwid s’acquièrent par l’écoute et la transmission orale.',
   'about.role_p2':'Qu’il soit pour vous un soutien vers la maîtrise, et non un substitut à la récitation auprès de ceux qui la maîtrisent.',
   'home.footer_copy':'Darbi — Mémorisation du Coran. Tous droits réservés',
+  'home.privacy_link':"Politique de confidentialité",
 
   // ===== Fenêtre de suggestions =====
   'fdbk.title':'💬 Partagez votre avis',
@@ -797,6 +815,8 @@ fr: {
   'quiz.hard_placeholder_plural':'Écrivez les versets complets...',
   'quiz.submit_check':'Vérifier ✓',
   'quiz.ayah_label':'Verset {n}',
+  'quiz.hard_from':'De',
+  'quiz.hard_to':'À',
 
   // ===== Remise en ordre =====
   'order.instruction':'Remettez les versets dans l’ordre — touchez un verset pour le placer dans la séquence. Vous voulez passer une case ? Touchez la case à partir de laquelle continuer.',
@@ -838,6 +858,7 @@ fr: {
 
   // ===== Aide (niveau difficile) =====
   'hint.btn':'💡 Indice (les 3 premiers mots)',
+  'hint.btn_rec':'💡 Aide',
   'voice.record_btn':'🎤 Enregistrement vocal',
   'voice.text_btn':'⌨️ Écrire',
   'reminder.banner':'🌙 Vous n’avez pas encore commencé votre révision du jour — poursuivez votre mémorisation maintenant',
@@ -1028,6 +1049,9 @@ tr: {
   'home.title':'Quran Darbi',
   'home.subtitle':'Ezberini sayfa sayfa test et — tekrar etmek ve pekiştirmek için etkileşimli testler',
   'home.recite_btn':'🎤 Ezber Testi',
+  'home.cta_start':'🌱 Testlere başla',
+  'home.continue_btn':'Kaldığın yerden devam et',
+  'home.chip_voice':'Sesli',
   'home.progress_btn':'📊 İlerlemem',
   'home.progress_btn_sub':'İlerleme ayrıntılarım ◀',
   'home.stat_tests':'test mevcut',
@@ -1060,6 +1084,7 @@ tr: {
   'about.role_p1':'Bu site, Kur’an’ın ve müteşabih ayetlerinin ezberini pekiştirmeye yardımcı bir araçtır. Ehil bir hocanın (şeyhin) yanında öğrenmenin yerini tutmaz; harekeler ve tecvid kuralları dinleyerek ve yüz yüze aktarımla öğrenilir.',
   'about.role_p2':'Bu site ustalığa ulaşmanızda size yardımcı olsun; ehil kişilere okumanın yerine geçmesin.',
   'home.footer_copy':'Darbi — Kur’an Ezberleme. Tüm hakları saklıdır',
+  'home.privacy_link':"Gizlilik Politikası",
 
   // ===== Geri bildirim penceresi =====
   'fdbk.title':'💬 Görüşünü paylaş',
@@ -1120,6 +1145,8 @@ tr: {
   'quiz.hard_placeholder_plural':'Ayetlerin tamamını yaz...',
   'quiz.submit_check':'Kontrol et ✓',
   'quiz.ayah_label':'{n}. Ayet',
+  'quiz.hard_from':'Başlangıç',
+  'quiz.hard_to':'Bitiş',
 
   // ===== Sıralama =====
   'order.instruction':'Ayetleri sıraya diz — sırayla yerleştirmek için bir ayete dokun. Bir hücreyi atlamak mı istiyorsun? Devam etmek istediğin hücreye dokun.',
@@ -1161,6 +1188,7 @@ tr: {
 
   // ===== İpucu (zor seviye) =====
   'hint.btn':'💡 İpucu (ilk 3 kelime)',
+  'hint.btn_rec':'💡 İpucu',
   'voice.record_btn':'🎤 Sesli kayıt',
   'voice.text_btn':'⌨️ Yazarak',
   'reminder.banner':'🌙 Bugünkü çalışmanıza henüz başlamadınız — ezberinize şimdi devam edin',
@@ -1352,6 +1380,9 @@ de: {
   'home.title':'Quran Darbi',
   'home.subtitle':'Teste dein Auswendiglernen Seite für Seite — interaktive Quizze zur Wiederholung und Festigung',
   'home.recite_btn':'🎤 Rezitationstest',
+  'home.cta_start':'🌱 Tests starten',
+  'home.continue_btn':'Dort weitermachen, wo du aufgehört hast',
+  'home.chip_voice':'Sprache',
   'home.progress_btn':'📊 Mein Fortschritt',
   'home.progress_btn_sub':'Alle Fortschrittsdetails ◀',
   'home.stat_tests':'verfügbare Quizze',
@@ -1384,6 +1415,7 @@ de: {
   'about.role_p1':'Diese Website ist ein Hilfsmittel, um das Auswendiglernen des Korans und seiner ähnlichen Verse (Mutaschabihat) zu festigen. Sie ersetzt nicht das Lernen bei einem qualifizierten Lehrer (Scheich): Vokalisierung und Tadschwid-Regeln werden durch Zuhören und mündliche Überlieferung erlernt.',
   'about.role_p2':'Sie soll eine Hilfe auf dem Weg zur Meisterschaft sein, kein Ersatz für das Rezitieren bei Kundigen.',
   'home.footer_copy':'Darbi — Koran-Auswendiglernen. Alle Rechte vorbehalten',
+  'home.privacy_link':"Datenschutzerklärung",
 
   // ===== Feedback-Modal =====
   'fdbk.title':'💬 Teile dein Feedback',
@@ -1444,6 +1476,8 @@ de: {
   'quiz.hard_placeholder_plural':'Gib die vollständigen Ayat ein...',
   'quiz.submit_check':'Prüfen ✓',
   'quiz.ayah_label':'Ayah {n}',
+  'quiz.hard_from':'Von',
+  'quiz.hard_to':'Bis',
 
   // ===== Reihenfolge =====
   'order.instruction':'Bringe die Ayat in die richtige Reihenfolge — tippe eine Ayah an, um sie einzusetzen. Möchtest du einen Platz überspringen? Tippe den Platz an, ab dem du fortfahren möchtest.',
@@ -1485,6 +1519,7 @@ de: {
 
   // ===== Hinweis (schweres Level) =====
   'hint.btn':'💡 Hinweis (erste 3 Wörter)',
+  'hint.btn_rec':'💡 Hinweis',
   'voice.record_btn':'🎤 Sprachaufnahme',
   'voice.text_btn':'⌨️ Tippen',
   'reminder.banner':'🌙 Du hast heute noch nicht angefangen — mach jetzt mit deinem Auswendiglernen weiter',
@@ -1675,6 +1710,9 @@ es: {
   'home.title':'Quran Darbi',
   'home.subtitle':'Pon a prueba tu memorización página por página — cuestionarios interactivos para repasar y reforzar',
   'home.recite_btn':'🎤 Prueba de recitación',
+  'home.cta_start':'🌱 Empezar los cuestionarios',
+  'home.continue_btn':'Seguir donde lo dejaste',
+  'home.chip_voice':'Voz',
   'home.progress_btn':'📊 Mi progreso',
   'home.progress_btn_sub':'Ver todos los detalles del progreso ◀',
   'home.stat_tests':'cuestionarios disponibles',
@@ -1707,6 +1745,7 @@ es: {
   'about.role_p1':'Este sitio es una herramienta de apoyo para consolidar la memorización del Corán y de sus versículos similares (mutashabihat). No sustituye el aprendizaje con un maestro cualificado (sheij): la vocalización y las reglas del tayuid se adquieren escuchando y por transmisión oral.',
   'about.role_p2':'Que sea una ayuda hacia la maestría, y no un sustituto de recitar ante quienes la dominan.',
   'home.footer_copy':'Darbi — Memorización del Corán. Todos los derechos reservados',
+  'home.privacy_link':"Política de privacidad",
 
   // ===== Modal de comentarios =====
   'fdbk.title':'💬 Comparte tu opinión',
@@ -1767,6 +1806,8 @@ es: {
   'quiz.hard_placeholder_plural':'Escribe las aleyas completas...',
   'quiz.submit_check':'Comprobar ✓',
   'quiz.ayah_label':'Aleya {n}',
+  'quiz.hard_from':'Desde',
+  'quiz.hard_to':'Hasta',
 
   // ===== Ordenar =====
   'order.instruction':'Ordena las aleyas — toca una aleya para colocarla en la secuencia. ¿Quieres saltar una casilla? Toca la casilla desde la que quieres continuar.',
@@ -1808,6 +1849,7 @@ es: {
 
   // ===== Pista (nivel difícil) =====
   'hint.btn':'💡 Pista (primeras 3 palabras)',
+  'hint.btn_rec':'💡 Pista',
   'voice.record_btn':'🎤 Grabación de voz',
   'voice.text_btn':'⌨️ Escribir',
   'reminder.banner':'🌙 Aún no has empezado tu repaso de hoy — continúa tu memorización ahora',
@@ -1998,6 +2040,9 @@ fa: {
   'home.title':'قرآن دربی',
   'home.subtitle':'حفظ خود را صفحه به صفحه بیازمایید — آزمون‌های تعاملی برای مرور و تثبیت',
   'home.recite_btn':'🎤 آزمون تلاوت',
+  'home.cta_start':'🌱 شروع آزمون‌ها',
+  'home.continue_btn':'ادامه از جایی که ماندی',
+  'home.chip_voice':'صوتی',
   'home.progress_btn':'📊 پیشرفت من',
   'home.progress_btn_sub':'جزئیات کامل پیشرفت ◀',
   'home.stat_tests':'آزمون موجود',
@@ -2030,6 +2075,7 @@ fa: {
   'about.role_p1':'این سایت ابزاری کمکی برای تثبیت حفظ قرآن و آیات متشابه آن است و جای آموختن از استاد ماهر (شیخ) را نمی‌گیرد؛ حرکات و احکام تجوید با شنیدن و مشافهه آموخته می‌شود.',
   'about.role_p2':'باشد که یاری‌رسان شما در اتقان باشد، نه جایگزین قرائت نزد اهل اتقان.',
   'home.footer_copy':'دربی — حفظ قرآن. تمامی حقوق محفوظ است',
+  'home.privacy_link':"سیاست حریم خصوصی",
 
   // ===== پنجره بازخورد =====
   'fdbk.title':'💬 بازخورد خود را به اشتراک بگذارید',
@@ -2090,6 +2136,8 @@ fa: {
   'quiz.hard_placeholder_plural':'آیات کامل را بنویسید...',
   'quiz.submit_check':'بررسی ✓',
   'quiz.ayah_label':'آیه {n}',
+  'quiz.hard_from':'از',
+  'quiz.hard_to':'تا',
 
   // ===== ترتیب =====
   'order.instruction':'آیات را به ترتیب بچینید — برای قرار دادن یک آیه در توالی، روی آن ضربه بزنید. می‌خواهید از یک جایگاه رد شوید؟ روی جایگاهی که می‌خواهید از آن ادامه دهید ضربه بزنید.',
@@ -2131,6 +2179,7 @@ fa: {
 
   // ===== راهنمایی (سطح دشوار) =====
   'hint.btn':'💡 راهنمایی (۳ کلمه‌ی اول)',
+  'hint.btn_rec':'💡 راهنمایی',
   'voice.record_btn':'🎤 ضبط صدا',
   'voice.text_btn':'⌨️ تایپ',
   'reminder.banner':'🌙 هنوز ورد امروز را شروع نکرده‌اید — همین حالا حفظ خود را ادامه دهید',
@@ -2520,6 +2569,7 @@ function loc(src,lg){
   if((m=s.match(/^سورة (.+?) \((\d+) (?:آية|آيات)\)$/))){n=surahName(m[1],lg);return n?L.sur(n)+' ('+L.cnt(+m[2])+')':null;}
   if((m=s.match(/^(?:(سورة) )?(.+?) ص ?(\d+) — (آيات|آية) (\d+)(?:\s*[–-]\s*(\d+))?(?: \((.+)\))?$/))){n=surahName(m[2],lg);if(!n)return null;
     return (m[1]?L.sur(n):n)+' '+L.p+m[3]+' \u2014 '+(m[6]?L.vs(m[5],m[6]):L.v(m[5]))+par(m[7],lg);}
+  if((m=s.match(/^(?:(سورة) )?(.+?) ص ?(\d+)$/))){n=surahName(m[2],lg);if(n)return (m[1]?L.sur(n):n)+' '+L.p+m[3];}
   if((m=s.match(/^سورة (.+?) — آية (\d+)$/))){n=surahName(m[1],lg);return n?L.sur(n)+' \u2014 '+L.v(m[2]):null;}
   if((m=s.match(/^سورة (.+)$/))){n=surahName(m[1],lg);return n?L.sur(n):null;}
   if((m=s.match(/^(?:الآيتين|الآيتان) (\d+)\s*[–-]\s*(\d+)$/)))return L.vs(m[1],m[2]);
@@ -2626,7 +2676,7 @@ function idxLoc(src,lg){
   var res=out[0];for(i=1;i<out.length;i++)res+=(seps[i-1]==='،'?', ':' — ')+out[i];
   return res;}
 var IDXSEL='.card-name,.surah-name,.surah-panel-title,.juz-title,.card-meta,.note-btn';
-var PRE=/^(سورة|الآية|الآيات|الآيتين|الآيتان|من الآية|اكتب|اختبار الحفظ|صفحة|الصفحة|ص ?\d|[^\d]{2,25} ص ?\d+ — )/;
+var PRE=/^(جزء عم|سورة|الآية|الآيات|الآيتين|الآيتان|من الآية|اكتب|اختبار الحفظ|صفحة|الصفحة|ص ?\d|[^\d]{2,25} ص ?\d+ — )/;
 
 /* عنوان التبويب (document.title): يُترجم بنفس القواعد، والأصل العربي محفوظ للعودة */
 function stripLead(x){return String(x).replace(/^[^A-Za-zÀ-ɏ؀-ۿ]+/,'');}
