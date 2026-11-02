@@ -133,6 +133,10 @@ html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{cont
 .hero-progress-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.26);}
 .hero-progress-btn-sub{font-size:0.68rem;font-weight:400;opacity:0.85;text-decoration:underline;}
 /* إحصائيات */
+.list-stats{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin:4px 16px 12px;font-family:'Scheherazade New',serif;color:var(--soft,#6b7f6b);}
+.list-stats span+span::before{content:'·';margin-inline-end:14px;opacity:.6;}
+.list-stats b{color:var(--accent,#4a7c4a);font-size:1.05rem;}
+.list-stats small{font-size:.85rem;}
 .hero-stats{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;}
 .hstat{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:6px 14px;text-align:center;color:rgba(255,255,255,0.9);}
 .hstat b{display:block;font-size:1.05rem;color:#fff;}
@@ -400,11 +404,6 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
         <span data-i18n="home.progress_btn">📊 تقدّمي</span>
       </a>
     </div>
-    <div class="hero-stats">
-      <div class="hstat"><b id="hstat-tests-count">156</b><small data-i18n="home.stat_tests">اختباراً متاحاً</small></div>
-      <div class="hstat"><b id="hstat-parts-count">4</b><small data-i18n="home.stat_parts">أجزاء</small></div>
-      <div class="hstat"><b id="hstat-surahs-count">109</b><small data-i18n="home.stat_surahs">سورة</small></div>
-    </div>
     <div class="hero-progress" id="hero-progress" style="display:none;">
       <div class="hero-resume">
         <div class="hero-resume-last notranslate" id="hero-last-visited" translate="no"></div>
@@ -435,6 +434,11 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 </div>
 
 <div id="list-view">
+<div class="list-stats" aria-label="حجم المحتوى">
+  <span><b id="hstat-tests-count">0</b> <small data-i18n="home.stat_tests">اختباراً متاحاً</small></span>
+  <span><b id="hstat-surahs-count">0</b> <small data-i18n="home.stat_surahs">سورة</small></span>
+  <span><b id="hstat-parts-count">0</b> <small data-i18n="home.stat_parts">أجزاء</small></span>
+</div>
 
 <div class="main" id="main">
 </div>
@@ -1652,8 +1656,6 @@ function renderDarbiProgress(){
     const pct=Math.round(doneCount/totalPages*100);
     const heroProg=document.getElementById('hero-progress');
     if(heroProg)heroProg.style.display='block';
-    const heroStats=document.querySelector('.hero-stats');
-    if(heroStats)heroStats.style.display='none';
     const fill=document.getElementById('hero-progress-fill');
     if(fill)fill.style.width=pct+'%';
     const text=document.getElementById('hero-progress-text');
