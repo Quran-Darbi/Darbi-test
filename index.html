@@ -432,28 +432,6 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 <div class="juz-filter-empty" id="juz-filter-empty" data-i18n="home.filter_empty">لا يوجد أجزاء مطابقة لهذا الفلتر حاليًا.</div>
 </div>
 
-<!-- عن المشروع -->
-<div id="about"></div>
-<div style="max-width:840px;margin:28px auto 0;padding:0 13px;">
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 20px;box-shadow:0 2px 10px var(--shadow);border-right:4px solid var(--green);">
-    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
-      <div style="flex-shrink:0;"><img src="icons/darbi_favicon_128.png" alt="دربي لحفظ القرآن" data-i18n-alt="home.title" width="52" height="52" style="border-radius:12px;display:block;"></div>
-      <div style="flex:1;min-width:220px;">
-        <div style="font-family:'Scheherazade New',serif;font-size:1.35rem;color:var(--green);font-weight:700;margin-bottom:8px;" data-i18n="home.about_title">عن المشروع</div>
-        <div style="font-size:0.93rem;color:var(--soft);line-height:2;">
-          <p style="margin:0 0 12px;" data-i18n="home.about_p1">«دربي لحفظ القرآن» منصة تفاعلية تهدف إلى مساعدة الجميع على حفظ كتاب الله ومراجعته، من خلال اختبارات متنوعة.</p>
-          <p style="margin:0;" data-i18n="home.about_p2">مصممة بعناية لتثبيت الحفظ وتعزيز إتقانه، مع التركيز على متشابهات القرآن الكريم.</p>
-        </div>
-        <div class="about-dua notranslate" translate="no" data-i18n="about.dua">نسأل الله أن يجعل القرآن ربيع قلوبنا، ونور صدورنا، وأن يرزقنا حفظه وإتقانه والعمل به.</div>
-        <div style="margin-top:14px;background:var(--green3);border-radius:12px;padding:12px 14px;text-align:center;">
-          <div style="font-family:'Scheherazade New',serif;font-size:1rem;color:var(--green);line-height:1.9;" class="notranslate" translate="no">﴿ وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ ﴾</div>
-          <div style="font-size:0.72rem;color:var(--soft);margin-top:3px;" class="notranslate" translate="no">سورة القمر — آية 17</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <footer>
   <div class="footer-ayah notranslate" translate="no">﴿ إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ ﴾</div>
   <div class="footer-ref notranslate" translate="no">سورة الحجر — آية 9</div>
@@ -1304,19 +1282,13 @@ const SOON_JUZ = {
   24:['الزمر — فصلت','ص 462'], 25:['فصلت — الجاثية','ص 482'],
 };
 
-// أرقام صفحات المصحف لسور جزء عمّ (للبحث برقم الصفحة فقط، لا تظهر في البطاقة)
-const AMMA_START={annaba:582,annaziat:583,abasa:585,attakwir:586,alinfitar:587,almutaffifin:587,alinshiqaq:589,alburuj:590,altariq:591,alaala:591,alghasiya:592,alfajr:593,albalad:594,alshams:595,allayl:595,alduha:596,alsharh:596,atteen:597,alalaq:597,alqadr:598,albayyina:598,alzalzala:599,alaadiyat:599,alqaria:600,altakathur:600,alasr:601,alhumaza:601,alfiyl:601,aquraysh:602,almaoon:602,alkawthur:602,alkafirun:603,alnnasr:603,almasad:603,alikhlas:604,alfalaq:604,alnnas:604};
-const AMMA_PAGE_FIX={annaba:[582,583],annaziat:[583,584],abasa:[584,585]}; // كما في صفحات الاختبار نفسها
+// أرقام صفحات المصحف لسور جزء عمّ (للبحث برقم الصفحة فقط، لا تظهر في البطاقة) — مأخوذة من صور المصحف، وتشمل صفحة عنوان السورة
+const AMMA_PAGES={annaba:[582,583],annaziat:[583,584],abasa:[584,585],attakwir:[586,586],alinfitar:[586,587],almutaffifin:[587,589],alinshiqaq:[589,589],alburuj:[590,590],altariq:[590,591],alaala:[591,592],alghasiya:[592,592],alfajr:[593,594],albalad:[594,594],alshams:[594,595],allayl:[595,596],alduha:[596,596],alsharh:[596,596],atteen:[597,597],alalaq:[597,597],alqadr:[598,598],albayyina:[598,599],alzalzala:[599,599],alaadiyat:[599,600],alqaria:[600,600],altakathur:[600,600],alasr:[601,601],alhumaza:[601,601],alfiyl:[601,601],aquraysh:[602,602],almaoon:[602,602],alkawthur:[602,602],alkafirun:[603,603],alnnasr:[603,603],almasad:[603,603],alikhlas:[604,604],alfalaq:[604,604],alnnas:[604,604]};
 function ammaPagesStr(file){
-  const k=file.replace('.html','');
-  const keys=Object.keys(AMMA_START);
-  const i=keys.indexOf(k);
-  if(i<0)return '';
-  let a=AMMA_START[k],b=i<keys.length-1?AMMA_START[keys[i+1]]:604;
-  if(AMMA_PAGE_FIX[k]){a=AMMA_PAGE_FIX[k][0];b=AMMA_PAGE_FIX[k][1];}
-  if(b<a)b=a;
-  let r='';for(let n=a;n<=b;n++)r+=(r?' ':'')+'ص '+n;
-  return r;
+  const r=AMMA_PAGES[file.replace('.html','')];
+  if(!r)return '';
+  let t='';for(let n=r[0];n<=r[1];n++)t+=(t?' ':'')+'ص '+n;
+  return t;
 }
 
 function card(href,name,meta,ok,surah,pages){
