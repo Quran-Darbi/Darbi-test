@@ -224,6 +224,7 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 
 /* ===== FOOTER ===== */
 footer{text-align:center;margin-top:44px;padding:24px 16px;border-top:1px solid var(--border);}
+html:not(.view-list) footer{margin-top:12px;}
 .footer-ayah{font-family:'Scheherazade New',serif;font-size:1rem;color:var(--green);margin-bottom:4px;}
 .footer-ref{font-size:0.75rem;color:var(--soft);margin-bottom:14px;}
 .footer-copy{font-size:0.8rem;color:var(--soft);}
@@ -446,7 +447,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   function openList(){
     if(isList())return;
     root.classList.add('view-list');
-    try{history.pushState({v:'list'},'','#quizzes');}catch(e){location.hash='quizzes';}
+    try{history.pushState({v:'list',push:1},'','#quizzes');}catch(e){location.hash='quizzes';}
     window.scrollTo(0,0);
   }
   function showHome(){
@@ -454,6 +455,21 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
     var q=document.querySelector('.search-input');
     if(q&&q.value){q.value='';if(typeof doSearch==='function')doSearch('');}
     window.scrollTo(0,0);
+  }
+  // الضغط على اسم الموقع في الأعلى يرجع إلى الشاشة الأولى
+  var logo=document.querySelector('.nav-logo');
+  if(logo){
+    logo.style.cursor='pointer';
+    logo.setAttribute('role','link');
+    logo.setAttribute('tabindex','0');
+    var goHome=function(){
+      if(!isList())return;
+      if(history.state&&history.state.push){history.back();return;}
+      try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+      showHome();
+    };
+    logo.addEventListener('click',goHome);
+    logo.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goHome();}});
   }
   var btn=document.getElementById('hero-start-btn');
   if(btn)btn.addEventListener('click',function(e){e.preventDefault();openList();});
