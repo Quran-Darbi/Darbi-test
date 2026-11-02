@@ -143,7 +143,10 @@ html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{cont
 /* الشاشة الأولى: الهيرو ثم شريط البحث ثم ملاحظة الإطلاق التجريبي، والفهرس يبدأ بعدها */
 .home-first{min-height:calc(100vh - 55px - 64px - 78px);min-height:calc(100svh - 55px - 64px - 78px);display:flex;flex-direction:column;}
 .home-first .hero{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;}
-#juz-index{scroll-margin-top:125px;}
+/* الفهرس شاشة ثانية: مخفي في الرئيسية ويظهر من «ابدأ الاختبارات» أو من البحث */
+#list-view{display:none;}
+html.view-list #list-view{display:block;}
+html.view-list .home-first,html.view-list .beta-note{display:none;}
 .search-input{font-family:'Amiri',serif;font-size:1rem;width:100%;max-width:580px;display:block;margin:0 auto;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:24px;background:var(--card);color:var(--text);outline:none;text-align:right;direction:rtl;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A7A55' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;}
 .search-input:focus{border-color:var(--green);}
 .search-input::placeholder{color:var(--soft);opacity:.7;}
@@ -377,7 +380,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <span class="hero-type">🎤 <span data-i18n="home.chip_voice">صوتي</span></span>
     </div>
     <div class="hero-btn-row">
-      <a href="#juz-index" class="hero-start-btn" id="hero-start-btn" data-i18n="home.cta_start">🌱 ابدأ الاختبارات</a>
+      <a href="#quizzes" class="hero-start-btn" id="hero-start-btn" data-i18n="home.cta_start">🌱 ابدأ الاختبارات</a>
       <a href="recitation.html" class="hero-rec-btn" data-i18n="home.recite_btn">🎤 اختبر حفظك</a>
       <a href="progress.html" class="hero-progress-btn">
         <span data-i18n="home.progress_btn">📊 تقدّمي</span>
@@ -417,6 +420,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   </div>
 </div>
 
+<div id="list-view">
 <div class="juz-filter-row" id="juz-index">
   <button type="button" class="juz-filter-chip active" data-mode="all" onclick="setJuzFilter('all',this)" data-i18n="home.filter_all">كل الأجزاء</button>
   <button type="button" class="juz-filter-chip" data-mode="built" onclick="setJuzFilter('built',this)" data-i18n="home.filter_built">متاح الآن</button>
@@ -426,6 +430,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 <div class="main" id="main">
 </div>
 <div class="juz-filter-empty" id="juz-filter-empty" data-i18n="home.filter_empty">لا يوجد أجزاء مطابقة لهذا الفلتر حاليًا.</div>
+</div>
 
 <!-- عن المشروع -->
 <div id="about"></div>
@@ -458,15 +463,35 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 
 <script>
 (function(){
-  var b=document.getElementById('hero-start-btn');
-  if(!b)return;
-  b.addEventListener('click',function(e){
-    var t=document.getElementById('juz-index');
-    if(!t)return;
-    e.preventDefault();
-    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
-  });
+  var root=document.documentElement;
+  function isList(){return root.classList.contains('view-list');}
+  function openList(){
+    if(isList())return;
+    root.classList.add('view-list');
+    try{history.pushState({v:'list'},'','#quizzes');}catch(e){location.hash='quizzes';}
+    window.scrollTo(0,0);
+  }
+  function showHome(){
+    root.classList.remove('view-list');
+    var q=document.querySelector('.search-input');
+    if(q&&q.value){q.value='';if(typeof doSearch==='function')doSearch('');}
+    window.scrollTo(0,0);
+  }
+  var btn=document.getElementById('hero-start-btn');
+  if(btn)btn.addEventListener('click',function(e){e.preventDefault();openList();});
+  var inp=document.querySelector('.search-input');
+  if(inp)inp.addEventListener('input',function(){if(inp.value.trim())openList();});
+  function sync(){if(location.hash==='#quizzes'){root.classList.add('view-list');}else if(isList()){showHome();}}
+  window.addEventListener('popstate',sync);
+  window.addEventListener('hashchange',sync);
+  // القادم من صفحة أخرى في الموقع (زر العودة مثلًا) يرى الفهرس مباشرة
+  var nav=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
+  var fromSite=false;
+  try{var r=document.referrer;fromSite=!!r&&r.indexOf(location.origin)===0&&new URL(r).pathname.replace(/\/index\.html$/,'/')!==location.pathname.replace(/\/index\.html$/,'/');}catch(e){}
+  if(location.hash==='#quizzes'||(nav.type==='navigate'&&fromSite)){
+    root.classList.add('view-list');
+    if(location.hash!=='#quizzes'){try{history.replaceState({v:'list'},'','#quizzes');}catch(e){}}
+  }
 })();
 const baqaraPages=[
   ['albaqara_p2.html','ص 2','1–5'],['albaqara_p3.html','ص 3','6–16'],
@@ -1279,9 +1304,24 @@ const SOON_JUZ = {
   24:['الزمر — فصلت','ص 462'], 25:['فصلت — الجاثية','ص 482'],
 };
 
-function card(href,name,meta,ok,surah){
+// أرقام صفحات المصحف لسور جزء عمّ (للبحث برقم الصفحة فقط، لا تظهر في البطاقة)
+const AMMA_START={annaba:582,annaziat:583,abasa:585,attakwir:586,alinfitar:587,almutaffifin:587,alinshiqaq:589,alburuj:590,altariq:591,alaala:591,alghasiya:592,alfajr:593,albalad:594,alshams:595,allayl:595,alduha:596,alsharh:596,atteen:597,alalaq:597,alqadr:598,albayyina:598,alzalzala:599,alaadiyat:599,alqaria:600,altakathur:600,alasr:601,alhumaza:601,alfiyl:601,aquraysh:602,almaoon:602,alkawthur:602,alkafirun:603,alnnasr:603,almasad:603,alikhlas:604,alfalaq:604,alnnas:604};
+const AMMA_PAGE_FIX={annaba:[582,583],annaziat:[583,584],abasa:[584,585]}; // كما في صفحات الاختبار نفسها
+function ammaPagesStr(file){
+  const k=file.replace('.html','');
+  const keys=Object.keys(AMMA_START);
+  const i=keys.indexOf(k);
+  if(i<0)return '';
+  let a=AMMA_START[k],b=i<keys.length-1?AMMA_START[keys[i+1]]:604;
+  if(AMMA_PAGE_FIX[k]){a=AMMA_PAGE_FIX[k][0];b=AMMA_PAGE_FIX[k][1];}
+  if(b<a)b=a;
+  let r='';for(let n=a;n<=b;n++)r+=(r?' ':'')+'ص '+n;
+  return r;
+}
+
+function card(href,name,meta,ok,surah,pages){
   const lx=x=>{try{return (window.darbiIdxLoc&&window.darbiIdxLoc(x))||'';}catch(e){return '';}};
-  const s=(surah?surah+' ':'')+name+' '+meta+' '+lx(surah)+' '+lx(name)+' '+lx(meta);
+  const s=(surah?surah+' ':'')+name+' '+meta+' '+lx(surah)+' '+lx(name)+' '+lx(meta)+(pages?' '+pages:'');
   if(!ok) return `<div class="quiz-card soon" data-s="${s}"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${name}</div><div class="card-meta">${meta}</div><span class="card-badge badge-soon">${darbiT('home.card_soon_badge')}</span></div>`;
   const key=(href||'').replace('.html','');
   return `<a href="${href}" class="quiz-card" data-s="${s}" data-key="${key}"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${name}</div><div class="card-meta">${meta}</div><div class="card-levels"><span class="lvl-dot" data-lvl="easy" title="${darbiT('home.lvl_easy_title')}">${darbiT('level.easy_name').slice(0,1)}</span><span class="lvl-dot" data-lvl="medium" title="${darbiT('home.lvl_medium_title')}">${darbiT('level.medium_name').slice(0,1)}</span><span class="lvl-dot" data-lvl="hard" title="${darbiT('home.lvl_hard_title')}">${darbiT('level.hard_name').slice(0,1)}</span></div><span class="card-badge badge-ok card-complete" style="display:none">${darbiT('home.card_complete_badge')}</span></a>`;
@@ -1299,7 +1339,7 @@ function groupPageKeys(g){
 function groupCardsHtml(g){
   if(g.kind==='single') return card(g.href,g.name,g.meta,true,g.name);
   if(g.kind==='soon') return card('',g.name,g.page?('ص '+g.page):darbiT('home.juz_soon'),false,g.name);
-  if(g.kind==='amma') return ammaData.map(p=>card(p[0],p[1],p[2],p[3])).join('');
+  if(g.kind==='amma') return ammaData.map(p=>card(p[0],p[1],p[2],p[3],undefined,ammaPagesStr(p[0]))).join('');
   const arr=g.arr, from=('from' in g)?g.from:0, to=('to' in g)?g.to:arr.length;
   return arr.slice(from,to).map(p=>card(p[0],p[1],p[2],true,g.surah)).join('');
 }
