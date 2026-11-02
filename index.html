@@ -141,7 +141,7 @@ html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{cont
 /* ===== SEARCH ===== */
 .search-wrap{background:var(--bg);padding:12px 16px 8px;position:sticky;top:55px;z-index:150;}
 /* الشاشة الأولى: الهيرو ثم شريط البحث ثم ملاحظة الإطلاق التجريبي، والفهرس يبدأ بعدها */
-.home-first{min-height:calc(100vh - 55px - 64px - 78px);min-height:calc(100svh - 55px - 64px - 78px);display:flex;flex-direction:column;}
+.home-first{min-height:calc(100vh - 55px - 64px - 78px - 62px - 10px);min-height:calc(100svh - 55px - 64px - 78px - 62px - 10px);display:flex;flex-direction:column;}
 .home-first .hero{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;}
 /* الفهرس شاشة ثانية: مخفي في الرئيسية ويظهر من «ابدأ الاختبارات» أو من البحث */
 #list-view{display:none;}
@@ -224,7 +224,14 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 
 /* ===== FOOTER ===== */
 footer{text-align:center;margin-top:44px;padding:24px 16px;border-top:1px solid var(--border);}
-html:not(.view-list) footer{margin-top:12px;}
+footer a{text-underline-offset:6px;text-decoration-thickness:1px;}
+/* الرئيسية: تذييل مضغوط في سطر واحد حتى تبقى كل الصفحة في شاشة واحدة */
+html:not(.view-list) footer{margin-top:0;padding:8px 16px 12px;}
+html:not(.view-list) footer .footer-ayah,html:not(.view-list) footer .footer-ref{display:none;}
+html:not(.view-list) body{padding-bottom:0;}
+html:not(.view-list) .beta-note{margin-bottom:10px;}
+html:not(.view-list) footer .footer-copy{font-size:0.76rem;line-height:1.5;}
+html:not(.view-list) footer .footer-copy+.footer-copy{margin-top:2px!important;white-space:nowrap;}
 .footer-ayah{font-family:'Scheherazade New',serif;font-size:1rem;color:var(--green);margin-bottom:4px;}
 .footer-ref{font-size:0.75rem;color:var(--soft);margin-bottom:14px;}
 .footer-copy{font-size:0.8rem;color:var(--soft);}
