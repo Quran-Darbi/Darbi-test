@@ -141,21 +141,23 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 /* ===== عن المشروع — التصميم الجديد (نوفمبر ٢٠٢٦) ===== */
 .ab-wrap{max-width:840px;margin:0 auto;padding:22px 13px 0;display:flex;flex-direction:column;gap:22px;}
 .ab-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 20px;box-shadow:0 2px 10px var(--shadow);}
-.ab-h{display:flex;align-items:center;gap:10px;font-size:1.25rem;font-weight:700;color:var(--green);margin-bottom:14px;}
+.ab-h{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:700;color:var(--green);margin-bottom:14px;}
 .ab-h-plain{margin-bottom:0;}
-.ab-h-ico{flex-shrink:0;width:38px;height:38px;border-radius:12px;background:var(--green3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.ab-h-ico{flex-shrink:0;width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;}
+html[data-theme="dark"] .ab-h-ico{background:var(--green3);color:var(--green);border:1.5px solid var(--green2);}
 .ab-sub{font-size:.95rem;font-weight:700;color:var(--text);margin:0 0 12px;}
 .ab-sub2{margin-top:22px;}
 
 /* البطاقة الافتتاحية */
-.ab-hero{text-align:center;background:linear-gradient(180deg,var(--green3) 0%,var(--card) 70%);position:relative;overflow:hidden;padding:30px 20px 26px;}
+.ab-hero{text-align:center;background:radial-gradient(120% 70% at 50% 0%,rgba(58,140,80,.16),transparent 65%),linear-gradient(180deg,var(--green3) 0%,var(--card) 80%);position:relative;overflow:hidden;padding:30px 20px 26px;}
 .ab-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green),var(--gold),var(--green));}
-.ab-logo{display:block;margin:0 auto 12px;border-radius:18px;box-shadow:0 4px 14px var(--shadow);}
+.ab-logo{display:block;margin:0 auto 12px;border-radius:20px;border:3px solid var(--card);box-shadow:0 6px 18px var(--shadow);}
 .ab-eyebrow{display:inline-block;font-size:.78rem;font-weight:700;color:var(--green);background:var(--card);border:1px solid var(--gold);border-radius:20px;padding:3px 14px;margin-bottom:8px;}
 .ab-brand{font-size:1.9rem;font-weight:700;color:var(--green);line-height:1.5;}
 .ab-tagline{font-size:1.05rem;font-weight:700;color:var(--text);margin:2px 0 12px !important;}
 .ab-intro{font-size:.95rem;line-height:2;color:var(--text);opacity:.88;max-width:600px;margin:0 auto 16px !important;}
 .ab-chip-ico{display:inline-flex;flex-shrink:0;}
+.ab-cta-hero{margin-top:18px;}
 .ab-chips{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
 .ab-chip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--green);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 12px;}
 
@@ -164,17 +166,19 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .ab-tl{list-style:none;padding:0;margin:0 0 6px;}
 .ab-tl li{position:relative;padding-inline-start:50px;padding-bottom:18px;}
 .ab-tl li:not(:last-child)::after{content:"";position:absolute;inset-inline-start:17px;top:38px;bottom:2px;width:2px;background:var(--border);}
-.ab-tl-dot{position:absolute;inset-inline-start:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--green3);border:2px solid var(--green2);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.ab-tl-dot{position:absolute;inset-inline-start:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--green3);border:2px solid var(--green2);color:var(--green);display:flex;align-items:center;justify-content:center;}
 .ab-tl h3{font-size:.98rem;color:var(--green);font-weight:700;margin:6px 0 2px;}
 .ab-tl p{font-size:.9rem;line-height:1.95;color:var(--text);opacity:.88;}
-.ab-goal{margin-top:6px !important;padding:14px 16px;border-radius:14px;background:var(--bg);border:1px solid var(--border);border-inline-start:3px solid var(--green2);font-size:.92rem;line-height:1.95;color:var(--text);}
+.ab-goal{margin-top:6px !important;padding:14px 16px;border-radius:14px;background:var(--green3);border-inline-start:3px solid var(--green2);font-size:.92rem;line-height:1.95;color:var(--text);}
+.ab-goal-h{font-weight:700;color:var(--green);margin-bottom:4px;}
+.ab-goal ul{list-style:none;padding:0;margin:0;}
 
 /* المستويات */
 .ab-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .ab-lvl{background:var(--bg);border:1px solid var(--border);border-top:3px solid var(--c,var(--green));border-radius:14px;padding:14px 14px 16px;}
 .ab-lvl-1{--c:var(--green2);}.ab-lvl-2{--c:var(--gold);}.ab-lvl-3{--c:var(--green);}
 .ab-lvl-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.ab-lvl-ico{font-size:1.8rem;line-height:1;}
+.ab-lvl-ico{display:inline-flex;color:var(--c);line-height:1;}
 .ab-dots{display:flex;gap:4px;}
 .ab-dots i{width:8px;height:8px;border-radius:50%;background:var(--border);display:block;}
 .ab-dots i.on{background:var(--c);}
@@ -185,7 +189,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 /* أنماط أخرى */
 .ab-modes{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .ab-mode{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px;color:inherit;text-decoration:none;}
-.ab-mode-ico{flex-shrink:0;width:42px;height:42px;border-radius:12px;background:var(--green3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.ab-mode-ico{flex-shrink:0;width:42px;height:42px;border-radius:12px;background:var(--green3);display:flex;align-items:center;justify-content:center;color:var(--green);}
 .ab-mode h3{font-size:1rem;color:var(--green);font-weight:700;margin-bottom:2px;}
 .ab-mode p{font-size:.86rem;line-height:1.9;color:var(--text);opacity:.88;}
 .ab-mode-link{transition:border-color .2s,transform .2s;}
@@ -196,6 +200,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .ab-steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .ab-steps li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px;}
 .ab-step-n{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.ab-steps li:last-child:nth-child(odd){grid-column:1/-1;}
 .ab-steps p{font-size:.9rem;line-height:1.9;color:var(--text);}
 .ab-cta{text-align:center;margin-top:18px;}
 .ab-btn{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;border:1.5px solid var(--green);border-radius:22px;padding:11px 24px;font-family:'Almarai',sans-serif;font-size:.95rem;font-weight:700;text-decoration:none;cursor:pointer;transition:opacity .2s,transform .2s;}
@@ -214,16 +219,17 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
 .ab-no p{font-size:.92rem;line-height:2;color:var(--text);}
 .ab-yes h3,.ab-no h3{font-size:.98rem;font-weight:700;color:var(--green);margin-bottom:6px;}
 .ab-yes ul,.ab-no ul{list-style:none;padding:0;margin:0;}
-.ab-yes li,.ab-no li{position:relative;padding-inline-start:22px;font-size:.9rem;line-height:1.9;color:var(--text);margin-bottom:4px;}
-.ab-yes li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--green);font-weight:700;}
+.ab-yes li,.ab-no li,.ab-goal li{position:relative;padding-inline-start:22px;font-size:.9rem;line-height:1.9;color:var(--text);margin-bottom:4px;}
+.ab-yes li::before,.ab-goal li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--green);font-weight:700;}
 .ab-card .about-note{margin-top:14px;}
 
 /* الحديث والملاحظة */
+.ab-wrap #khatm-dua{margin-top:-8px;}
 .ab-label{font-size:.9rem;font-weight:700;color:var(--green);text-align:center;margin-bottom:8px;}
 .ab-acc{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:.88rem;line-height:1.9;color:var(--soft);}
 
 /* حركة خفيفة عند الظهور */
-.js .ab-reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
+.js .ab-reveal{opacity:0;transform:translateY(10px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);}
 .js .ab-reveal.in{opacity:1;transform:none;}
 @media (prefers-reduced-motion:reduce){.js .ab-reveal{opacity:1;transform:none;transition:none;}.ab-mode-link,.ab-btn{transition:none;}}
 .ab-btn:focus-visible,.ab-mode-link:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
@@ -271,33 +277,34 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
     <h1 class="ab-eyebrow" data-i18n="home.about_title">عن المشروع</h1>
     <div class="ab-brand" data-i18n="home.title">دربي لحفظ القرآن</div>
     <p class="ab-tagline"><span data-i18n="about2.tagline">رفيقك في رحلة حفظ القرآن ومراجعته</span> <span aria-hidden="true">🤍</span></p>
-    <p class="ab-intro" data-i18n="about2.intro">منصة تفاعلية تساعد على مراجعة حفظ القرآن الكريم واختبار إتقانه، صفحةً صفحة، بنص المصحف بالرسم العثماني، مع التركيز على ضبط الآيات المتشابهة وتثبيت الحفظ من خلال اختبارات متنوعة وتفاعلية.</p>
+    <p class="ab-intro" data-i18n="about2.intro">منصة تفاعلية تساعدك على مراجعة حفظ القرآن الكريم واختبار إتقانه، صفحةً صفحة، مع التركيز على المتشابهات.</p>
     <ul class="ab-chips">
       <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></span> <span data-i18n="about2.chip1">اختبارات تفاعلية متنوعة</span></li>
       <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></span> <span data-i18n="about2.chip2">تركيز على المتشابهات</span></li>
       <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z"/><path d="M12 6.5v13"/></svg></span> <span data-i18n="about2.chip3">النص القرآني لرواية حفص بالرسم العثماني</span></li>
     </ul>
+    <div class="ab-cta ab-cta-hero"><a class="ab-btn" href="index.html"><span data-i18n="about2.cta">ابدأ المراجعة الآن</span> <span aria-hidden="true">←</span></a></div>
   </section>
 
   <!-- ===== ماذا تجد في دربي؟ ===== -->
   <section class="ab-card ab-reveal" id="features" aria-labelledby="feat-h">
-    <h2 class="ab-h" id="feat-h"><span class="ab-h-ico" aria-hidden="true">🧭</span><span data-i18n="about2.find_title">ماذا تجد في دربي؟</span></h2>
+    <h2 class="ab-h" id="feat-h"><span class="ab-h-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span data-i18n="about2.find_title">ماذا تجد في دربي؟</span></h2>
     <p class="ab-sub" data-i18n="about2.find_sub">اختبر حفظك بثلاثة مستويات:</p>
     <div class="ab-levels">
       <article class="ab-lvl ab-lvl-1">
-        <div class="ab-lvl-top"><span class="ab-lvl-ico" aria-hidden="true">🌱</span><span class="ab-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div>
+        <div class="ab-lvl-top"><span class="ab-lvl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 12c0-4 3-6 7-6 0 4-3 6-7 6z"/><path d="M12 14c0-3-2.5-5-6-5 0 3 2.5 5 6 5z"/></svg></span><span class="ab-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div>
         <h3 data-i18n="level.easy_name">سهل</h3>
         <div class="ab-lvl-tag" data-i18n="about2.lvl1_tag">اختر الإجابة الصحيحة</div>
-        <p data-i18n="about2.lvl1_d">اختر الإجابة الصحيحة من بين خيارات متقاربة، وتدرّب على التمييز بين الآيات المتشابهة.</p>
+        <p data-i18n="about2.lvl1_d">خيارات متقاربة تدرّبك على التمييز بين الآيات المتشابهة.</p>
       </article>
       <article class="ab-lvl ab-lvl-2">
-        <div class="ab-lvl-top"><span class="ab-lvl-ico" aria-hidden="true">🌿</span><span class="ab-dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span></div>
+        <div class="ab-lvl-top"><span class="ab-lvl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-9 5-14 14-14 0 9-5 14-14 14z"/><path d="M5 19c3-4 6-7 10-9"/></svg></span><span class="ab-dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span></div>
         <h3 data-i18n="level.medium_name">متوسط</h3>
         <div class="ab-lvl-tag" data-i18n="about2.lvl2_tag">أكمل الفراغ</div>
         <p data-i18n="about2.lvl2_d">استحضر الكلمة أو الكلمتين الناقصتين لإكمال الآية.</p>
       </article>
       <article class="ab-lvl ab-lvl-3">
-        <div class="ab-lvl-top"><span class="ab-lvl-ico" aria-hidden="true">🌳</span><span class="ab-dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+        <div class="ab-lvl-top"><span class="ab-lvl-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-7"/><path d="M12 15c-4 0-7-2.5-7-6a7 7 0 0 1 14 0c0 3.5-3 6-7 6z"/></svg></span><span class="ab-dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
         <h3 data-i18n="level.hard_name">صعب</h3>
         <div class="ab-lvl-tag" data-i18n="about2.lvl3_tag">استرجع الآيات</div>
         <p data-i18n="about2.lvl3_d">اكتب الآيات المطلوبة أو اتلُها بصوتك، استجابةً لسؤال يحدد لك موضع البداية والنهاية.</p>
@@ -307,14 +314,14 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
     <p class="ab-sub ab-sub2" data-i18n="about2.more_title">واكتشف اختبارات أخرى لمراجعة حفظك.</p>
     <div class="ab-modes">
       <article class="ab-mode">
-        <span class="ab-mode-ico" aria-hidden="true">🔀</span>
+        <span class="ab-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg></span>
         <div>
           <h3 data-i18n="about2.order_t">ترتيب الآيات</h3>
           <p data-i18n="about2.order_d">رتّب الآيات وفق تسلسلها كما وردت في السورة.</p>
         </div>
       </article>
       <a class="ab-mode ab-mode-link" href="recitation.html">
-        <span class="ab-mode-ico" aria-hidden="true">🎤</span>
+        <span class="ab-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></span>
         <div>
           <h3 data-i18n="about2.recite_t">اختبر تلاوتك</h3>
           <p data-i18n="about2.recite_d">اختر الصفحة أو السورة التي تريد مراجعتها، أو حدد الآيات التي ترغب في تسميعها، ثم اقرأها بصوتك لتتعرف على مدى مطابقة تلاوتك للنص القرآني، والكلمات التي تحتاج إلى مراجعة.</p>
@@ -324,45 +331,53 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
     </div>
   </section>
 
-  <!-- ===== لماذا دربي؟ ===== -->
-  <section class="ab-card ab-reveal" id="why" aria-labelledby="why-h">
-    <h2 class="ab-h" id="why-h"><span class="ab-h-ico" aria-hidden="true">💡</span><span data-i18n="about2.why_title">لماذا دربي؟</span></h2>
-    <blockquote class="ab-quote" data-i18n="about2.why_quote">الحفظ يُبنى بالتكرار، والمراجعة هي ما تثبّته.</blockquote>
-    <ol class="ab-tl">
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">🌱</span>
-        <h3 data-i18n="about2.tl1_t">الفكرة</h3>
-        <p data-i18n="about2.tl1_p">تأسست فكرة «دربي لحفظ القرآن» انطلاقًا من تجربة شخصية واقعية خلال رحلة حفظ القرآن الكريم، وما صاحبها من حاجة إلى وسيلة تفاعلية لاختبار الحفظ، ومراجعة الآيات المتشابهة، والتدرب على استحضارها بدقة.</p>
-      </li>
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">🔎</span>
-        <h3 data-i18n="about2.tl2_t">الحاجة</h3>
-        <p data-i18n="about2.tl2_p">ومن خلال البحث عن أدوات تساعد على ذلك، برزت الحاجة إلى تجربة رقمية أكثر تكاملًا، تجمع بين تنوع الاختبارات، والتركيز على المتشابهات، وسهولة الاستخدام، والتفاعل بأساليب حديثة.</p>
-      </li>
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">📈</span>
-        <h3 data-i18n="about2.tl3_t">التطور</h3>
-        <p data-i18n="about2.tl3_p">ومن هنا تحولت الفكرة من مبادرة شخصية إلى مشروع رقمي متكامل، بدأ باختبارات الاختيار من متعدد، ثم تطور تدريجيًا ليضم مستويات وأنماطًا متنوعة للمراجعة.</p>
-      </li>
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">📱</span>
-        <h3 data-i18n="about2.tl4_t">اليوم</h3>
-        <p data-i18n="about2.tl4_p">وصولًا إلى إطلاق تطبيق خاص بدربي على Google Play.</p>
-      </li>
-    </ol>
-    <p class="ab-goal" data-i18n="about2.why_goal">يهدف دربي إلى جعل المراجعة أكثر تفاعلًا وتنظيمًا، والمساعدة على اكتشاف مواضع الخطأ والتشابه، ومعرفة ما يحتاج إلى مزيد من المراجعة أو التثبيت.</p>
-  </section>
-
   <!-- ===== كيف تستفيد؟ ===== -->
   <section class="ab-card ab-reveal" id="how" aria-labelledby="how-h">
-    <h2 class="ab-h" id="how-h"><span class="ab-h-ico" aria-hidden="true">✅</span><span data-i18n="about2.how_title">كيف تستفيد من دربي؟</span></h2>
+    <h2 class="ab-h" id="how-h"><span class="ab-h-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span><span data-i18n="about2.how_title">كيف تستفيد من دربي؟</span></h2>
     <ol class="ab-steps">
       <li><span class="ab-step-n" aria-hidden="true">١</span><p data-i18n="about2.how1">اختر السورة والصفحة التي تريد مراجعتها.</p></li>
       <li><span class="ab-step-n" aria-hidden="true">٢</span><p data-i18n="about2.how2">ابدأ بالمستوى السهل، ثم تدرّج إلى المتوسط فالصعب.</p></li>
       <li><span class="ab-step-n" aria-hidden="true">٣</span><p data-i18n="about2.how3">كرّر الاختبار حتى تتقن الصفحة، ثم انتقل إلى الصفحة التالية.</p></li>
       <li><span class="ab-step-n" aria-hidden="true">٤</span><p data-i18n="about2.how4">استخدم أنماط الاختبار المختلفة لتعزيز قدرتك على استحضار الآيات وضبط المتشابهات.</p></li>
+      <li><span class="ab-step-n" aria-hidden="true">٥</span><p data-i18n="about2.how5">تابع تقدمك صفحةً صفحة وسورةً سورة.</p></li>
     </ol>
     <div class="ab-cta"><a class="ab-btn" href="index.html"><span data-i18n="about2.cta">ابدأ المراجعة الآن</span> <span aria-hidden="true">←</span></a></div>
+  </section>
+
+  <!-- ===== لماذا دربي؟ ===== -->
+  <section class="ab-card ab-reveal" id="why" aria-labelledby="why-h">
+    <h2 class="ab-h" id="why-h"><span class="ab-h-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg></span><span data-i18n="about2.why_title">لماذا دربي؟</span></h2>
+    <blockquote class="ab-quote" data-i18n="about2.why_quote">الحفظ يُبنى بالتكرار، والمراجعة هي ما تثبّته.</blockquote>
+    <ol class="ab-tl">
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 12c0-4 3-6 7-6 0 4-3 6-7 6z"/><path d="M12 14c0-3-2.5-5-6-5 0 3 2.5 5 6 5z"/></svg></span>
+        <h3 data-i18n="about2.tl1_t">الفكرة</h3>
+        <p data-i18n="about2.tl1_p">انطلقت فكرة «دربي لحفظ القرآن» من تجربة شخصية واقعية خلال رحلة حفظ القرآن الكريم، وما صاحبها من حاجة إلى وسيلة تفاعلية لاختبار الحفظ، ومراجعة الآيات المتشابهة، والتدرب على استحضارها بدقة.</p>
+      </li>
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></span>
+        <h3 data-i18n="about2.tl2_t">الحاجة</h3>
+        <p data-i18n="about2.tl2_p">ومن خلال البحث عن أدوات تساعد على ذلك، برزت الحاجة إلى تجربة رقمية أشمل، تجمع بين تنوع الاختبارات، والتركيز على المتشابهات، وسهولة الاستخدام، والتفاعل بأساليب حديثة.</p>
+      </li>
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+        <h3 data-i18n="about2.tl3_t">التطور</h3>
+        <p data-i18n="about2.tl3_p">ومن هنا تحولت الفكرة من مبادرة شخصية إلى مشروع رقمي متكامل، بدأ باختبارات الاختيار من متعدد، ثم تطور تدريجيًا ليضم مستويات وأنماطًا متنوعة للمراجعة.</p>
+      </li>
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+        <h3 data-i18n="about2.tl4_t">اليوم</h3>
+        <p data-i18n="about2.tl4_p">واليوم يتوفر دربي كتطبيق على Google Play.</p>
+      </li>
+    </ol>
+    <div class="ab-goal">
+      <p class="ab-goal-h" data-i18n="about2.goal_h">يهدف دربي إلى:</p>
+      <ul>
+        <li data-i18n="about2.goal1">جعل المراجعة أكثر تفاعلًا وتنظيمًا.</li>
+        <li data-i18n="about2.goal2">المساعدة على اكتشاف مواضع الخطأ والتشابه.</li>
+        <li data-i18n="about2.goal3">معرفة ما يحتاج إلى مزيد من المراجعة أو التثبيت.</li>
+      </ul>
+    </div>
   </section>
 
   <!-- ===== ما دور دربي؟ ===== -->
@@ -400,16 +415,16 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
   <!-- دعاء ختم القرآن -->
   <section class="about-card ab-reveal" id="khatm-dua" aria-label="من أدعية ختم القرآن" style="border-right-color:var(--gold);">
     <div class="about-row">
-      <div class="role-mark" aria-hidden="true">🤲</div>
+      <div class="role-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg></div>
       <div class="about-body">
-        <div class="notranslate" translate="no" style="font-family:'Scheherazade New',serif;font-size:1.1rem;color:var(--green);line-height:2.1;text-align:center;">اللَّهُمَّ ارْحَمْنَا بِالقُرْآنِ الكَرِيمِ، وَاجْعَلْهُ لَنَا إِمَامًا وَنُورًا وَهُدًى وَرَحْمَةً، اللَّهُمَّ ذَكِّرْنَا مِنْهُ مَا نَسِينَا، وَعَلِّمْنَا مِنْهُ مَا جَهِلْنَا، وَارْزُقْنَا تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ، وَاجْعَلْهُ لَنَا حُجَّةً يَا رَبَّ العَالَمِينَ</div>
+        <div class="notranslate" translate="no" style="font-family:'Scheherazade New',serif;font-size:1.1rem;color:var(--green);line-height:2.1;text-align:center;">«اللَّهُمَّ ارْحَمْنَا بِالقُرْآنِ الكَرِيمِ، وَاجْعَلْهُ لَنَا إِمَامًا وَنُورًا وَهُدًى وَرَحْمَةً، اللَّهُمَّ ذَكِّرْنَا مِنْهُ مَا نَسِينَا، وَعَلِّمْنَا مِنْهُ مَا جَهِلْنَا، وَارْزُقْنَا تِلَاوَتَهُ آنَاءَ اللَّيْلِ وَأَطْرَافَ النَّهَارِ، وَاجْعَلْهُ لَنَا حُجَّةً يَا رَبَّ العَالَمِينَ»</div>
       </div>
     </div>
   </section>
 
   <!-- ملاحظة الدقة -->
   <div class="ab-acc ab-reveal">
-    <p data-i18n="about2.acc">نحرص على مطابقة النص القرآني للمصحف، ويسعدنا أن تخبرنا بأي خطأ تلاحظه أو اقتراح يخطر لك.</p>
+    <p data-i18n="about2.acc">نرحب بملاحظاتكم واقتراحاتكم.</p>
     <button type="button" class="ab-btn ab-btn-ghost" onclick="fdbkOpen()" data-i18n="nav.feedback">💬 الاقتراحات</button>
   </div>
 
