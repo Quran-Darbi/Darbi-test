@@ -49,10 +49,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Scheherazade+New:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Almarai:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Cairo',sans-serif;background:var(--bg,#F2F5F0);color:var(--text,#1A2E1A);min-height:100vh;padding-bottom:60px;transition:background .3s,color .3s;}
+body{font-family:'Almarai',sans-serif;background:var(--bg,#F2F5F0);color:var(--text,#1A2E1A);min-height:100vh;padding-bottom:60px;transition:background .3s,color .3s;}
 
 /* ===== VARS ===== */
 :root{
@@ -72,12 +72,12 @@ html[data-theme="dark"]{
 
 /* ===== NAV ===== */
 nav{background:var(--nav);border-bottom:1.5px solid var(--border);padding:10px 18px 10px 58px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px var(--shadow);}
-.nav-logo{font-family:'Cairo',sans-serif;font-size:1.1rem;color:var(--green);font-weight:700;display:flex;align-items:center;gap:6px;}
+.nav-logo{font-family:'Almarai',sans-serif;font-size:1.1rem;color:var(--green);font-weight:700;display:flex;align-items:center;gap:6px;}
 .nav-logo span{font-size:1.3rem;}
 .nav-logo img{width:24px;height:24px;border-radius:6px;object-fit:cover;flex-shrink:0;}
 .nav-right{display:flex;align-items:center;gap:8px;}
 .theme-btn{background:var(--green3);border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.rec-btn{display:flex;align-items:center;gap:5px;background:var(--green);color:#fff;border:none;border-radius:18px;padding:7px 14px;font-size:0.85rem;font-family:'Cairo',sans-serif;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
+.rec-btn{display:flex;align-items:center;gap:5px;background:var(--green);color:#fff;border:none;border-radius:18px;padding:7px 14px;font-size:0.85rem;font-family:'Almarai',sans-serif;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
 .rec-btn:hover{opacity:.88;}
 
 /* ===== HERO ===== */
@@ -100,19 +100,19 @@ html[data-theme="dark"] #hero-progress-fill{background:var(--green)!important;}
 .hero-stars-bottom{text-align:center;color:rgba(255,255,255,0.18);font-size:1.4rem;letter-spacing:6px;pointer-events:none;margin-top:18px;line-height:1.2;}
 .hero-inner{position:relative;z-index:1;}
 .hero-bismillah{font-family:'Scheherazade New',serif;font-size:1.1rem;color:rgba(255,255,255,0.75);margin-bottom:16px;letter-spacing:1px;}
-.hero-title{font-family:'Cairo',sans-serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;}
+.hero-title{font-family:'Almarai',sans-serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;}
 .hero-sub{text-wrap:balance;font-size:1.02rem;line-height:1.7;color:rgba(255,255,255,0.78);margin-bottom:20px;}
 /* بطاقة الآية */
 .ayah-banner{display:inline-flex;flex-direction:column;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:14px;padding:10px 18px;margin-bottom:12px;backdrop-filter:blur(6px);max-width:340px;}
 .ayah-text{font-family:'Scheherazade New',serif;font-size:1.05rem;color:#fff;line-height:1.9;margin-bottom:4px;}
 .ayah-ref{font-size:0.72rem;color:rgba(255,255,255,0.6);letter-spacing:.5px;}
 /* زر التلاوة */
-.hero-rec-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:8px 22px;font-size:0.9rem;font-family:'Cairo',sans-serif;font-weight:700;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,0.12);transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.hero-rec-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:8px 22px;font-size:0.9rem;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,0.12);transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .hero-rec-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,0.2);}
 .hero-rec-btn::after{content:"→";display:inline-block;font-size:1.05rem;opacity:.75;}
 .hero-btn-row{display:flex;flex-direction:column;align-items:center;gap:13px;}
 /* زر البدء الرئيسي + شارات أنواع الاختبارات */
-.hero-start-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:14px 38px;font-size:1.22rem;min-width:240px;justify-content:center;font-family:'Cairo',sans-serif;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.hero-start-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:14px 38px;font-size:1.22rem;min-width:240px;justify-content:center;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .hero-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,0.25);}
 .hero-types{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 5px;margin:0 -14px 20px;padding:0;}
 .hero-type{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);color:#fff;border-radius:14px;padding:2px 8px;font-size:clamp(0.62rem,3.3vw,0.8rem);line-height:1.7;white-space:nowrap;}
@@ -121,7 +121,7 @@ html[data-theme="dark"] #hero-progress-fill{background:var(--green)!important;}
 .hero-resume-last{font-size:0.88rem;color:#fff;line-height:1.5;}
 .hero-resume-count{font-size:0.76rem;color:rgba(255,255,255,0.78);margin-top:2px;}
 .hero-resume-bar{width:100%;height:4px;margin:9px 0 12px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;}
-.hero-continue{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.6);color:#fff;border-radius:16px;padding:6px 14px;font-size:0.85rem;font-family:'Cairo',sans-serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;}
+.hero-continue{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.6);color:#fff;border-radius:16px;padding:6px 14px;font-size:0.85rem;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;}
 .hero-continue:hover{background:rgba(255,255,255,0.28);transform:translateY(-2px);}
 .hero-continue::after{content:"→";}
 html[dir="rtl"] .hero-continue::after{content:"←";}
@@ -129,7 +129,7 @@ html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{cont
 #main{scroll-margin-top:130px;}
 .hero-start-btn::after{content:"→";display:inline-block;font-size:1.05rem;opacity:.75;}
 .hero-inner .ayah-banner{margin-top:10px;margin-bottom:0;}
-.hero-progress-btn{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,0.16);color:#fff;border:1.5px solid rgba(255,255,255,0.55);border-radius:18px;padding:9px 24px;font-size:0.95rem;font-family:'Cairo',sans-serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;cursor:pointer;}
+.hero-progress-btn{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,0.16);color:#fff;border:1.5px solid rgba(255,255,255,0.55);border-radius:18px;padding:9px 24px;font-size:0.95rem;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;cursor:pointer;}
 .hero-progress-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.26);}
 .hero-progress-btn-sub{font-size:0.68rem;font-weight:400;opacity:0.85;text-decoration:underline;}
 /* إحصائيات */
@@ -158,7 +158,7 @@ html.view-list #list-view{display:block;}
 .quiz-card.focus-mark{animation:darbiGlow 1.8s ease-in-out infinite;}
 @media(prefers-reduced-motion:reduce){.quiz-card.focus-mark{animation:none;box-shadow:0 0 0 3px rgba(196,168,74,.9);}}
 html.view-list .home-first,html.view-list .beta-note{display:none;}
-.search-input{font-family:'Cairo',sans-serif;font-size:1rem;width:100%;max-width:580px;display:block;margin:0 auto;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:24px;background:var(--card);color:var(--text);outline:none;text-align:right;direction:rtl;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A7A55' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;}
+.search-input{font-family:'Almarai',sans-serif;font-size:1rem;width:100%;max-width:580px;display:block;margin:0 auto;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:24px;background:var(--card);color:var(--text);outline:none;text-align:right;direction:rtl;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A7A55' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;}
 .search-input:focus{border-color:var(--green);}
 .search-input::placeholder{color:var(--soft);opacity:.7;}
 
@@ -179,11 +179,11 @@ html.view-list .home-first,html.view-list .beta-note{display:none;}
 .acc-left{display:flex;flex-direction:column;align-items:flex-start;gap:5px;flex:1;min-width:0;}
 .acc-left-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
 .acc-right{display:flex;align-items:center;gap:7px;flex-shrink:0;}
-.juz-badge{background:var(--green);color:#fff;font-family:'Cairo',sans-serif;font-size:0.82rem;padding:3px 11px;border-radius:10px;white-space:nowrap;}
+.juz-badge{background:var(--green);color:#fff;font-family:'Almarai',sans-serif;font-size:0.82rem;padding:3px 11px;border-radius:10px;white-space:nowrap;}
 .juz-badge.amma{background:#1A6A1A;}
 .juz-badge.soon{background:var(--border);color:var(--soft);}
 html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
-.juz-title{font-family:'Cairo',sans-serif;font-size:1rem;color:var(--green);font-weight:700;}
+.juz-title{font-family:'Almarai',sans-serif;font-size:1rem;color:var(--green);font-weight:700;}
 .juz-count{font-size:0.62rem;color:var(--soft);background:var(--green3);border:1px solid var(--border);border-radius:7px;padding:1px 7px;white-space:nowrap;}
 .juz-bar-track{width:100%;max-width:260px;height:5px;background:var(--border);border-radius:4px;overflow:hidden;}
 .juz-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green2));border-radius:4px;transition:width .4s;}
@@ -192,7 +192,7 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .acc-arrow.open{transform:rotate(180deg);}
 .acc-body{display:none;padding:10px 10px 12px;border-top:1px solid var(--border);background:var(--bg);}
 .acc-body.open{display:block;}
-.surah-name{font-family:'Cairo',sans-serif;font-size:0.88rem;color:var(--green);font-weight:700;margin:10px 0 6px;}
+.surah-name{font-family:'Almarai',sans-serif;font-size:0.88rem;color:var(--green);font-weight:700;margin:10px 0 6px;}
 .surah-name:first-child{margin-top:2px;}
 .surah-card{font-family:inherit;cursor:pointer;text-align:start;width:100%;}
 .quiz-card.surah-card.sel{background:linear-gradient(135deg,#2E6B3E,#3A8C50);border-color:#2E6B3E;box-shadow:0 4px 12px rgba(46,107,62,.35);}
@@ -210,7 +210,7 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .surah-panel .card-bar{width:2px;}
 .surah-panel .lvl-dot{width:15px;height:15px;font-size:0.55rem;}
 .surah-panel.open{display:block;}
-.surah-panel-title{display:inline-block;font-family:'Cairo',sans-serif;font-size:0.8rem;color:#fff;background:#2E6B3E;font-weight:700;margin:0 0 8px;padding:2px 12px;border-radius:20px;}
+.surah-panel-title{display:inline-block;font-family:'Almarai',sans-serif;font-size:0.8rem;color:#fff;background:#2E6B3E;font-weight:700;margin:0 0 8px;padding:2px 12px;border-radius:20px;}
 @media(max-width:560px){.surah-panel .cards-grid{grid-template-columns:repeat(4,1fr);}.surah-panel{padding:9px 7px 8px;}}
 
 .note-btn{margin-top:9px;width:100%;background:var(--green3);border:1px dashed var(--green2);color:var(--green);font-size:0.78rem;padding:8px;border-radius:10px;cursor:pointer;text-align:center;font-family:inherit;}
@@ -223,7 +223,7 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .quiz-card.soon{opacity:.45;cursor:default;pointer-events:none;}
 .card-bar{position:absolute;right:0;top:0;width:3px;height:100%;background:linear-gradient(180deg,var(--green),var(--green2));border-radius:0 11px 11px 0;}
 .quiz-card.soon .card-bar{background:var(--border);}
-.card-name{font-family:'Cairo',sans-serif;font-size:0.95rem;color:var(--green);font-weight:700;padding-right:5px;}
+.card-name{font-family:'Almarai',sans-serif;font-size:0.95rem;color:var(--green);font-weight:700;padding-right:5px;}
 .card-meta{font-size:0.7rem;color:var(--soft);padding-right:5px;}
 .card-badge{display:inline-block;font-size:0.66rem;padding:2px 7px;border-radius:7px;margin-top:2px;}
 .badge-ok{background:#E4F4DE;color:#2D5A27;border:1px solid #B0D8A8;}
@@ -300,7 +300,7 @@ html[data-theme="dark"] .beta-text{color:var(--soft);}
 @media(max-height:680px){
   html.has-progress .home-first .hero-inner .ayah-banner{display:none;}
 }
-@media(max-height:760px){
+@media(max-height:800px){
   html:not(.has-progress) .home-first .hero{padding-top:10px;padding-bottom:8px;}
   html:not(.has-progress) .home-first .hero-bismillah{display:none;}
   html:not(.has-progress) .home-first .hero-sub{margin-bottom:10px;}
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 <style>
-.tools-fab{position:fixed;top:14px;left:14px;z-index:9990;display:inline-flex;font-family:'Cairo',Tahoma,sans-serif;}
+.tools-fab{position:fixed;top:14px;left:14px;z-index:9990;display:inline-flex;font-family:'Almarai',Tahoma,sans-serif;}
 .tools-fab-btn{display:flex;align-items:center;justify-content:center;background:var(--green3,var(--surface2,#EAF2EA));color:var(--green,var(--accent,#2E6B3E));border:1px solid var(--border,#E4EAE4);border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
 .tools-fab-btn:hover{filter:brightness(1.05);}
 .tools-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;max-width:min(240px,calc(100vw - 24px));background:var(--card,#fff);border:1.5px solid var(--border,#E4EAE4);border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,0.18);overflow:hidden;min-width:195px;border-top:3px solid #C4A84A;z-index:9998;}
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded',function(){
 .tools-lang-list button.lang-active .lang-check{visibility:visible;}
 .fdbk-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:10000;align-items:center;justify-content:center;padding:16px;}
 .fdbk-overlay.open{display:flex;}
-.fdbk-modal{background:#fff;border-radius:14px;max-width:380px;width:100%;padding:20px;border-top:4px solid #C4A84A;font-family:'Cairo',Tahoma,sans-serif;direction:rtl;text-align:right;}
+.fdbk-modal{background:#fff;border-radius:14px;max-width:380px;width:100%;padding:20px;border-top:4px solid #C4A84A;font-family:'Almarai',Tahoma,sans-serif;direction:rtl;text-align:right;}
 html[data-theme="dark"] .fdbk-modal{background:#182018;color:#DCF0D8;}
 .fdbk-modal h3{margin:0 0 12px;color:#2E6B3E;font-size:1.15rem;}
 html[data-theme="dark"] .fdbk-modal h3{color:#6BBF5A;}
@@ -359,7 +359,7 @@ html[data-theme="dark"] .fdbk-send{background:#4A9E40;}
 .fdbk-cancel{background:none;border:1px solid #d8e0d8;color:inherit;}
 .qr-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10001;align-items:center;justify-content:center;padding:16px;}
 .qr-overlay.open{display:flex;}
-.qr-modal{background:var(--card,#fff);border:1px solid var(--border,#E4EAE4);border-radius:18px;padding:22px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.2);border-top:4px solid #C4A84A;font-family:'Cairo',Tahoma,sans-serif;}
+.qr-modal{background:var(--card,#fff);border:1px solid var(--border,#E4EAE4);border-radius:18px;padding:22px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.2);border-top:4px solid #C4A84A;font-family:'Almarai',Tahoma,sans-serif;}
 .qr-title{font-size:1.05rem;color:#2E6B3E;font-weight:700;margin-bottom:14px;}
 html[data-theme="dark"] .qr-title{color:#6BBF5A;}
 .qr-img{border-radius:12px;border:1px solid var(--border,#E4EAE4);background:#fff;padding:8px;}
