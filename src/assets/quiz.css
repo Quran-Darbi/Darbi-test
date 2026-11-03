@@ -4,7 +4,7 @@
    - خط الواجهة: Almarai (Google Fonts) — كل نص ليس آية: العناوين والأزرار والقوائم والنوافذ والأرقام.
      الكود:  @import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap');
              font-family:'Almarai',sans-serif;
-   - نصوص القرآن فقط (الآيات والبسملة) تبقى بخط المصحف: 'Amiri','Scheherazade New'.
+   - نصوص القرآن فقط (الآيات والبسملة): 'Scheherazade New' (ثم Amiri احتياطًا).
    - أي صفحة أو عنصر جديد يستخدم Almarai. للتأكد: node tools/check_fonts.js
    - التفاصيل في DEVELOPMENT.md (قسم «الخط»)
    ============================================================ */
@@ -137,5 +137,7 @@ html[data-theme="dark"] .qr-title{color:#6BBF5A;}
 .qr-copy-btn{background:#2E6B3E;color:#fff;border:none;}
 html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .qr-close-btn{background:none;border:1px solid var(--border,#E4EAE4);color:var(--text,#1A1A1A);}
-/* نصوص القرآن والآيات تبقى بخط المصحف (Amiri / Scheherazade New) — بقية الواجهة بخط Almarai */
-.q-text,.choice-btn,.answer-input,.feedback,.hint-box,.rec-transcript,.rec-word,.order-item,.order-help,.order-slot,.order-filled-grid,.order-empty-strip,.oh-tap,.mushaf-block,.ayah-end,.notranslate{font-family:'Amiri','Scheherazade New','Traditional Arabic',serif;}
+/* نصوص القرآن والآيات بخط Scheherazade New (ثم Amiri احتياطًا) — بقية الواجهة بخط Almarai */
+.q-text,.choice-btn,.answer-input,.feedback,.hint-box,.rec-transcript,.rec-word,.order-item,.order-help,.order-slot,.order-filled-grid,.order-empty-strip,.oh-tap,.mushaf-block,.ayah-end,.notranslate{font-family:'Scheherazade New','Amiri','Traditional Arabic',serif;}
+/* Scheherazade New أصغر بصريًا من Amiri بنفس المقاس، فنكبّر أسئلة واختيارات الآيات قليلًا */
+.q-text{font-size:22px;}.choice-btn{font-size:19px;}

@@ -146,7 +146,7 @@ node tools/validate.js && node tools/build.js
 - **كود التحميل:** `@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap');`
   (في أول `src/assets/quiz.css` لصفحات الاختبارات؛ وفي وسم `<link>` داخل الصفحات المستقلة: `index.html` و`progress.html` و`about.html` و`privacy.html` و`recitation.html`).
 - **كود الاستخدام:** `font-family:'Almarai',sans-serif;`
-- **الاستثناء الوحيد:** نصوص القرآن (الآيات والبسملة وكلمات الإجابة) تبقى بخط المصحف `'Amiri','Scheherazade New'`، ولا يُغيَّر الرسم العثماني بأي حال.
+- **الاستثناء الوحيد:** نصوص القرآن (الآيات والبسملة وكلمات الإجابة) كلها بخط `'Scheherazade New'` (ثم Amiri احتياطًا) — اختارته هند لأن شكله أوضح، ولا يُغيَّر الرسم العثماني بأي حال.
 - **صفحات الاختبارات:** تأخذ الخط من `src/assets/quiz.css` وحده (لا تُعدَّل الصفحات المولَّدة). عدّلي الملف ثم `node tools/build.js`.
 - **عنصر جديد يعرض آية:** أضيفي محدّده إلى قائمة `QURAN_SELECTORS` في `tools/check_fonts.js` وإلى آخر `src/assets/quiz.css`.
 - **الفحص:** `node tools/check_fonts.js` — يفشل إن بقي خط قديم على عنصر ليس من عناصر القرآن.
