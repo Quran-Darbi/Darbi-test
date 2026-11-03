@@ -157,7 +157,6 @@ html[data-theme="dark"] .ab-h-ico{background:var(--green3);color:var(--green);bo
 .ab-tagline{font-size:1.05rem;font-weight:700;color:var(--text);margin:2px 0 12px !important;}
 .ab-intro{font-size:.95rem;line-height:2;color:var(--text);opacity:.88;max-width:600px;margin:0 auto 16px !important;}
 .ab-chip-ico{display:inline-flex;flex-shrink:0;}
-.ab-cta-hero{margin-top:18px;}
 .ab-chips{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
 .ab-chip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--green);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 12px;}
 
@@ -188,9 +187,11 @@ html[data-theme="dark"] .ab-h-ico{background:var(--green3);color:var(--green);bo
 
 /* أنماط أخرى */
 .ab-modes{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.ab-mode{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:14px;color:inherit;text-decoration:none;}
-.ab-mode-ico{flex-shrink:0;width:42px;height:42px;border-radius:12px;background:var(--green3);display:flex;align-items:center;justify-content:center;color:var(--green);}
-.ab-mode h3{font-size:1rem;color:var(--green);font-weight:700;margin-bottom:2px;}
+.ab-mode{display:block;--c:var(--green2);background:var(--bg);border:1px solid var(--border);border-top:3px solid var(--c);border-radius:14px;padding:14px 14px 16px;color:inherit;text-decoration:none;}
+.ab-mode-link{--c:var(--green);}
+.ab-mode-ico{display:inline-flex;color:var(--c);line-height:1;margin-bottom:6px;}
+.ab-mode-ico svg{width:30px;height:30px;}
+.ab-mode h3{font-size:1.05rem;color:var(--green);font-weight:700;margin-bottom:6px;}
 .ab-mode p{font-size:.86rem;line-height:1.9;color:var(--text);opacity:.88;}
 .ab-mode-link{transition:border-color .2s,transform .2s;}
 .ab-mode-link:hover{border-color:var(--green2);transform:translateY(-2px);}
@@ -240,7 +241,7 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
   .ab-card{padding:20px 16px;}
 }
 </style>
-<script src="lang.js?v=20261103a"></script>
+<script src="lang.js?v=20261104a"></script>
 </head>
 <body>
 
@@ -277,13 +278,12 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
     <h1 class="ab-eyebrow" data-i18n="home.about_title">عن المشروع</h1>
     <div class="ab-brand" data-i18n="home.title">دربي لحفظ القرآن</div>
     <p class="ab-tagline"><span data-i18n="about2.tagline">رفيقك في رحلة حفظ القرآن ومراجعته</span> <span aria-hidden="true">🤍</span></p>
-    <p class="ab-intro" data-i18n="about2.intro">منصة تفاعلية تساعدك على مراجعة حفظ القرآن الكريم واختبار إتقانه، صفحةً صفحة، مع التركيز على المتشابهات.</p>
+    <p class="ab-intro" data-i18n="about2.intro">منصة تفاعلية تساعدك على مراجعة حفظ القرآن الكريم واختبار إتقانه، صفحةً صفحة، مع التركيز على ضبط المتشابهات.</p>
     <ul class="ab-chips">
       <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></span> <span data-i18n="about2.chip1">اختبارات تفاعلية متنوعة</span></li>
       <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></span> <span data-i18n="about2.chip2">تركيز على المتشابهات</span></li>
       <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z"/><path d="M12 6.5v13"/></svg></span> <span data-i18n="about2.chip3">النص القرآني لرواية حفص بالرسم العثماني</span></li>
     </ul>
-    <div class="ab-cta ab-cta-hero"><a class="ab-btn" href="index.html"><span data-i18n="about2.cta">ابدأ المراجعة الآن</span> <span aria-hidden="true">←</span></a></div>
   </section>
 
   <!-- ===== ماذا تجد في دربي؟ ===== -->
