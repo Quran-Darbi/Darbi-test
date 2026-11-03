@@ -155,18 +155,19 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .ab-brand{font-size:1.9rem;font-weight:700;color:var(--green);line-height:1.5;}
 .ab-tagline{font-size:1.05rem;font-weight:700;color:var(--text);margin:2px 0 12px !important;}
 .ab-intro{font-size:.95rem;line-height:2;color:var(--text);opacity:.88;max-width:600px;margin:0 auto 16px !important;}
+.ab-chip-ico{display:inline-flex;flex-shrink:0;}
 .ab-chips{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;}
-.ab-chip{font-size:.8rem;color:var(--green);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 12px;}
+.ab-chip{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--green);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 12px;}
 
 /* لماذا دربي */
-.ab-quote{margin:0 0 20px;padding:14px 16px;font-size:1.15rem;font-weight:700;line-height:1.9;color:var(--green);background:var(--green3);border-radius:14px;border-right:4px solid var(--gold);}
+.ab-quote{text-wrap:balance;margin:0 0 20px;padding:14px 16px;font-size:1.15rem;font-weight:700;line-height:1.9;color:var(--green);background:var(--green3);border-radius:14px;border-right:4px solid var(--gold);}
 .ab-tl{list-style:none;padding:0;margin:0 0 6px;}
 .ab-tl li{position:relative;padding-inline-start:50px;padding-bottom:18px;}
 .ab-tl li:not(:last-child)::after{content:"";position:absolute;inset-inline-start:17px;top:38px;bottom:2px;width:2px;background:var(--border);}
 .ab-tl-dot{position:absolute;inset-inline-start:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--green3);border:2px solid var(--green2);display:flex;align-items:center;justify-content:center;font-size:1rem;}
 .ab-tl h3{font-size:.98rem;color:var(--green);font-weight:700;margin:6px 0 2px;}
 .ab-tl p{font-size:.9rem;line-height:1.95;color:var(--text);opacity:.88;}
-.ab-goal{margin-top:6px !important;padding:14px 16px;border-radius:14px;background:var(--gold2);font-size:.92rem;line-height:1.95;color:var(--text);}
+.ab-goal{margin-top:6px !important;padding:14px 16px;border-radius:14px;background:var(--bg);border:1px solid var(--border);border-inline-start:3px solid var(--green2);font-size:.92rem;line-height:1.95;color:var(--text);}
 
 /* المستويات */
 .ab-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
@@ -209,12 +210,12 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
 .ab-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .ab-yes,.ab-no{border-radius:14px;padding:14px 16px;}
 .ab-yes{background:var(--green3);}
-.ab-no{background:var(--gold2);}
+.ab-no{background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;}
+.ab-no p{font-size:.92rem;line-height:2;color:var(--text);}
 .ab-yes h3,.ab-no h3{font-size:.98rem;font-weight:700;color:var(--green);margin-bottom:6px;}
 .ab-yes ul,.ab-no ul{list-style:none;padding:0;margin:0;}
 .ab-yes li,.ab-no li{position:relative;padding-inline-start:22px;font-size:.9rem;line-height:1.9;color:var(--text);margin-bottom:4px;}
 .ab-yes li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--green);font-weight:700;}
-.ab-no li::before{content:"—";position:absolute;inset-inline-start:0;color:var(--gold);font-weight:700;}
 .ab-card .about-note{margin-top:14px;}
 
 /* الحديث والملاحظة */
@@ -272,39 +273,10 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
     <p class="ab-tagline"><span data-i18n="about2.tagline">رفيقك في رحلة حفظ القرآن ومراجعته</span> <span aria-hidden="true">🤍</span></p>
     <p class="ab-intro" data-i18n="about2.intro">منصة تفاعلية تساعد على مراجعة حفظ القرآن الكريم واختبار إتقانه، صفحةً صفحة، بنص المصحف بالرسم العثماني، مع التركيز على ضبط الآيات المتشابهة وتثبيت الحفظ من خلال اختبارات متنوعة وتفاعلية.</p>
     <ul class="ab-chips">
-      <li class="ab-chip"><span aria-hidden="true">📖</span> <span data-i18n="about2.chip1">بنص المصحف بالرسم العثماني</span></li>
-      <li class="ab-chip"><span aria-hidden="true">🔍</span> <span data-i18n="about2.chip2">تركيز على المتشابهات</span></li>
-      <li class="ab-chip"><span aria-hidden="true">🎯</span> <span data-i18n="about2.chip3">اختبارات متنوعة وتفاعلية</span></li>
+      <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></span> <span data-i18n="about2.chip1">اختبارات تفاعلية متنوعة</span></li>
+      <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></span> <span data-i18n="about2.chip2">تركيز على المتشابهات</span></li>
+      <li class="ab-chip"><span class="ab-chip-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z"/><path d="M12 6.5v13"/></svg></span> <span data-i18n="about2.chip3">النص القرآني لرواية حفص بالرسم العثماني</span></li>
     </ul>
-  </section>
-
-  <!-- ===== لماذا دربي؟ ===== -->
-  <section class="ab-card ab-reveal" id="why" aria-labelledby="why-h">
-    <h2 class="ab-h" id="why-h"><span class="ab-h-ico" aria-hidden="true">💡</span><span data-i18n="about2.why_title">لماذا دربي؟</span></h2>
-    <blockquote class="ab-quote" data-i18n="about2.why_quote">الحفظ يُبنى بالتكرار، والمراجعة هي ما تثبّته.</blockquote>
-    <ol class="ab-tl">
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">🌱</span>
-        <h3 data-i18n="about2.tl1_t">الفكرة</h3>
-        <p data-i18n="about2.tl1_p">تأسست فكرة «دربي لحفظ القرآن» انطلاقًا من تجربة شخصية واقعية خلال رحلة حفظ القرآن الكريم، وما صاحبها من حاجة إلى وسيلة تفاعلية لاختبار الحفظ، ومراجعة الآيات المتشابهة، والتدرب على استحضارها بدقة.</p>
-      </li>
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">🔎</span>
-        <h3 data-i18n="about2.tl2_t">الحاجة</h3>
-        <p data-i18n="about2.tl2_p">ومن خلال البحث عن أدوات تساعد على ذلك، برزت الحاجة إلى تجربة رقمية أكثر تكاملًا، تجمع بين تنوع الاختبارات، والتركيز على المتشابهات، وسهولة الاستخدام، والتفاعل بأساليب حديثة.</p>
-      </li>
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">🚀</span>
-        <h3 data-i18n="about2.tl3_t">التطور</h3>
-        <p data-i18n="about2.tl3_p">ومن هنا تحولت الفكرة من مبادرة شخصية إلى مشروع رقمي متكامل، بدأ باختبارات الاختيار من متعدد، ثم تطور تدريجيًا ليضم مستويات وأنماطًا متنوعة للمراجعة.</p>
-      </li>
-      <li>
-        <span class="ab-tl-dot" aria-hidden="true">📱</span>
-        <h3 data-i18n="about2.tl4_t">اليوم</h3>
-        <p data-i18n="about2.tl4_p">وصولًا إلى إطلاق تطبيق خاص بدربي على Google Play.</p>
-      </li>
-    </ol>
-    <p class="ab-goal" data-i18n="about2.why_goal">يهدف دربي إلى جعل المراجعة أكثر تفاعلًا وتنظيمًا، ومساعدتك على اكتشاف مواضع الخطأ والتشابه، ومعرفة ما يحتاج إلى مزيد من المراجعة أو التثبيت.</p>
   </section>
 
   <!-- ===== ماذا تجد في دربي؟ ===== -->
@@ -332,7 +304,7 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
       </article>
     </div>
 
-    <p class="ab-sub ab-sub2" data-i18n="about2.more_title">واكتشف طرقًا أخرى لمراجعة حفظك:</p>
+    <p class="ab-sub ab-sub2" data-i18n="about2.more_title">واكتشف اختبارات أخرى لمراجعة حفظك.</p>
     <div class="ab-modes">
       <article class="ab-mode">
         <span class="ab-mode-ico" aria-hidden="true">🔀</span>
@@ -350,6 +322,35 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
         </div>
       </a>
     </div>
+  </section>
+
+  <!-- ===== لماذا دربي؟ ===== -->
+  <section class="ab-card ab-reveal" id="why" aria-labelledby="why-h">
+    <h2 class="ab-h" id="why-h"><span class="ab-h-ico" aria-hidden="true">💡</span><span data-i18n="about2.why_title">لماذا دربي؟</span></h2>
+    <blockquote class="ab-quote" data-i18n="about2.why_quote">الحفظ يُبنى بالتكرار، والمراجعة هي ما تثبّته.</blockquote>
+    <ol class="ab-tl">
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true">🌱</span>
+        <h3 data-i18n="about2.tl1_t">الفكرة</h3>
+        <p data-i18n="about2.tl1_p">تأسست فكرة «دربي لحفظ القرآن» انطلاقًا من تجربة شخصية واقعية خلال رحلة حفظ القرآن الكريم، وما صاحبها من حاجة إلى وسيلة تفاعلية لاختبار الحفظ، ومراجعة الآيات المتشابهة، والتدرب على استحضارها بدقة.</p>
+      </li>
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true">🔎</span>
+        <h3 data-i18n="about2.tl2_t">الحاجة</h3>
+        <p data-i18n="about2.tl2_p">ومن خلال البحث عن أدوات تساعد على ذلك، برزت الحاجة إلى تجربة رقمية أكثر تكاملًا، تجمع بين تنوع الاختبارات، والتركيز على المتشابهات، وسهولة الاستخدام، والتفاعل بأساليب حديثة.</p>
+      </li>
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true">📈</span>
+        <h3 data-i18n="about2.tl3_t">التطور</h3>
+        <p data-i18n="about2.tl3_p">ومن هنا تحولت الفكرة من مبادرة شخصية إلى مشروع رقمي متكامل، بدأ باختبارات الاختيار من متعدد، ثم تطور تدريجيًا ليضم مستويات وأنماطًا متنوعة للمراجعة.</p>
+      </li>
+      <li>
+        <span class="ab-tl-dot" aria-hidden="true">📱</span>
+        <h3 data-i18n="about2.tl4_t">اليوم</h3>
+        <p data-i18n="about2.tl4_p">وصولًا إلى إطلاق تطبيق خاص بدربي على Google Play.</p>
+      </li>
+    </ol>
+    <p class="ab-goal" data-i18n="about2.why_goal">يهدف دربي إلى جعل المراجعة أكثر تفاعلًا وتنظيمًا، والمساعدة على اكتشاف مواضع الخطأ والتشابه، ومعرفة ما يحتاج إلى مزيد من المراجعة أو التثبيت.</p>
   </section>
 
   <!-- ===== كيف تستفيد؟ ===== -->
@@ -374,19 +375,17 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
       <div class="ab-yes">
         <h3 data-i18n="about2.yes_t">دربي يُعينك على</h3>
         <ul>
-          <li data-i18n="about2.yes1">إتقان الحفظ والمراجعة</li>
-          <li data-i18n="about2.yes2">ضبط المتشابهات</li>
+          <li data-i18n="about2.yes1">تثبيت الحفظ</li>
+          <li data-i18n="about2.yes2">إتقان المتشابهات</li>
+          <li data-i18n="about2.yes3">المراجعة المستمرة</li>
+          <li data-i18n="about2.yes4">متابعة تقدمك</li>
         </ul>
       </div>
       <div class="ab-no">
-        <h3 data-i18n="about2.no_t">لكنه لا يُغني عن</h3>
-        <ul>
-          <li data-i18n="about2.no1">التلقّي من شيخ متقن</li>
-          <li data-i18n="about2.no2">فضبط التشكيل وأحكام التجويد يُؤخذان بالسماع والمشافهة من أهل الاختصاص</li>
-        </ul>
+        <p data-i18n="about2.no_p">ولكن لا يُغني عن التلقي من شيخ مُتقِن؛ فالتشكيل وأحكام التجويد تُؤخذ بالسماع والمشافهة.</p>
       </div>
     </div>
-    <div class="about-note" data-i18n="about2.role_note">فليكن دربي رفيقك في طريق الإتقان، ومُعينًا لك على تثبيت محفوظك.</div>
+    <div class="about-note" data-i18n="about2.role_note">فليكن دربي مُعِينًا لك على الإتقان، لا بديلًا عن القراءة على أهل الإتقان.</div>
   </section>
 
   <!-- ===== فضل القرآن (الحديث) ===== -->
@@ -410,7 +409,7 @@ html[data-theme="dark"] .ab-step-n{background:var(--green3);color:var(--green);b
 
   <!-- ملاحظة الدقة -->
   <div class="ab-acc ab-reveal">
-    <p data-i18n="about2.acc">نحرص على مطابقة النص القرآني للمصحف، فإن لاحظت أي خطأ فيسعدنا أن تخبرنا به.</p>
+    <p data-i18n="about2.acc">نحرص على مطابقة النص القرآني للمصحف، ويسعدنا أن تخبرنا بأي خطأ تلاحظه أو اقتراح يخطر لك.</p>
     <button type="button" class="ab-btn ab-btn-ghost" onclick="fdbkOpen()" data-i18n="nav.feedback">💬 الاقتراحات</button>
   </div>
 
