@@ -52,7 +52,7 @@ ar: {
 
   // ===== الصفحة الرئيسية =====
   'home.title':'دربي لحفظ القرآن',
-  'home.subtitle':'اختبر حفظك صفحةً بصفحة...\nاختبارات تفاعلية لمراجعة الحفظ وتثبيته',
+  'home.subtitle':'رفيقك في رحلة إتقان الحفظ وتثبيته\nاختبارات تفاعلية لمراجعة الحفظ وضبط المتشابهات.',
   'home.title_tail':'اختبار حفظ القرآن الكريم ومراجعته',
   'home.recite_btn':'🎤 اختبر حفظك',
   'home.cta_start':'🌱 ابدأ الاختبارات',
@@ -437,7 +437,7 @@ en: {
 
   // ===== Home page =====
   'home.title':'Quran Darbi',
-  'home.subtitle':'Test your memorization page by page...\ninteractive quizzes to review and reinforce it',
+  'home.subtitle':'Your companion in mastering your memorization\nInteractive quizzes to review and master similar verses.',
   'home.title_tail':'Test and review your Quran memorization',
   'home.recite_btn':'🎤 Recitation Test',
   'home.cta_start':'🌱 Start the quizzes',
@@ -816,7 +816,7 @@ fr: {
 
   // ===== Page d’accueil =====
   'home.title':'Quran Darbi',
-  'home.subtitle':'Testez votre mémorisation page par page...\ndes quiz interactifs pour réviser et consolider',
+  'home.subtitle':'Votre compagnon pour maîtriser la mémorisation\nQuiz interactifs pour réviser et distinguer les versets similaires.',
   'home.title_tail':'Testez et révisez votre mémorisation du Coran',
   'home.recite_btn':'🎤 Test de récitation',
   'home.cta_start':'🌱 Commencer les tests',
@@ -1195,7 +1195,7 @@ tr: {
 
   // ===== Ana sayfa =====
   'home.title':'Quran Darbi',
-  'home.subtitle':'Ezberini sayfa sayfa test et...\ntekrar etmek ve pekiştirmek için etkileşimli testler',
+  'home.subtitle':'Ezberini pekiştirmede yol arkadaşın\nEzberi tekrar etmek ve benzer ayetleri ayırt etmek için etkileşimli testler.',
   'home.title_tail':'Kur’an ezberini test et ve tekrar et',
   'home.recite_btn':'🎤 Ezber Testi',
   'home.cta_start':'🌱 Testlere başla',
@@ -1575,7 +1575,7 @@ de: {
 
   // ===== Startseite =====
   'home.title':'Quran Darbi',
-  'home.subtitle':'Teste dein Auswendiglernen Seite für Seite...\ninteraktive Quizze zur Wiederholung und Festigung',
+  'home.subtitle':'Dein Begleiter beim Festigen des Auswendiglernens\nInteraktive Quizze zum Wiederholen und Unterscheiden ähnlicher Verse.',
   'home.title_tail':'Teste und wiederhole dein Koran-Auswendiglernen',
   'home.recite_btn':'🎤 Rezitationstest',
   'home.cta_start':'🌱 Tests starten',
@@ -1954,7 +1954,7 @@ es: {
 
   // ===== Página de inicio =====
   'home.title':'Quran Darbi',
-  'home.subtitle':'Pon a prueba tu memorización página por página...\ncuestionarios interactivos para repasar y reforzar',
+  'home.subtitle':'Tu compañero para dominar la memorización\nCuestionarios interactivos para repasar y distinguir versículos similares.',
   'home.title_tail':'Pon a prueba y repasa tu memorización del Corán',
   'home.recite_btn':'🎤 Prueba de recitación',
   'home.cta_start':'🌱 Empezar los cuestionarios',
@@ -2333,7 +2333,7 @@ fa: {
 
   // ===== صفحه اصلی =====
   'home.title':'قرآن دربی',
-  'home.subtitle':'حفظ خود را صفحه به صفحه بیازمایید...\nآزمون‌های تعاملی برای مرور و تثبیت',
+  'home.subtitle':'همراه تو در مسیر تسلط و تثبیت حفظ\nآزمون‌های تعاملی برای مرور حفظ و تسلط بر آیات مشابه.',
   'home.title_tail':'آزمون و مرور حفظ قرآن کریم',
   'home.recite_btn':'🎤 آزمون تلاوت',
   'home.cta_start':'🌱 شروع آزمون‌ها',
