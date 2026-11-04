@@ -86,7 +86,6 @@ nav{background:var(--nav);border-bottom:1.5px solid var(--border);padding:10px 1
 html[data-theme="dark"] .hero{background:linear-gradient(180deg,var(--card) 0%,var(--bg) 100%);border-bottom:1.5px solid var(--border);}
 html[data-theme="dark"] .hero-title{color:var(--text);}
 html[data-theme="dark"] .hero-bismillah,html[data-theme="dark"] .hero-sub{color:var(--soft);}
-html[data-theme="dark"] .hero-tagline{color:var(--text);}
 html[data-theme="dark"] .hero-start-btn{background:var(--green);color:#0f1f10;}
 html[data-theme="dark"] .hero-rec-btn,html[data-theme="dark"] .hero-progress-btn,html[data-theme="dark"] .hero-continue{background:var(--green3);color:var(--green);border:1.5px solid var(--green2);}
 html[data-theme="dark"] .hero-type,html[data-theme="dark"] .hstat,html[data-theme="dark"] .hero .ayah-banner{background:var(--green3);border-color:var(--border);}
@@ -102,7 +101,6 @@ html[data-theme="dark"] #hero-progress-fill{background:var(--green)!important;}
 .hero-inner{position:relative;z-index:1;}
 .hero-bismillah{font-family:'Scheherazade New',serif;font-size:1.1rem;color:rgba(255,255,255,0.75);margin-bottom:16px;letter-spacing:1px;}
 .hero-title{font-family:'Almarai',sans-serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;}
-.hero-tagline{font-size:1.15rem;font-weight:700;line-height:1.5;color:#fff;margin-bottom:4px;}
 .hero-sub{text-wrap:balance;font-size:1.02rem;line-height:1.7;color:rgba(255,255,255,0.78);margin-bottom:20px;}
 /* بطاقة الآية */
 .ayah-banner{display:inline-flex;flex-direction:column;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:14px;padding:10px 18px;margin-bottom:12px;backdrop-filter:blur(6px);max-width:340px;}
@@ -407,8 +405,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   <div class="hero-inner">
     <div class="hero-bismillah notranslate" translate="no">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
     <div class="hero-title" data-i18n="home.title">دربي لحفظ القرآن</div>
-    <div class="hero-tagline" data-i18n="home.tagline">رفيقك في رحلة حفظ القرآن</div>
-    <div class="hero-sub" data-i18n="home.subtitle">اختبارات تفاعلية لمراجعة الحفظ وإتقان المتشابهات.</div>
+    <div class="hero-sub" data-i18n="home.subtitle">اختبر حفظك صفحةً بصفحة... اختبارات تفاعلية لمراجعة الحفظ وتثبيته</div>
     <div class="hero-types" aria-label="أنواع الاختبارات">
       <span class="hero-type">🌱 <span data-i18n="level.easy_name">سهل</span></span>
       <span class="hero-type">🌿 <span data-i18n="level.medium_name">متوسط</span></span>
@@ -433,7 +430,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
     </div>
     <div class="hero-stars-bottom">✦ ✦ ✦</div>
     <div class="ayah-banner">
-      <div class="ayah-text notranslate" translate="no">﴿ وَرَتِّلِ ٱلۡقُرۡءَانَ تَرۡتِيلًا ﴾</div>
+      <div class="ayah-text notranslate" translate="no" dir="rtl">﴿ وَرَتِّلِ ٱلۡقُرۡءَانَ تَرۡتِيلًا ﴾</div>
       <div class="ayah-ref notranslate" translate="no">سورة المزمل — آية 4</div>
     </div>
   </div>
@@ -465,7 +462,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 </div>
 
 <footer>
-  <div class="footer-ayah notranslate" translate="no">﴿ إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ ﴾</div>
+  <div class="footer-ayah notranslate" translate="no" dir="rtl">﴿ إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ ﴾</div>
   <div class="footer-ref notranslate" translate="no">سورة الحجر — آية 9</div>
   <div class="footer-copy">© 2026<span id="copy-year"></span> <span data-i18n="home.footer_copy">دربي لحفظ القرآن — جميع الحقوق محفوظة</span></div>
   <div class="footer-copy" style="margin-top:6px"><a href="about.html" data-i18n="home.about_title" style="color:inherit;text-decoration:underline">عن المشروع</a> · <a href="privacy.html" data-i18n="home.privacy_link" style="color:inherit;text-decoration:underline">سياسة الخصوصية</a></div>
