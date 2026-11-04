@@ -54,6 +54,7 @@ ar: {
   'home.title':'دربي لحفظ القرآن',
   'home.tagline':'رفيقك في رحلة حفظ القرآن',
   'home.subtitle':'اختبارات تفاعلية لمراجعة الحفظ وإتقان المتشابهات.',
+  'home.title_tail':'اختبار حفظ القرآن الكريم ومراجعته',
   'home.recite_btn':'🎤 اختبر حفظك',
   'home.cta_start':'🌱 ابدأ الاختبارات',
   'home.continue_btn':'تابع من حيث توقفت',
@@ -439,6 +440,7 @@ en: {
   'home.title':'Quran Darbi',
   'home.tagline':'Your companion on the journey of Quran memorization',
   'home.subtitle':'Interactive quizzes to review your memorization and perfect the similar verses.',
+  'home.title_tail':'Test and review your Quran memorization',
   'home.recite_btn':'🎤 Recitation Test',
   'home.cta_start':'🌱 Start the quizzes',
   'home.continue_btn':'Continue where you left off',
@@ -770,6 +772,7 @@ fr: {
   'home.title':'Quran Darbi',
   'home.tagline':'Votre compagnon dans le parcours de mémorisation du Coran',
   'home.subtitle':'Des quiz interactifs pour réviser votre mémorisation et maîtriser les versets similaires.',
+  'home.title_tail':'Testez et révisez votre mémorisation du Coran',
   'home.recite_btn':'🎤 Test de récitation',
   'home.cta_start':'🌱 Commencer les tests',
   'home.continue_btn':'Reprendre où vous en étiez',
@@ -1101,6 +1104,7 @@ tr: {
   'home.title':'Quran Darbi',
   'home.tagline':'Kur’an ezberi yolculuğunda yol arkadaşın',
   'home.subtitle':'Ezberini tekrar etmek ve benzer ayetleri pekiştirmek için etkileşimli testler.',
+  'home.title_tail':'Kur’an ezberini test et ve tekrar et',
   'home.recite_btn':'🎤 Ezber Testi',
   'home.cta_start':'🌱 Testlere başla',
   'home.continue_btn':'Kaldığın yerden devam et',
@@ -1433,6 +1437,7 @@ de: {
   'home.title':'Quran Darbi',
   'home.tagline':'Dein Begleiter auf dem Weg des Koran-Auswendiglernens',
   'home.subtitle':'Interaktive Quizze, um dein Auswendiglernen zu wiederholen und ähnliche Verse sicher zu beherrschen.',
+  'home.title_tail':'Teste und wiederhole dein Koran-Auswendiglernen',
   'home.recite_btn':'🎤 Rezitationstest',
   'home.cta_start':'🌱 Tests starten',
   'home.continue_btn':'Dort weitermachen, wo du aufgehört hast',
@@ -1764,6 +1769,7 @@ es: {
   'home.title':'Quran Darbi',
   'home.tagline':'Tu compañero en el camino de memorizar el Corán',
   'home.subtitle':'Cuestionarios interactivos para repasar tu memorización y dominar los versículos similares.',
+  'home.title_tail':'Pon a prueba y repasa tu memorización del Corán',
   'home.recite_btn':'🎤 Prueba de recitación',
   'home.cta_start':'🌱 Empezar los cuestionarios',
   'home.continue_btn':'Seguir donde lo dejaste',
@@ -2095,6 +2101,7 @@ fa: {
   'home.title':'قرآن دربی',
   'home.tagline':'همراه تو در مسیر حفظ قرآن',
   'home.subtitle':'آزمون‌های تعاملی برای مرور حفظ و تسلط بر آیات مشابه.',
+  'home.title_tail':'آزمون و مرور حفظ قرآن کریم',
   'home.recite_btn':'🎤 آزمون تلاوت',
   'home.cta_start':'🌱 شروع آزمون‌ها',
   'home.continue_btn':'ادامه از جایی که ماندی',
@@ -2740,6 +2747,7 @@ function titleLoc(ar,lg){
   var L=T[lg];if(!L)return null;var s=dg(ar).replace(/\s+/g,' ').trim(),m,T_=window.darbiT;
   var brand=T_?T_('home.title'):null;
   if(s==='دربي لحفظ القرآن')return brand;
+  if(s==='دربي لحفظ القرآن — اختبار حفظ القرآن الكريم ومراجعته')return brand+' — '+T_('home.title_tail');
   if((m=s.match(/^(?:عن المشروع — دربي لحفظ القرآن|عن دربي — اختبار حفظ القرآن الكريم ومراجعته)$/)))return stripLead(T_('nav.about'))+' — '+brand;
   if((m=s.match(/^تقدّمي — دربي لحفظ القرآن$/)))return stripLead(T_('nav.progress'))+' — '+brand;
   if((m=s.match(/^اختبر حفظك — دربي لحفظ القرآن$/)))return stripLead(T_('home.recite_btn'))+' — '+brand;
