@@ -97,7 +97,7 @@ body{font-family:'Almarai','Amiri','Scheherazade New',sans-serif;background:var(
 .tools-fab.open .tools-menu{display:block;}
 .tools-item{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;padding:12px 14px;font-size:0.88rem;color:var(--text,#1A1A1A);cursor:pointer;text-align:right;font-family:inherit;}
 .tools-item:hover{background:var(--green3,var(--surface2,#F0F7F2));}
-.tools-item .tools-lang-inline{margin-inline-start:auto;display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;}
+.tools-item .tools-lang-inline{margin-inline-start:auto;display:flex;align-items:center;gap:4px;}
 .tools-item .tools-lang-inline span:first-child{font-size:1em;color:inherit;}
 .tools-item .tools-arrow{font-size:0.75em;color:#B8963A;transition:transform .2s;}
 .tools-item svg{flex-shrink:0;}
@@ -141,3 +141,6 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .q-text,.choice-btn,.answer-input,.feedback,.hint-box,.rec-transcript,.rec-word,.order-item,.order-help,.order-slot,.order-filled-grid,.order-empty-strip,.oh-tap,.mushaf-block,.ayah-end,.notranslate{font-family:'Scheherazade New','Amiri','Traditional Arabic',serif;}
 /* Scheherazade New أصغر بصريًا من Amiri بنفس المقاس، فنكبّر أسئلة واختيارات الآيات قليلًا */
 .q-text{font-size:22px;}.choice-btn{font-size:19px;}
+
+/* الترتيب: عند قلّة العناصر (١–٣) يملأ العنصر عرض الشاشة بدل عمود ضيّق */
+#order-pool{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important;}
