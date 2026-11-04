@@ -14,8 +14,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google" content="notranslate">
-<title>Quran-darbi.com | دربي لحفظ القرآن</title>
-<meta name="description" content="اختبر حفظك للقرآن الكريم">
+<title>دربي لحفظ القرآن — اختبار حفظ القرآن الكريم ومراجعته</title>
+<meta name="description" content="منصة تفاعلية لاختبار حفظ القرآن الكريم ومراجعته صفحةً بصفحة، مع التركيز على متشابهات القرآن: اختبارات سهلة ومتوسطة وصعبة، وترتيب الآيات، واختبار صوتي.">
 <script src="lang.js"></script>
 <script src="darbi-keys.js"></script>
 <link rel="manifest" href="manifest.json">
@@ -29,7 +29,7 @@
 <link rel="icon" type="image/png" sizes="256x256" href="icons/darbi_favicon_256.png">
 <link rel="apple-touch-icon" href="icons/darbi_favicon_512.png">
 <meta property="og:title" content="دربي لحفظ القرآن">
-<meta property="og:description" content="اختبر حفظك للقرآن الكريم">
+<meta property="og:description" content="منصة تفاعلية لاختبار حفظ القرآن الكريم ومراجعته صفحةً بصفحة، مع التركيز على متشابهات القرآن: اختبارات سهلة ومتوسطة وصعبة، وترتيب الآيات، واختبار صوتي.">
 <meta property="og:url" content="https://quran-darbi.com/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://quran-darbi.com/og-image.png">
@@ -49,10 +49,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Almarai:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Amiri',serif;background:var(--bg,#F2F5F0);color:var(--text,#1A2E1A);min-height:100vh;padding-bottom:60px;transition:background .3s,color .3s;}
+body{font-family:'Almarai',sans-serif;background:var(--bg,#F2F5F0);color:var(--text,#1A2E1A);min-height:100vh;padding-bottom:60px;transition:background .3s,color .3s;}
 
 /* ===== VARS ===== */
 :root{
@@ -72,12 +72,12 @@ html[data-theme="dark"]{
 
 /* ===== NAV ===== */
 nav{background:var(--nav);border-bottom:1.5px solid var(--border);padding:10px 18px 10px 58px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px var(--shadow);}
-.nav-logo{font-family:'Scheherazade New',serif;font-size:1.1rem;color:var(--green);font-weight:700;display:flex;align-items:center;gap:6px;}
+.nav-logo{font-family:'Almarai',sans-serif;font-size:1.1rem;color:var(--green);font-weight:700;display:flex;align-items:center;gap:6px;}
 .nav-logo span{font-size:1.3rem;}
 .nav-logo img{width:24px;height:24px;border-radius:6px;object-fit:cover;flex-shrink:0;}
 .nav-right{display:flex;align-items:center;gap:8px;}
 .theme-btn{background:var(--green3);border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.rec-btn{display:flex;align-items:center;gap:5px;background:var(--green);color:#fff;border:none;border-radius:18px;padding:7px 14px;font-size:0.85rem;font-family:'Amiri',serif;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
+.rec-btn{display:flex;align-items:center;gap:5px;background:var(--green);color:#fff;border:none;border-radius:18px;padding:7px 14px;font-size:0.85rem;font-family:'Almarai',sans-serif;text-decoration:none;transition:opacity .2s;white-space:nowrap;}
 .rec-btn:hover{opacity:.88;}
 
 /* ===== HERO ===== */
@@ -86,6 +86,7 @@ nav{background:var(--nav);border-bottom:1.5px solid var(--border);padding:10px 1
 html[data-theme="dark"] .hero{background:linear-gradient(180deg,var(--card) 0%,var(--bg) 100%);border-bottom:1.5px solid var(--border);}
 html[data-theme="dark"] .hero-title{color:var(--text);}
 html[data-theme="dark"] .hero-bismillah,html[data-theme="dark"] .hero-sub{color:var(--soft);}
+html[data-theme="dark"] .hero-tagline{color:var(--text);}
 html[data-theme="dark"] .hero-start-btn{background:var(--green);color:#0f1f10;}
 html[data-theme="dark"] .hero-rec-btn,html[data-theme="dark"] .hero-progress-btn,html[data-theme="dark"] .hero-continue{background:var(--green3);color:var(--green);border:1.5px solid var(--green2);}
 html[data-theme="dark"] .hero-type,html[data-theme="dark"] .hstat,html[data-theme="dark"] .hero .ayah-banner{background:var(--green3);border-color:var(--border);}
@@ -100,19 +101,20 @@ html[data-theme="dark"] #hero-progress-fill{background:var(--green)!important;}
 .hero-stars-bottom{text-align:center;color:rgba(255,255,255,0.18);font-size:1.4rem;letter-spacing:6px;pointer-events:none;margin-top:18px;line-height:1.2;}
 .hero-inner{position:relative;z-index:1;}
 .hero-bismillah{font-family:'Scheherazade New',serif;font-size:1.1rem;color:rgba(255,255,255,0.75);margin-bottom:16px;letter-spacing:1px;}
-.hero-title{font-family:'Scheherazade New',serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;}
+.hero-title{font-family:'Almarai',sans-serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px;}
+.hero-tagline{font-size:1.15rem;font-weight:700;line-height:1.5;color:#fff;margin-bottom:4px;}
 .hero-sub{text-wrap:balance;font-size:1.02rem;line-height:1.7;color:rgba(255,255,255,0.78);margin-bottom:20px;}
 /* بطاقة الآية */
 .ayah-banner{display:inline-flex;flex-direction:column;align-items:center;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:14px;padding:10px 18px;margin-bottom:12px;backdrop-filter:blur(6px);max-width:340px;}
 .ayah-text{font-family:'Scheherazade New',serif;font-size:1.05rem;color:#fff;line-height:1.9;margin-bottom:4px;}
 .ayah-ref{font-size:0.72rem;color:rgba(255,255,255,0.6);letter-spacing:.5px;}
 /* زر التلاوة */
-.hero-rec-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:8px 22px;font-size:0.9rem;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,0.12);transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.hero-rec-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:8px 22px;font-size:0.9rem;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;box-shadow:0 3px 12px rgba(0,0,0,0.12);transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .hero-rec-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,0.2);}
 .hero-rec-btn::after{content:"→";display:inline-block;font-size:1.05rem;opacity:.75;}
 .hero-btn-row{display:flex;flex-direction:column;align-items:center;gap:13px;}
 /* زر البدء الرئيسي + شارات أنواع الاختبارات */
-.hero-start-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:14px 38px;font-size:1.22rem;min-width:240px;justify-content:center;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:transform .2s,box-shadow .2s;cursor:pointer;}
+.hero-start-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#1f5a2c;border:none;border-radius:22px;padding:14px 38px;font-size:1.22rem;min-width:240px;justify-content:center;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .hero-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,0.25);}
 .hero-types{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 5px;margin:0 -14px 20px;padding:0;}
 .hero-type{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);color:#fff;border-radius:14px;padding:2px 8px;font-size:clamp(0.62rem,3.3vw,0.8rem);line-height:1.7;white-space:nowrap;}
@@ -121,7 +123,7 @@ html[data-theme="dark"] #hero-progress-fill{background:var(--green)!important;}
 .hero-resume-last{font-size:0.88rem;color:#fff;line-height:1.5;}
 .hero-resume-count{font-size:0.76rem;color:rgba(255,255,255,0.78);margin-top:2px;}
 .hero-resume-bar{width:100%;height:4px;margin:9px 0 12px;background:rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;}
-.hero-continue{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.6);color:#fff;border-radius:16px;padding:6px 14px;font-size:0.85rem;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;}
+.hero-continue{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.6);color:#fff;border-radius:16px;padding:6px 14px;font-size:0.85rem;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;}
 .hero-continue:hover{background:rgba(255,255,255,0.28);transform:translateY(-2px);}
 .hero-continue::after{content:"→";}
 html[dir="rtl"] .hero-continue::after{content:"←";}
@@ -129,10 +131,15 @@ html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{cont
 #main{scroll-margin-top:130px;}
 .hero-start-btn::after{content:"→";display:inline-block;font-size:1.05rem;opacity:.75;}
 .hero-inner .ayah-banner{margin-top:10px;margin-bottom:0;}
-.hero-progress-btn{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,0.16);color:#fff;border:1.5px solid rgba(255,255,255,0.55);border-radius:18px;padding:9px 24px;font-size:0.95rem;font-family:'Scheherazade New',serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;cursor:pointer;}
+.hero-progress-btn{display:inline-flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,0.16);color:#fff;border:1.5px solid rgba(255,255,255,0.55);border-radius:18px;padding:9px 24px;font-size:0.95rem;font-family:'Almarai',sans-serif;font-weight:700;text-decoration:none;transition:transform .2s,background .2s;cursor:pointer;}
 .hero-progress-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.26);}
 .hero-progress-btn-sub{font-size:0.68rem;font-weight:400;opacity:0.85;text-decoration:underline;}
 /* إحصائيات */
+.list-stats{display:none;justify-content:center;gap:10px;margin:14px 16px 4px;flex-wrap:wrap;}
+html.view-list .list-stats{display:flex;}
+.list-stats .hstat{background:var(--green3,#e8f0e8);border:1px solid var(--border,#d5e0d5);color:var(--soft,#6b7f6b);padding:5px 14px;}
+.list-stats .hstat b{color:var(--accent,#4a7c4a);}
+html[data-theme="dark"] .list-stats .hstat{background:var(--green3);color:var(--text);}
 .hero-stats{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;}
 .hstat{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:6px 14px;text-align:center;color:rgba(255,255,255,0.9);}
 .hstat b{display:block;font-size:1.05rem;color:#fff;}
@@ -140,7 +147,20 @@ html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{cont
 
 /* ===== SEARCH ===== */
 .search-wrap{background:var(--bg);padding:12px 16px 8px;position:sticky;top:55px;z-index:150;}
-.search-input{font-family:'Amiri',serif;font-size:1rem;width:100%;max-width:580px;display:block;margin:0 auto;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:24px;background:var(--card);color:var(--text);outline:none;text-align:right;direction:rtl;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A7A55' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;}
+/* الشاشة الأولى: الهيرو ثم شريط البحث ثم ملاحظة الإطلاق التجريبي، والفهرس يبدأ بعدها */
+.home-first{display:flex;flex-direction:column;}
+/* الرئيسية: الصفحة عمود بارتفاع الشاشة، والهيرو يملأ المتبقي، فلا حاجة لتقدير ارتفاع الشريط والتذييل */
+html:not(.view-list) body{display:flex;flex-direction:column;min-height:100vh;min-height:100svh;}
+html:not(.view-list) .home-first{flex:1 0 auto;}
+.home-first .hero{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;}
+/* الفهرس شاشة ثانية: مخفي في الرئيسية ويظهر من «ابدأ الاختبارات» أو من البحث */
+#list-view{display:none;}
+html.view-list #list-view{display:block;}
+@keyframes darbiGlow{0%,100%{box-shadow:0 0 0 3px rgba(196,168,74,.55),0 0 6px 0 rgba(196,168,74,.25);}50%{box-shadow:0 0 0 4px rgba(196,168,74,.95),0 0 16px 3px rgba(196,168,74,.55);}}
+.quiz-card.focus-mark{animation:darbiGlow 1.8s ease-in-out infinite;}
+@media(prefers-reduced-motion:reduce){.quiz-card.focus-mark{animation:none;box-shadow:0 0 0 3px rgba(196,168,74,.9);}}
+html.view-list .home-first,html.view-list .beta-note{display:none;}
+.search-input{font-family:'Almarai',sans-serif;font-size:1rem;width:100%;max-width:580px;display:block;margin:0 auto;padding:10px 16px 10px 40px;border:1.5px solid var(--border);border-radius:24px;background:var(--card);color:var(--text);outline:none;text-align:right;direction:rtl;transition:border-color .2s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A7A55' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;}
 .search-input:focus{border-color:var(--green);}
 .search-input::placeholder{color:var(--soft);opacity:.7;}
 
@@ -161,11 +181,11 @@ html[dir="rtl"] .hero-start-btn::after,html[dir="rtl"] .hero-rec-btn::after{cont
 .acc-left{display:flex;flex-direction:column;align-items:flex-start;gap:5px;flex:1;min-width:0;}
 .acc-left-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
 .acc-right{display:flex;align-items:center;gap:7px;flex-shrink:0;}
-.juz-badge{background:var(--green);color:#fff;font-family:'Scheherazade New',serif;font-size:0.82rem;padding:3px 11px;border-radius:10px;white-space:nowrap;}
+.juz-badge{background:var(--green);color:#fff;font-family:'Almarai',sans-serif;font-size:0.82rem;padding:3px 11px;border-radius:10px;white-space:nowrap;}
 .juz-badge.amma{background:#1A6A1A;}
 .juz-badge.soon{background:var(--border);color:var(--soft);}
 html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
-.juz-title{font-family:'Scheherazade New',serif;font-size:1rem;color:var(--green);font-weight:700;}
+.juz-title{font-family:'Almarai',sans-serif;font-size:1rem;color:var(--green);font-weight:700;}
 .juz-count{font-size:0.62rem;color:var(--soft);background:var(--green3);border:1px solid var(--border);border-radius:7px;padding:1px 7px;white-space:nowrap;}
 .juz-bar-track{width:100%;max-width:260px;height:5px;background:var(--border);border-radius:4px;overflow:hidden;}
 .juz-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green2));border-radius:4px;transition:width .4s;}
@@ -174,7 +194,7 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .acc-arrow.open{transform:rotate(180deg);}
 .acc-body{display:none;padding:10px 10px 12px;border-top:1px solid var(--border);background:var(--bg);}
 .acc-body.open{display:block;}
-.surah-name{font-family:'Scheherazade New',serif;font-size:0.88rem;color:var(--green);font-weight:700;margin:10px 0 6px;}
+.surah-name{font-family:'Almarai',sans-serif;font-size:0.88rem;color:var(--green);font-weight:700;margin:10px 0 6px;}
 .surah-name:first-child{margin-top:2px;}
 .surah-card{font-family:inherit;cursor:pointer;text-align:start;width:100%;}
 .quiz-card.surah-card.sel{background:linear-gradient(135deg,#2E6B3E,#3A8C50);border-color:#2E6B3E;box-shadow:0 4px 12px rgba(46,107,62,.35);}
@@ -192,7 +212,7 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .surah-panel .card-bar{width:2px;}
 .surah-panel .lvl-dot{width:15px;height:15px;font-size:0.55rem;}
 .surah-panel.open{display:block;}
-.surah-panel-title{display:inline-block;font-family:'Scheherazade New',serif;font-size:0.8rem;color:#fff;background:#2E6B3E;font-weight:700;margin:0 0 8px;padding:2px 12px;border-radius:20px;}
+.surah-panel-title{display:inline-block;font-family:'Almarai',sans-serif;font-size:0.8rem;color:#fff;background:#2E6B3E;font-weight:700;margin:0 0 8px;padding:2px 12px;border-radius:20px;}
 @media(max-width:560px){.surah-panel .cards-grid{grid-template-columns:repeat(4,1fr);}.surah-panel{padding:9px 7px 8px;}}
 
 .note-btn{margin-top:9px;width:100%;background:var(--green3);border:1px dashed var(--green2);color:var(--green);font-size:0.78rem;padding:8px;border-radius:10px;cursor:pointer;text-align:center;font-family:inherit;}
@@ -205,7 +225,7 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .quiz-card.soon{opacity:.45;cursor:default;pointer-events:none;}
 .card-bar{position:absolute;right:0;top:0;width:3px;height:100%;background:linear-gradient(180deg,var(--green),var(--green2));border-radius:0 11px 11px 0;}
 .quiz-card.soon .card-bar{background:var(--border);}
-.card-name{font-family:'Scheherazade New',serif;font-size:0.95rem;color:var(--green);font-weight:700;padding-right:5px;}
+.card-name{font-family:'Almarai',sans-serif;font-size:0.95rem;color:var(--green);font-weight:700;padding-right:5px;}
 .card-meta{font-size:0.7rem;color:var(--soft);padding-right:5px;}
 .card-badge{display:inline-block;font-size:0.66rem;padding:2px 7px;border-radius:7px;margin-top:2px;}
 .badge-ok{background:#E4F4DE;color:#2D5A27;border:1px solid #B0D8A8;}
@@ -217,6 +237,14 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 
 /* ===== FOOTER ===== */
 footer{text-align:center;margin-top:44px;padding:24px 16px;border-top:1px solid var(--border);}
+footer a{text-underline-offset:6px;text-decoration-thickness:1px;}
+/* الرئيسية: تذييل مضغوط في سطر واحد حتى تبقى كل الصفحة في شاشة واحدة */
+html:not(.view-list) footer{margin-top:0;padding:8px 16px 12px;}
+html:not(.view-list) footer .footer-ayah,html:not(.view-list) footer .footer-ref{display:none;}
+html:not(.view-list) body{padding-bottom:0;}
+html:not(.view-list) .beta-note{margin-bottom:10px;}
+html:not(.view-list) footer .footer-copy{font-size:0.76rem;line-height:1.5;}
+html:not(.view-list) footer .footer-copy+.footer-copy{margin-top:2px!important;white-space:nowrap;}
 .footer-ayah{font-family:'Scheherazade New',serif;font-size:1rem;color:var(--green);margin-bottom:4px;}
 .footer-ref{font-size:0.75rem;color:var(--soft);margin-bottom:14px;}
 .footer-copy{font-size:0.8rem;color:var(--soft);}
@@ -242,10 +270,45 @@ html[data-theme="dark"] .beta-tag{color:var(--gold);}
 html[data-theme="dark"] .beta-text{color:var(--soft);}
 @media(max-width:380px){.beta-note-inner{padding:9px 12px;}.beta-text{font-size:0.76rem;}}
 
-.about-hadith{margin-top:14px;background:var(--green3);border-radius:12px;border-right:3px solid var(--gold);padding:12px 14px;text-align:center;}
-.about-hadith-text{font-family:'Scheherazade New',serif;font-size:1.05rem;color:var(--green);line-height:2;}
-.about-hadith-src{font-size:0.78rem;color:var(--soft);margin-top:4px;line-height:1.7;}
 .about-dua{margin-top:14px;font-family:'Scheherazade New',serif;font-size:1.02rem;line-height:1.9;color:var(--green);text-align:center;}
+/* ضغط الشاشة الأولى حتى يظهر مربع البحث كاملًا على الهواتف الأقصر */
+@media(max-height:860px){
+  html.has-progress .home-first .hero{padding-top:10px;padding-bottom:8px;}
+  html.has-progress .home-first .hero-bismillah{margin-bottom:8px;}
+  html.has-progress .home-first .hero-title{margin-bottom:6px;}
+  html.has-progress .home-first .hero-sub{margin-bottom:10px;line-height:1.5;}
+  html.has-progress .home-first .hero-types{margin-bottom:12px;}
+  html.has-progress .home-first .hero-btn-row{gap:9px;}
+  html.has-progress .home-first .hero-start-btn{padding:10px 38px;}
+  html.has-progress .home-first .hero-progress-btn{padding:6px 24px;}
+  html.has-progress .home-first .hero-stats{margin-top:12px;gap:8px;}
+  html.has-progress .home-first .hstat{padding:3px 12px;}
+  html.has-progress .home-first .hero-progress{margin-top:12px;}
+  html.has-progress .home-first .hero-stars-bottom{margin-top:2px;font-size:1.1rem;line-height:1;}
+  html.has-progress .home-first .hero-inner .ayah-banner{margin-top:4px;padding:6px 16px;}
+  html.has-progress .home-first .ayah-text{line-height:1.6;margin-bottom:0;}
+}
+@media(max-height:740px){
+  html.has-progress .home-first .hero-types{margin-bottom:8px;}
+  html.has-progress .home-first .hero-stats{margin-top:8px;}
+  html.has-progress .home-first .hero-stars-bottom{display:none;}
+  html.has-progress .home-first .hero-bismillah{display:none;}
+  html.has-progress .home-first .hero-progress{margin-top:6px;}
+  html.has-progress .home-first .hero-resume-bar{margin:5px 0 8px;}
+  html.has-progress .home-first .hero-resume-last{font-size:0.82rem;line-height:1.3;}
+  html.has-progress .home-first .hero-continue{padding:4px 14px;}
+  html.has-progress .home-first .hero-types{display:none;}
+}
+@media(max-height:680px){
+  html.has-progress .home-first .hero-inner .ayah-banner{display:none;}
+}
+@media(max-height:800px){
+  html:not(.has-progress) .home-first .hero{padding-top:10px;padding-bottom:8px;}
+  html:not(.has-progress) .home-first .hero-bismillah{display:none;}
+  html:not(.has-progress) .home-first .hero-sub{margin-bottom:10px;}
+  html:not(.has-progress) .home-first .hero-types{margin-bottom:10px;}
+  html:not(.has-progress) .home-first .hero-stars-bottom{display:none;}
+}
 </style>
 <link rel="canonical" href="https://quran-darbi.com/">
 <script>
@@ -263,7 +326,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 <style>
-.tools-fab{position:fixed;top:14px;left:14px;z-index:9990;display:inline-flex;font-family:'Amiri','Scheherazade New',Tahoma,sans-serif;}
+.tools-fab{position:fixed;top:10px;left:14px;z-index:9990;display:inline-flex;font-family:'Almarai',Tahoma,sans-serif;}
 .tools-fab-btn{display:flex;align-items:center;justify-content:center;background:var(--green3,var(--surface2,#EAF2EA));color:var(--green,var(--accent,#2E6B3E));border:1px solid var(--border,#E4EAE4);border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
 .tools-fab-btn:hover{filter:brightness(1.05);}
 .tools-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;max-width:min(240px,calc(100vw - 24px));background:var(--card,#fff);border:1.5px solid var(--border,#E4EAE4);border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,0.18);overflow:hidden;min-width:195px;border-top:3px solid #C4A84A;z-index:9998;}
@@ -283,7 +346,7 @@ document.addEventListener('DOMContentLoaded',function(){
 .tools-lang-list button.lang-active .lang-check{visibility:visible;}
 .fdbk-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:10000;align-items:center;justify-content:center;padding:16px;}
 .fdbk-overlay.open{display:flex;}
-.fdbk-modal{background:#fff;border-radius:14px;max-width:380px;width:100%;padding:20px;border-top:4px solid #C4A84A;font-family:'Amiri','Scheherazade New',Tahoma,sans-serif;direction:rtl;text-align:right;}
+.fdbk-modal{background:#fff;border-radius:14px;max-width:380px;width:100%;padding:20px;border-top:4px solid #C4A84A;font-family:'Almarai',Tahoma,sans-serif;direction:rtl;text-align:right;}
 html[data-theme="dark"] .fdbk-modal{background:#182018;color:#DCF0D8;}
 .fdbk-modal h3{margin:0 0 12px;color:#2E6B3E;font-size:1.15rem;}
 html[data-theme="dark"] .fdbk-modal h3{color:#6BBF5A;}
@@ -298,7 +361,7 @@ html[data-theme="dark"] .fdbk-send{background:#4A9E40;}
 .fdbk-cancel{background:none;border:1px solid #d8e0d8;color:inherit;}
 .qr-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10001;align-items:center;justify-content:center;padding:16px;}
 .qr-overlay.open{display:flex;}
-.qr-modal{background:var(--card,#fff);border:1px solid var(--border,#E4EAE4);border-radius:18px;padding:22px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.2);border-top:4px solid #C4A84A;font-family:'Amiri','Scheherazade New',Tahoma,sans-serif;}
+.qr-modal{background:var(--card,#fff);border:1px solid var(--border,#E4EAE4);border-radius:18px;padding:22px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.2);border-top:4px solid #C4A84A;font-family:'Almarai',Tahoma,sans-serif;}
 .qr-title{font-size:1.05rem;color:#2E6B3E;font-weight:700;margin-bottom:14px;}
 html[data-theme="dark"] .qr-title{color:#6BBF5A;}
 .qr-img{border-radius:12px;border:1px solid var(--border,#E4EAE4);background:#fff;padding:8px;}
@@ -339,11 +402,13 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 </div>  </div>
 </nav>
 
+<div class="home-first">
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-bismillah notranslate" translate="no">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
     <div class="hero-title" data-i18n="home.title">دربي لحفظ القرآن</div>
-    <div class="hero-sub" data-i18n="home.subtitle">اختبر حفظك صفحةً بصفحة — اختبارات تفاعلية لمراجعة الحفظ وتثبيته</div>
+    <div class="hero-tagline" data-i18n="home.tagline">رفيقك في رحلة حفظ القرآن</div>
+    <div class="hero-sub" data-i18n="home.subtitle">اختبارات تفاعلية لمراجعة الحفظ وإتقان المتشابهات.</div>
     <div class="hero-types" aria-label="أنواع الاختبارات">
       <span class="hero-type">🌱 <span data-i18n="level.easy_name">سهل</span></span>
       <span class="hero-type">🌿 <span data-i18n="level.medium_name">متوسط</span></span>
@@ -352,16 +417,11 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <span class="hero-type">🎤 <span data-i18n="home.chip_voice">صوتي</span></span>
     </div>
     <div class="hero-btn-row">
-      <a href="alfatiha.html" class="hero-start-btn" data-i18n="home.cta_start">🌱 ابدأ الاختبارات</a>
+      <a href="#quizzes" class="hero-start-btn" id="hero-start-btn" data-i18n="home.cta_start">🌱 ابدأ الاختبارات</a>
       <a href="recitation.html" class="hero-rec-btn" data-i18n="home.recite_btn">🎤 اختبر حفظك</a>
       <a href="progress.html" class="hero-progress-btn">
         <span data-i18n="home.progress_btn">📊 تقدّمي</span>
       </a>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat"><b id="hstat-tests-count">156</b><small data-i18n="home.stat_tests">اختباراً متاحاً</small></div>
-      <div class="hstat"><b id="hstat-parts-count">4</b><small data-i18n="home.stat_parts">أجزاء</small></div>
-      <div class="hstat"><b id="hstat-surahs-count">109</b><small data-i18n="home.stat_surahs">سورة</small></div>
     </div>
     <div class="hero-progress" id="hero-progress" style="display:none;">
       <div class="hero-resume">
@@ -373,10 +433,21 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
     </div>
     <div class="hero-stars-bottom">✦ ✦ ✦</div>
     <div class="ayah-banner">
-      <div class="ayah-text notranslate" translate="no">﴿ وَرَتِّلِ الْقُرْآنَ تَرْتِيلاً ﴾</div>
+      <div class="ayah-text notranslate" translate="no">﴿ وَرَتِّلِ ٱلۡقُرۡءَانَ تَرۡتِيلًا ﴾</div>
       <div class="ayah-ref notranslate" translate="no">سورة المزمل — آية 4</div>
     </div>
   </div>
+</div>
+
+</div>
+
+<div class="list-stats" aria-label="حجم المحتوى">
+  <div class="hstat"><b id="hstat-tests-count">0</b><small data-i18n="home.stat_tests">اختبارًا متاحًا</small></div>
+  <div class="hstat"><b id="hstat-parts-count">0</b><small data-i18n="home.stat_parts">جزءًا</small></div>
+  <div class="hstat"><b id="hstat-surahs-count">0</b><small data-i18n="home.stat_surahs">سورة</small></div>
+</div>
+<div class="search-wrap">
+  <input class="search-input" type="text" data-i18n-placeholder="home.search_placeholder" placeholder="ابحث عن سورة أو صفحة..." oninput="doSearch(this.value)" />
 </div>
 
 <div class="beta-note">
@@ -386,54 +457,102 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   </div>
 </div>
 
-<div class="search-wrap">
-  <input class="search-input" type="text" data-i18n-placeholder="home.search_placeholder" placeholder="ابحث عن سورة أو صفحة..." oninput="doSearch(this.value)" />
-</div>
-
-<div class="juz-filter-row">
-  <button type="button" class="juz-filter-chip active" data-mode="all" onclick="setJuzFilter('all',this)" data-i18n="home.filter_all">كل الأجزاء</button>
-  <button type="button" class="juz-filter-chip" data-mode="built" onclick="setJuzFilter('built',this)" data-i18n="home.filter_built">متاح الآن</button>
-  <button type="button" class="juz-filter-chip" data-mode="soon" onclick="setJuzFilter('soon',this)" data-i18n="home.filter_soon">قريبًا</button>
-</div>
+<div id="list-view">
 
 <div class="main" id="main">
 </div>
 <div class="juz-filter-empty" id="juz-filter-empty" data-i18n="home.filter_empty">لا يوجد أجزاء مطابقة لهذا الفلتر حاليًا.</div>
-
-<!-- عن المشروع -->
-<div id="about"></div>
-<div style="max-width:840px;margin:28px auto 0;padding:0 13px;">
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 20px;box-shadow:0 2px 10px var(--shadow);border-right:4px solid var(--green);">
-    <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
-      <div style="flex-shrink:0;"><img src="icons/darbi_favicon_128.png" alt="دربي لحفظ القرآن" data-i18n-alt="home.title" width="52" height="52" style="border-radius:12px;display:block;"></div>
-      <div style="flex:1;min-width:220px;">
-        <div style="font-family:'Scheherazade New',serif;font-size:1.35rem;color:var(--green);font-weight:700;margin-bottom:8px;" data-i18n="home.about_title">عن المشروع</div>
-        <div style="font-size:0.93rem;color:var(--soft);line-height:2;">
-          <p style="margin:0 0 12px;" data-i18n="home.about_p1">«دربي لحفظ القرآن» منصة تفاعلية تهدف إلى مساعدة الجميع على حفظ كتاب الله ومراجعته، من خلال اختبارات متنوعة.</p>
-          <p style="margin:0;" data-i18n="home.about_p2">مصممة بعناية لتثبيت الحفظ وتعزيز إتقانه، مع التركيز على متشابهات القرآن الكريم.</p>
-        </div>
-        <div class="about-hadith notranslate" translate="no">
-          <div class="about-hadith-text">عن عبد الله بن عمرو رضي الله عنهما، عن النبي ﷺ قال: «يُقالُ لصاحِبِ القرآنِ اقرأ وارتَقِ ورتِّل كما كنتَ ترتِّلُ في الدُّنيا فإنَّ منزلَكَ عندَ آخرِ آيةٍ تقرؤُها»</div>
-          <div class="about-hadith-src">رواه أبو داود والترمذي وأحمد</div>
-        </div>
-        <div class="about-dua notranslate" translate="no" data-i18n="about.dua">نسأل الله أن يجعل القرآن ربيع قلوبنا، ونور صدورنا، وأن يرزقنا حفظه وإتقانه والعمل به.</div>
-        <div style="margin-top:14px;background:var(--green3);border-radius:12px;padding:12px 14px;text-align:center;">
-          <div style="font-family:'Scheherazade New',serif;font-size:1rem;color:var(--green);line-height:1.9;" class="notranslate" translate="no">﴿ وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ ﴾</div>
-          <div style="font-size:0.72rem;color:var(--soft);margin-top:3px;" class="notranslate" translate="no">سورة القمر — آية 17</div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <footer>
   <div class="footer-ayah notranslate" translate="no">﴿ إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ ﴾</div>
   <div class="footer-ref notranslate" translate="no">سورة الحجر — آية 9</div>
   <div class="footer-copy">© 2026<span id="copy-year"></span> <span data-i18n="home.footer_copy">دربي لحفظ القرآن — جميع الحقوق محفوظة</span></div>
-  <div class="footer-copy" style="margin-top:6px"><a href="privacy.html" data-i18n="home.privacy_link" style="color:inherit;text-decoration:underline">سياسة الخصوصية</a></div>
+  <div class="footer-copy" style="margin-top:6px"><a href="about.html" data-i18n="home.about_title" style="color:inherit;text-decoration:underline">عن المشروع</a> · <a href="privacy.html" data-i18n="home.privacy_link" style="color:inherit;text-decoration:underline">سياسة الخصوصية</a></div>
 </footer>
 
 <script>
+(function(){
+  var root=document.documentElement;
+  function isList(){return root.classList.contains('view-list');}
+  function openList(){
+    if(isList())return;
+    root.classList.add('view-list');
+    try{history.pushState({v:'list',push:1},'','#quizzes');}catch(e){location.hash='quizzes';}
+    window.scrollTo(0,0);
+  }
+  function showHome(){
+    root.classList.remove('view-list');
+    var q=document.querySelector('.search-input');
+    if(q&&q.value){q.value='';if(typeof doSearch==='function')doSearch('');}
+    window.scrollTo(0,0);
+  }
+  // الضغط على اسم الموقع في الأعلى يرجع إلى الشاشة الأولى
+  var logo=document.querySelector('.nav-logo');
+  if(logo){
+    logo.style.cursor='pointer';
+    logo.setAttribute('role','link');
+    logo.setAttribute('tabindex','0');
+    var goHome=function(){
+      if(!isList())return;
+      if(history.state&&history.state.push){history.back();return;}
+      try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+      showHome();
+    };
+    logo.addEventListener('click',goHome);
+    logo.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();goHome();}});
+  }
+  var btn=document.getElementById('hero-start-btn');
+  if(btn)btn.addEventListener('click',function(e){e.preventDefault();openList();});
+  var inp=document.querySelector('.search-input');
+  if(inp)inp.addEventListener('input',function(){if(inp.value.trim())openList();});
+  function sync(){if(location.hash==='#quizzes'){root.classList.add('view-list');}else if(isList()){showHome();}}
+  window.addEventListener('popstate',sync);
+  window.addEventListener('hashchange',sync);
+  // القادم من صفحة أخرى في الموقع (زر العودة مثلًا) يرى الفهرس مباشرة
+  var nav=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0])||{};
+  var fromSite=false,fromKey='';
+  try{var r=document.referrer;fromSite=!!r&&r.indexOf(location.origin)===0&&new URL(r).pathname.replace(/\/index\.html$/,'/')!==location.pathname.replace(/\/index\.html$/,'/');if(fromSite){var m=new URL(r).pathname.match(/([^\/]+)\.html$/);if(m)fromKey=m[1];}}catch(e){}
+  // يفتح الجزء والسورة التي جاء منها المستخدم ويمرّر إلى بطاقتها
+  function focusCard(key){
+    var card=document.querySelector('a.quiz-card[data-key="'+key+'"]');
+    if(!card)return;
+    var acc=card.closest('.acc');
+    if(acc){
+      var body=acc.querySelector('.acc-body'),arrow=acc.querySelector('.acc-arrow');
+      if(body)body.classList.add('open');
+      if(arrow)arrow.classList.add('open');
+    }
+    var panel=card.closest('.surah-panel');
+    if(panel&&!panel.classList.contains('open')){
+      var sb=document.querySelector('.surah-card[data-panel="'+panel.id+'"]');
+      if(sb&&typeof toggleSurah==='function')toggleSurah(sb);
+    }
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(function(){
+      card.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+      card.classList.add('focus-mark'); // يبقى يلمع حتى يختار المستخدم بطاقة أخرى
+      document.addEventListener('click',function clear(e){
+        var q=e.target.closest&&e.target.closest('.quiz-card');
+        var sc=e.target.closest&&e.target.closest('.surah-card');
+        var own=card.closest('.surah-panel');
+        var ownBtn=own?document.querySelector('.surah-card[data-panel="'+own.id+'"]'):null;
+        if((q&&q!==card)||(sc&&sc!==ownBtn)){
+          card.classList.remove('focus-mark');
+          document.removeEventListener('click',clear,true);
+        }
+      },true);
+    },120);
+  }
+  if(nav.type==='navigate'&&fromSite&&fromKey){
+    var run=function(){setTimeout(function(){focusCard(fromKey);},200);};
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+  }
+  if(location.hash==='#quizzes'||(nav.type==='navigate'&&fromSite)){
+    root.classList.add('view-list');
+    if(location.hash!=='#quizzes'){try{history.replaceState({v:'list'},'','#quizzes');}catch(e){}}
+  }
+})();
 const baqaraPages=[
   ['albaqara_p2.html','ص 2','1–5'],['albaqara_p3.html','ص 3','6–16'],
   ['albaqara_p4.html','ص 4','17–24'],['albaqara_p5.html','ص 5','25–29'],
@@ -948,6 +1067,44 @@ const yaseenPages=[
   ['yaseen_p444.html','ص 444','55–70'],['yaseen_p445.html','ص 445','71–83'],
 ];
 
+const israPages=[
+  ['alisra_p282.html','ص 282','1–7'],['alisra_p283.html','ص 283','8–17'],
+  ['alisra_p284.html','ص 284','18–27'],['alisra_p285.html','ص 285','28–38'],
+  ['alisra_p286.html','ص 286','39–49'],['alisra_p287.html','ص 287','50–58'],
+  ['alisra_p288.html','ص 288','59–66'],['alisra_p289.html','ص 289','67–75'],
+  ['alisra_p290.html','ص 290','76–86'],['alisra_p291.html','ص 291','87–96'],
+  ['alisra_p292.html','ص 292','97–104'],['alisra_p293.html','ص 293','105–111'],
+];
+
+const saffatPages=[
+  ['assaffat_p446.html','ص 446','1–24'],['assaffat_p447.html','ص 447','25–51'],
+  ['assaffat_p448.html','ص 448','52–76'],['assaffat_p449.html','ص 449','77–102'],
+  ['assaffat_p450.html','ص 450','103–126'],['assaffat_p451.html','ص 451','127–153'],
+  ['assaffat_p452.html','ص 452','154–182'],
+];
+
+const sadPages=[
+  ['sad_p453.html','ص 453','1–16'],['sad_p454.html','ص 454','17–26'],
+  ['sad_p455.html','ص 455','27–42'],['sad_p456.html','ص 456','43–61'],
+  ['sad_p457.html','ص 457','62–83'],['sad_p458.html','ص 458','84–88'],
+];
+
+const zumarPages=[
+  ['azzumar_p458.html','ص 458','1–5'],['azzumar_p459.html','ص 459','6–10'],
+  ['azzumar_p460.html','ص 460','11–21'],['azzumar_p461.html','ص 461','22–31'],
+  ['azzumar_p462.html','ص 462','32–40'],['azzumar_p463.html','ص 463','41–47'],
+  ['azzumar_p464.html','ص 464','48–56'],['azzumar_p465.html','ص 465','57–67'],
+  ['azzumar_p466.html','ص 466','68–74'],['azzumar_p467.html','ص 467','75'],
+];
+
+const ghafirPages=[
+  ['ghafir_p467.html','ص 467','1–7'],['ghafir_p468.html','ص 468','8–16'],
+  ['ghafir_p469.html','ص 469','17–25'],['ghafir_p470.html','ص 470','26–33'],
+  ['ghafir_p471.html','ص 471','34–40'],['ghafir_p472.html','ص 472','41–49'],
+  ['ghafir_p473.html','ص 473','50–58'],['ghafir_p474.html','ص 474','59–66'],
+  ['ghafir_p475.html','ص 475','67–77'],['ghafir_p476.html','ص 476','78–85'],
+];
+
 const fussilatPages=[
   ['fussilat_p477.html','ص 477','1–11'],['fussilat_p478.html','ص 478','12–20'],
   ['fussilat_p479.html','ص 479','21–29'],['fussilat_p480.html','ص 480','30–38'],
@@ -1187,7 +1344,7 @@ const JUZ_GROUPS = {
         { kind:'full', arr:annahlPages, name:'النحل', surah:'النحل' }
       ] },
   15:{ title:'الإسراء، الكهف', groups:[
-        { kind:'soon', name:'الإسراء', page:282 },
+        { kind:'full', arr:israPages, name:'الإسراء', surah:'الإسراء' },
         { kind:'range', arr:kahfPages, from:0, to:9, name:'سورة الكهف (1–74)', surah:'الكهف', note:'سورة الكهف تكمل في الجزء 16 ←', noteTarget:16 }
       ] },
   16:{ title:'الكهف، مريم، طه', groups:[
@@ -1229,13 +1386,13 @@ const JUZ_GROUPS = {
       ] },
   23:{ title:'يس، الصافات، ص، الزمر', groups:[
         { kind:'range', arr:yaseenPages, from:2, to:6, name:'سورة يس (28–83)', surah:'يس', note:'◄ سورة يس بدأت في الجزء 22', noteTarget:22 },
-        { kind:'soon', name:'الصافات', page:446 },
-        { kind:'soon', name:'ص', page:453 },
-        { kind:'soon', name:'الزمر', page:458 }
+        { kind:'full', arr:saffatPages, name:'الصافات', surah:'الصافات' },
+        { kind:'full', arr:sadPages, name:'ص', surah:'ص' },
+        { kind:'range', arr:zumarPages, from:0, to:4, name:'سورة الزمر (1–31)', surah:'الزمر', note:'سورة الزمر تكمل في الجزء 24 ←', noteTarget:24 }
       ] },
   24:{ title:'الزمر، غافر، فصلت', groups:[
-        { kind:'soon', name:'الزمر (تابع)', page:462 },
-        { kind:'soon', name:'غافر', page:467 },
+        { kind:'range', arr:zumarPages, from:4, to:10, name:'سورة الزمر (32–75)', surah:'الزمر', note:'◄ سورة الزمر بدأت في الجزء 23', noteTarget:23 },
+        { kind:'full', arr:ghafirPages, name:'غافر', surah:'غافر' },
         { kind:'range', arr:fussilatPages, from:0, to:5, name:'سورة فصلت (1–46)', surah:'فصلت', note:'سورة فصلت تكمل في الجزء 25 ←', noteTarget:25 }
       ] },
   25:{ title:'فصلت، الشورى، الزخرف، الدخان، الجاثية', groups:[
@@ -1300,12 +1457,21 @@ const SOON_JUZ = {
   17:['الأنبياء — الحج','ص 322'],
   18:['المؤمنون — الفرقان','ص 342'], 19:['الفرقان — النمل','ص 362'],
   20:['النمل — العنكبوت','ص 382'], 21:['العنكبوت — الأحزاب','ص 402'],
-  24:['الزمر — فصلت','ص 462'], 25:['فصلت — الجاثية','ص 482'],
+  25:['فصلت — الجاثية','ص 482'],
 };
 
-function card(href,name,meta,ok,surah){
+// أرقام صفحات المصحف لسور جزء عمّ (للبحث برقم الصفحة فقط، لا تظهر في البطاقة) — مأخوذة من صور المصحف، وتشمل صفحة عنوان السورة
+const AMMA_PAGES={annaba:[582,583],annaziat:[583,584],abasa:[584,585],attakwir:[586,586],alinfitar:[586,587],almutaffifin:[587,589],alinshiqaq:[589,589],alburuj:[590,590],altariq:[590,591],alaala:[591,592],alghasiya:[592,592],alfajr:[593,594],albalad:[594,594],alshams:[594,595],allayl:[595,596],alduha:[596,596],alsharh:[596,596],atteen:[597,597],alalaq:[597,597],alqadr:[598,598],albayyina:[598,599],alzalzala:[599,599],alaadiyat:[599,600],alqaria:[600,600],altakathur:[600,600],alasr:[601,601],alhumaza:[601,601],alfiyl:[601,601],aquraysh:[602,602],almaoon:[602,602],alkawthur:[602,602],alkafirun:[603,603],alnnasr:[603,603],almasad:[603,603],alikhlas:[604,604],alfalaq:[604,604],alnnas:[604,604]};
+function ammaPagesStr(file){
+  const r=AMMA_PAGES[file.replace('.html','')];
+  if(!r)return '';
+  let t='';for(let n=r[0];n<=r[1];n++)t+=(t?' ':'')+'ص '+n;
+  return t;
+}
+
+function card(href,name,meta,ok,surah,pages){
   const lx=x=>{try{return (window.darbiIdxLoc&&window.darbiIdxLoc(x))||'';}catch(e){return '';}};
-  const s=(surah?surah+' ':'')+name+' '+meta+' '+lx(surah)+' '+lx(name)+' '+lx(meta);
+  const s=(surah?surah+' ':'')+name+' '+meta+' '+lx(surah)+' '+lx(name)+' '+lx(meta)+(pages?' '+pages:'');
   if(!ok) return `<div class="quiz-card soon" data-s="${s}"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${name}</div><div class="card-meta">${meta}</div><span class="card-badge badge-soon">${darbiT('home.card_soon_badge')}</span></div>`;
   const key=(href||'').replace('.html','');
   return `<a href="${href}" class="quiz-card" data-s="${s}" data-key="${key}"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${name}</div><div class="card-meta">${meta}</div><div class="card-levels"><span class="lvl-dot" data-lvl="easy" title="${darbiT('home.lvl_easy_title')}">${darbiT('level.easy_name').slice(0,1)}</span><span class="lvl-dot" data-lvl="medium" title="${darbiT('home.lvl_medium_title')}">${darbiT('level.medium_name').slice(0,1)}</span><span class="lvl-dot" data-lvl="hard" title="${darbiT('home.lvl_hard_title')}">${darbiT('level.hard_name').slice(0,1)}</span></div><span class="card-badge badge-ok card-complete" style="display:none">${darbiT('home.card_complete_badge')}</span></a>`;
@@ -1323,7 +1489,7 @@ function groupPageKeys(g){
 function groupCardsHtml(g){
   if(g.kind==='single') return card(g.href,g.name,g.meta,true,g.name);
   if(g.kind==='soon') return card('',g.name,g.page?('ص '+g.page):darbiT('home.juz_soon'),false,g.name);
-  if(g.kind==='amma') return ammaData.map(p=>card(p[0],p[1],p[2],p[3])).join('');
+  if(g.kind==='amma') return ammaData.map(p=>card(p[0],p[1],p[2],p[3],undefined,ammaPagesStr(p[0]))).join('');
   const arr=g.arr, from=('from' in g)?g.from:0, to=('to' in g)?g.to:arr.length;
   return arr.slice(from,to).map(p=>card(p[0],p[1],p[2],true,g.surah)).join('');
 }
@@ -1457,6 +1623,11 @@ function renderDarbiProgress(){
   sabaPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة سبأ '+p[1];});
   fatirPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة فاطر '+p[1];});
   yaseenPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة يس '+p[1];});
+  israPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الإسراء '+p[1];});
+  saffatPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الصافات '+p[1];});
+  sadPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة ص '+p[1];});
+  zumarPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الزمر '+p[1];});
+  ghafirPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة غافر '+p[1];});
   fussilatPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة فصلت '+p[1];});
   shuraPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الشورى '+p[1];});
   zukhrufPages.forEach(p=>{nameByKey[p[0].replace('.html','')]='سورة الزخرف '+p[1];});
@@ -1539,7 +1710,7 @@ function renderDarbiProgress(){
 
   if(!Object.keys(all).length)return;
 
-  const totalPages=1+baqaraPages.length+alimranPages.length+nisaPages.length+maidaPages.length+anamPages.length+araafPages.length+anfalPages.length+tawbaPages.length+hudPages.length+kahfPages.length+maryamPages.length+tahaPages.length+anbiyaPages.length+hajjPages.length+yunusPages.length+yusufPages.length+arraadPages.length+ibrahimPages.length+alhijrPages.length+annahlPages.length+yaseenPages.length+fussilatPages.length+shuraPages.length+zukhrufPages.length+dukhanPages.length+jathiyaPages.length+arrahmanPages.length+alwaqiahPages.length+almulkPages.length+alqalamPages.length+alhaqqaPages.length+almaarijPages.length+nuhPages.length+aljinnPages.length+almuzzammilPages.length+almudaththirPages.length+alqiyamaPages.length+alinsanPages.length+almursalatPages.length+alahqafPages.length+muhammadPages.length+alfathPages.length+alhujuratPages.length+qafPages.length+azzariyatPages.length+atturPages.length+annajmPages.length+alqamarPages.length+alhadidPages.length+almujadilaPages.length+alhashrPages.length+almumtahanaPages.length+alsaffPages.length+aljumuaPages.length+almunafiqunPages.length+attaghabunPages.length+attalaqPages.length+attahrimPages.length+ashshuaraPages.length+annamlPages.length+qasasPages.length+ankabutPages.length+arrumPages.length+luqmanPages.length+assajdaPages.length+alahzabPages.length+sabaPages.length+fatirPages.length+muminunPages.length+nurPages.length+furqanPages.length+ammaData.filter(p=>p[3]).length;
+  const totalPages=1+baqaraPages.length+alimranPages.length+nisaPages.length+maidaPages.length+anamPages.length+araafPages.length+anfalPages.length+tawbaPages.length+hudPages.length+kahfPages.length+maryamPages.length+tahaPages.length+anbiyaPages.length+hajjPages.length+yunusPages.length+yusufPages.length+arraadPages.length+ibrahimPages.length+alhijrPages.length+annahlPages.length+yaseenPages.length+israPages.length+saffatPages.length+sadPages.length+zumarPages.length+ghafirPages.length+fussilatPages.length+shuraPages.length+zukhrufPages.length+dukhanPages.length+jathiyaPages.length+arrahmanPages.length+alwaqiahPages.length+almulkPages.length+alqalamPages.length+alhaqqaPages.length+almaarijPages.length+nuhPages.length+aljinnPages.length+almuzzammilPages.length+almudaththirPages.length+alqiyamaPages.length+alinsanPages.length+almursalatPages.length+alahqafPages.length+muhammadPages.length+alfathPages.length+alhujuratPages.length+qafPages.length+azzariyatPages.length+atturPages.length+annajmPages.length+alqamarPages.length+alhadidPages.length+almujadilaPages.length+alhashrPages.length+almumtahanaPages.length+alsaffPages.length+aljumuaPages.length+almunafiqunPages.length+attaghabunPages.length+attalaqPages.length+attahrimPages.length+ashshuaraPages.length+annamlPages.length+qasasPages.length+ankabutPages.length+arrumPages.length+luqmanPages.length+assajdaPages.length+alahzabPages.length+sabaPages.length+fatirPages.length+muminunPages.length+nurPages.length+furqanPages.length+ammaData.filter(p=>p[3]).length;
   let doneCount=0;
   Object.keys(nameByKey).forEach(k=>{ if(darbiPageComplete(all[k])) doneCount++; });
 
@@ -1547,8 +1718,7 @@ function renderDarbiProgress(){
     const pct=Math.round(doneCount/totalPages*100);
     const heroProg=document.getElementById('hero-progress');
     if(heroProg)heroProg.style.display='block';
-    const heroStats=document.querySelector('.hero-stats');
-    if(heroStats)heroStats.style.display='none';
+    document.documentElement.classList.add('has-progress');
     const fill=document.getElementById('hero-progress-fill');
     if(fill)fill.style.width=pct+'%';
     const text=document.getElementById('hero-progress-text');
