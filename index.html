@@ -307,6 +307,30 @@ html[data-theme="dark"] .beta-text{color:var(--soft);}
   html:not(.has-progress) .home-first .hero-types{margin-bottom:10px;}
   html:not(.has-progress) .home-first .hero-stars-bottom{display:none;}
 }
+/* الشاشات الطويلة: توزيع المساحة الفائضة على المسافات بين عناصر الهيرو بدل تركها فارغة فوق وتحت */
+@media(min-height:801px){
+  html:not(.has-progress) .home-first .hero{--x:max(0px,min(28px,calc((100svh - 800px) * .12)));}
+}
+@media(min-height:861px){
+  html.has-progress .home-first .hero{--x:max(0px,min(24px,calc((100svh - 860px) * .12)));}
+}
+@media(min-height:801px){
+  html:not(.has-progress) .home-first .hero-bismillah{margin-bottom:calc(16px + var(--x));}
+  html:not(.has-progress) .home-first .hero-title{margin-bottom:calc(12px + var(--x) * .6);}
+  html:not(.has-progress) .home-first .hero-sub{margin-bottom:calc(20px + var(--x));}
+  html:not(.has-progress) .home-first .hero-types{margin-bottom:calc(20px + var(--x));}
+  html:not(.has-progress) .home-first .hero-btn-row{gap:calc(13px + var(--x) * .6);}
+  html:not(.has-progress) .home-first .hero-stars-bottom{margin-top:calc(18px + var(--x));}
+  html:not(.has-progress) .home-first .hero-inner .ayah-banner{margin-top:calc(10px + var(--x));}
+}
+@media(min-height:861px){
+  html.has-progress .home-first .hero-bismillah{margin-bottom:calc(16px + var(--x));}
+  html.has-progress .home-first .hero-sub{margin-bottom:calc(20px + var(--x));}
+  html.has-progress .home-first .hero-types{margin-bottom:calc(20px + var(--x));}
+  html.has-progress .home-first .hero-btn-row{gap:calc(13px + var(--x) * .6);}
+  html.has-progress .home-first .hero-progress{margin-top:calc(20px + var(--x));}
+  html.has-progress .home-first .hero-stars-bottom{margin-top:calc(18px + var(--x));}
+}
 </style>
 <link rel="canonical" href="https://quran-darbi.com/">
 <script>
@@ -406,7 +430,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
     <div class="hero-bismillah notranslate" translate="no">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
     <div class="hero-title" data-i18n="home.title">دربي لحفظ القرآن</div>
     <div class="hero-sub" data-i18n="home.subtitle">رفيقك في رحلة إتقان الحفظ وتثبيته
-اختبارات تفاعلية لمراجعة الحفظ وضبط المتشابهات.</div>
+اختبارات تفاعلية لمراجعة الحفظ وإتقان المتشابهات.</div>
     <div class="hero-types" aria-label="أنواع الاختبارات">
       <span class="hero-type">🌱 <span data-i18n="level.easy_name">سهل</span></span>
       <span class="hero-type">🌿 <span data-i18n="level.medium_name">متوسط</span></span>

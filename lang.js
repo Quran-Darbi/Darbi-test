@@ -52,7 +52,7 @@ ar: {
 
   // ===== الصفحة الرئيسية =====
   'home.title':'دربي لحفظ القرآن',
-  'home.subtitle':'رفيقك في رحلة إتقان الحفظ وتثبيته\nاختبارات تفاعلية لمراجعة الحفظ وضبط المتشابهات.',
+  'home.subtitle':'رفيقك في رحلة إتقان الحفظ وتثبيته\nاختبارات تفاعلية لمراجعة الحفظ وإتقان المتشابهات.',
   'home.title_tail':'اختبار حفظ القرآن الكريم ومراجعته',
   'home.recite_btn':'🎤 اختبر حفظك',
   'home.cta_start':'🌱 ابدأ الاختبارات',
@@ -2782,6 +2782,7 @@ function ensureSyncMenuItem(){
         anchor = shareBtn || progBtn;
         item = document.createElement('button');
         item.className = 'tools-item tools-sync-item';
+        item.style.whiteSpace = 'nowrap'; item.style.fontSize = '0.8rem'; item.style.textAlign = 'start';
         item.setAttribute('onclick', "toolsClose();location.href='progress.html#sync-card';");
         var span = document.createElement('span');
         item.appendChild(span);
