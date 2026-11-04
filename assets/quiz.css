@@ -144,3 +144,8 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 
 /* الترتيب: عند قلّة العناصر (١–٣) يملأ العنصر عرض الشاشة بدل عمود ضيّق */
 #order-pool{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important;}
+/* الترتيب — تجربة الجولات/العدّاد */
+.order-round-info{text-align:center;font-size:15px;font-weight:700;color:var(--accent-dark,var(--accent));margin:0 0 10px;}
+.order-counter{display:flex;align-items:center;gap:10px;direction:rtl;background:var(--surface2);border:1.5px solid var(--gold,#C4A84A);border-radius:12px;padding:8px 10px;margin-bottom:12px;}
+.order-counter-lbl{flex:1;text-align:center;font-size:15px;color:var(--accent-dark,var(--accent));}
+.order-counter-btn{min-width:44px;min-height:44px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface3);color:var(--accent);font-size:22px;font-family:inherit;cursor:pointer;}
