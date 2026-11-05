@@ -144,8 +144,11 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 
 /* الترتيب: عند قلّة العناصر (١–٣) يملأ العنصر عرض الشاشة بدل عمود ضيّق */
 #order-pool{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important;}
-/* الترتيب — تجربة الجولات/العدّاد */
-.order-round-info{text-align:center;font-size:15px;font-weight:700;color:var(--accent-dark,var(--accent));margin:0 0 10px;}
-.order-counter{display:flex;align-items:center;gap:10px;direction:rtl;background:var(--surface2);border:1.5px solid var(--gold,#C4A84A);border-radius:12px;padding:8px 10px;margin-bottom:12px;}
-.order-counter-lbl{flex:1;text-align:center;font-size:15px;color:var(--accent-dark,var(--accent));}
-.order-counter-btn{min-width:44px;min-height:44px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface3);color:var(--accent);font-size:22px;font-family:inherit;cursor:pointer;}
+/* الترتيب على جولات */
+.order-round-info{margin:0 0 10px;text-align:center;}
+.order-round-title{font-size:15px;font-weight:700;color:var(--accent-dark,var(--accent));margin-bottom:8px;}
+.order-round-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.order-round-nav button{flex:1;min-width:110px;min-height:40px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);color:var(--accent);font-family:inherit;font-size:14px;cursor:pointer;}
+.order-round-nav button:disabled{opacity:.45;cursor:default;}
+.order-round-nav .restart{background:transparent;border-style:dashed;color:var(--text-soft,var(--accent));}
+.order-congrats{margin-top:8px;font-weight:700;}
