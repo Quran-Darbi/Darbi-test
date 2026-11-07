@@ -230,9 +230,9 @@ html[data-theme="dark"] .juz-badge:not(.amma):not(.soon){background:#2E6B3E;}
 .badge-ok{background:#E4F4DE;color:#2D5A27;border:1px solid #B0D8A8;}
 .badge-soon{background:var(--green3);color:var(--soft);border:1px solid var(--border);}
 /* مستويات كل بطاقة اختبار (سهل/متوسط/صعب) + علامة الاكتمال الكامل */
-.card-levels{display:flex;gap:3px;margin-top:5px;width:100%;}
-.lvl-dot{flex:1;height:5px;border-radius:3px;background:var(--border);font-size:0;}
-.lvl-dot.done{background:var(--green2);}
+.card-levels{display:flex;gap:6px;margin-top:3px;line-height:1;}
+.lvl-dot{font-size:0.8rem;line-height:1;opacity:.3;filter:grayscale(1);}
+.lvl-dot.done{opacity:1;filter:none;}
 
 /* ===== FOOTER ===== */
 footer{text-align:center;margin-top:44px;padding:24px 16px;border-top:1px solid var(--border);}
@@ -1497,7 +1497,7 @@ function card(href,name,meta,ok,surah,pages){
   const s=(surah?surah+' ':'')+name+' '+meta+' '+lx(surah)+' '+lx(name)+' '+lx(meta)+(pages?' '+pages:'');
   if(!ok) return `<div class="quiz-card soon" data-s="${s}"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${name}</div><div class="card-meta">${meta}</div><span class="card-badge badge-soon">${darbiT('home.card_soon_badge')}</span></div>`;
   const key=(href||'').replace('.html','');
-  return `<a href="${href}" class="quiz-card" data-s="${s}" data-key="${key}"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${name}</div><div class="card-meta">${meta}</div><div class="card-levels"><span class="lvl-dot" data-lvl="easy" title="${darbiT('home.lvl_easy_title')}"></span><span class="lvl-dot" data-lvl="medium" title="${darbiT('home.lvl_medium_title')}"></span><span class="lvl-dot" data-lvl="hard" title="${darbiT('home.lvl_hard_title')}"></span><span class="lvl-dot" data-lvl="order" title="${darbiT('level.order_name')}"></span></div><span class="card-badge badge-ok card-complete" style="display:none">${darbiT('home.card_complete_badge')}</span></a>`;
+  return `<a href="${href}" class="quiz-card" data-s="${s}" data-key="${key}"><div class="card-bar"></div><div class="card-name notranslate" translate="no">${name}</div><div class="card-meta">${meta}</div><div class="card-levels"><span class="lvl-dot" data-lvl="easy" title="${darbiT('home.lvl_easy_title')}">🌱</span><span class="lvl-dot" data-lvl="medium" title="${darbiT('home.lvl_medium_title')}">🌿</span><span class="lvl-dot" data-lvl="hard" title="${darbiT('home.lvl_hard_title')}">🌳</span><span class="lvl-dot" data-lvl="order" title="${darbiT('level.order_name')}">↕️</span></div><span class="card-badge badge-ok card-complete" style="display:none">${darbiT('home.card_complete_badge')}</span></a>`;
 }
 
 // مفاتيح التقدّم (نفس مفاتيح darbi_progress) اللي يغطيها مقطع واحد
