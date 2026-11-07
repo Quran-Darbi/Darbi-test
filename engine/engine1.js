@@ -200,18 +200,30 @@ let ohSt=ohS0(),ohStep=0,ohTap=0,ohTimer=null,ohPlaying=false,ohFlash=null;
 const OH_STEPS=[
  {get act(){return darbiT('oh.step1_act');},
   get why(){return darbiT('oh.step1_why');},
-  taps:[1,0,2].map(function(k){return {at:function(){return document.querySelector('#oh-pool [data-p="'+k+'"]');},
-    run:function(s){s.placed[s.cursor]=k;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,s.cursor+1);}};})},
+  taps:[
+   {at:function(){return document.querySelector('#oh-pool [data-p="1"]');},
+    run:function(s){s.placed[s.cursor]=1;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,s.cursor+1);}}
+  ]},
  {get act(){return darbiT('oh.step2_act');},
   get why(){return darbiT('oh.step2_why');},
+  taps:[
+   {at:function(){return document.querySelector('#oh-slots [data-d="2"]');},
+    run:function(s){s.cursor=2;ohFlash='d2';}},
+   {at:function(){return document.querySelector('#oh-pool [data-p="2"]');},
+    run:function(s){s.placed[2]=2;ohFlash='s2';s.cursor=ohEmpty(s.placed,0);}},
+   {at:function(){return document.querySelector('#oh-pool [data-p="0"]');},
+    run:function(s){s.placed[s.cursor]=0;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,0);}}
+  ]},
+ {get act(){return darbiT('oh.step3_act');},
+  get why(){return darbiT('oh.step3_why');},
   taps:[
    {at:function(){return document.querySelector('#oh-slots [data-s="0"] .order-badge');},
     run:function(s){s.selected=0;ohFlash='s0';}},
    {at:function(){return document.querySelector('#oh-slots [data-s="1"] .order-badge');},
     run:function(s){const t=s.placed[0];s.placed[0]=s.placed[1];s.placed[1]=t;s.selected=-1;ohFlash='s0';}}
   ]},
- {get act(){return darbiT('oh.step3_act');},
-  get why(){return darbiT('oh.step3_why');},
+ {get act(){return darbiT('oh.step4_act');},
+  get why(){return darbiT('oh.step4_why');},
   taps:[
    {at:function(){return document.querySelector('#oh-slots [data-s="2"]');},
     run:function(s){ohFlash='p'+s.placed[2];s.placed[2]=null;s.cursor=2;}},
@@ -219,6 +231,7 @@ const OH_STEPS=[
     run:function(s){s.placed[2]=2;ohFlash='s2';s.cursor=ohEmpty(s.placed,0);}}
   ]}
 ];
+
 
 
 function ohDraw(){
