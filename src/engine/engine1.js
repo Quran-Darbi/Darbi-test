@@ -185,7 +185,11 @@ let orderPlaced=[],orderCursor=0,orderPoolOrder=[],orderSelected=-1;
    link = وقفة أقصر بين ضغطتين في نفس الخطوة (الشرح واحد فمش محتاج قراية تاني) */
 const OH_MS={read:4400,move:1100,press:600,hold:3400,link:1800};
 const ORDER_HELP_KEY='darbi_order_help_seen';
-function OH_SEG_AT(i){return [darbiT('oh.seg1'),darbiT('oh.seg2'),darbiT('oh.seg3')][i];}
+/* آيات حقيقية للمثال (منسوخة حرفيًا من صفحتي الكوثر والعصر): الكوثر افتراضيًا، والعصر في صفحة الكوثر نفسها حتى لا يُكشف ترتيبها */
+const OH_DEMO_KAWTHAR=["إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ","فَصَلِّ لِرَبِّكَ وَٱنْحَرْ","إِنَّ شَانِئَكَ هُوَ ٱلْأَبْتَرُ"];
+const OH_DEMO_ASR=["وَٱلْعَصْرِ","إِنَّ ٱلْإِنسَٰنَ لَفِى خُسْرٍ","إِلَّا ٱلَّذِينَ ءَامَنُوا وَعَمِلُوا ٱلصَّٰلِحَٰتِ وَتَوَاصَوْا۟ بِٱلْحَقِّ وَتَوَاصَوْا۟ بِٱلصَّبْرِ"];
+function OH_SEG_AT(i){var k=(typeof RESUME_KEY!=='undefined')?RESUME_KEY:'';return (k==='quranResume_alkawthur'?OH_DEMO_ASR:OH_DEMO_KAWTHAR)[i];}
+function ohAyahEl(i){const a=document.createElement('span');a.className='oh-ayah notranslate';a.setAttribute('translate','no');a.setAttribute('lang','ar');a.setAttribute('dir','rtl');a.textContent=OH_SEG_AT(i);return a;}
 function ohAr(n){return typeof toArabicNum==='function'?toArabicNum(n):String(n);}
 function ohNum(i){return '﴿'+ohAr(i+1)+'﴾';}
 function ohEmpty(p,f){for(let i=f;i<p.length;i++)if(p[i]===null)return i;for(let i=0;i<p.length;i++)if(p[i]===null)return i;return -1;}
@@ -242,7 +246,7 @@ function ohDraw(){
    c.className='order-slot filled'+(pos===ohSt.selected?' oh-swap':'')+(ohFlash==='s'+pos?' oh-flash':'');
    c.setAttribute('data-s',pos);
    const b=document.createElement('span');b.className='order-badge';b.textContent=ohNum(pos);
-   const t=document.createElement('span');t.textContent=OH_SEG_AT(idx);
+   const t=ohAyahEl(idx);
    const x=document.createElement('span');x.className='order-x';x.setAttribute('aria-hidden','true');x.textContent='✕';c.appendChild(b);c.appendChild(t);c.appendChild(x);g.appendChild(c);
   }
  });
@@ -252,7 +256,7 @@ function ohDraw(){
   if(ohSt.placed.indexOf(idx)>-1)return;
   const b=document.createElement('div');
   b.className='order-item'+(ohFlash==='p'+idx?' oh-flash':'');
-  b.setAttribute('data-p',idx);b.textContent=OH_SEG_AT(idx);po.appendChild(b);
+  b.setAttribute('data-p',idx);b.appendChild(ohAyahEl(idx));po.appendChild(b);
  });
  ohFlash=null;
 }
@@ -341,7 +345,7 @@ function _orderHelpSet(open){
 function toggleOrderHelp(){const p=document.getElementById('order-help');if(!p)return;_orderHelpSet(p.style.display==='none');_orderHelpMark();}
 function closeOrderHelp(){_orderHelpSet(false);_orderHelpMark();}
 /* اتجاه لوحة الشرح في اللغات اللاتينية — يُحقن من هنا حتى لا يعتمد على نسخة quiz.css المخزّنة في المتصفح */
-(function(){try{if(document.getElementById('oh-ltr-style'))return;var st=document.createElement('style');st.id='oh-ltr-style';st.textContent='html[dir="ltr"] .order-help,html[dir="ltr"] .order-help .order-item,html[dir="ltr"] .order-help .order-slot{direction:ltr;text-align:left;}html[dir="ltr"] .order-help,html[dir="ltr"] .order-help *:not(.ayah-end):not(.order-badge){font-family:inherit;}';document.head.appendChild(st);}catch(e){}})();
+(function(){try{if(document.getElementById('oh-ltr-style'))return;var st=document.createElement('style');st.id='oh-ltr-style';st.textContent='html[dir="ltr"] .order-help,html[dir="ltr"] .order-help .order-item,html[dir="ltr"] .order-help .order-slot{direction:ltr;text-align:left;}html[dir="ltr"] .order-help,html[dir="ltr"] .order-help *:not(.ayah-end):not(.order-badge):not(.oh-ayah){font-family:inherit;}.oh-ayah{display:block;flex:1;text-align:right;font-family:\'Scheherazade New\',\'Amiri\',\'Traditional Arabic\',serif;}';document.head.appendChild(st);}catch(e){}})();
 function maybeShowOrderHelp(){var seen=false;try{seen=!!localStorage.getItem(ORDER_HELP_KEY);}catch(e){}if(seen){_orderHelpSet(false);}else{_orderHelpSet(true);_orderHelpMark();}}
 /* ===== نهاية لوحة شرح الترتيب ===== */
 /*OHJS-END*/
