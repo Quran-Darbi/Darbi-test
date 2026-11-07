@@ -158,3 +158,5 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .order-slot.correct-slot .order-x,.order-slot.wrong-slot .order-x{display:none;}
 #order-check-btn:disabled{opacity:.5;cursor:default;}
 .oh-rounds-note{margin:10px 0 0;padding:8px 10px;border-radius:10px;background:var(--surface3);color:var(--text-soft,var(--accent));font-size:13px;line-height:1.7;text-align:center;}
+/* لغات تُكتب من اليسار: لوحة الشرح تتبع اتجاه الصفحة (لا تمسّ آيات الاختبار الحقيقية) */
+html[dir="ltr"] .order-help,html[dir="ltr"] .order-help .order-item,html[dir="ltr"] .order-help .order-slot{direction:ltr;text-align:left;}html[dir="ltr"] .order-help,html[dir="ltr"] .order-help *:not(.ayah-end):not(.order-badge){font-family:inherit;}
