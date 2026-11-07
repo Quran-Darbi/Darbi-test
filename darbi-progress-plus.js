@@ -194,6 +194,13 @@
     if (all[k]) { delete all[k]; safeSetJSON(MISSED_KEY, all); }
   }
 
+  // إجابة صحيحة عن سؤال سبق الخطأ فيه ← يخرج من قائمة المراجعة تلقائيًا
+  function recordCorrect(level, qIndex) {
+    var pageKey = currentPageKey();
+    if (!pageKey) return;
+    removeMiss(pageKey, level, qIndex);
+  }
+
   function getReviewQueue(limit) {
     var all = safeGetJSON(MISSED_KEY, {});
     var list = Object.keys(all).map(function (k) { return all[k]; });
@@ -361,6 +368,7 @@
 
   window.DarbiExtra = {
     recordMiss: recordMiss,
+    recordCorrect: recordCorrect,
     removeMiss: removeMiss,
     getReviewQueue: getReviewQueue,
     getStreak: getStreak,

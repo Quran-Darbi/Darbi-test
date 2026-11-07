@@ -432,36 +432,6 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 
   </div>
 
-  <div class="card" id="sync-card">
-    <h2 data-i18n="progress.sync_title">☁️ مزامنة عبر جوجل</h2>
-    <div class="sync-desc" data-i18n="progress.sync_desc">سجّل الدخول بحساب جوجل ليُحفظ تقدّمك ويُزامَن تلقائيًا بين أجهزتك، حتى لو غيّرت الهاتف أو مسحت بيانات المتصفح.</div>
-    <div class="sync-status hidden" id="sync-status"></div>
-    <div class="sync-actions">
-      <button class="sync-btn sync-signin" id="sync-signin-btn" onclick="onSyncSignIn()" data-i18n="progress.sync_signin_btn">🔵 تسجيل الدخول بجوجل</button>
-      <button class="sync-btn sync-now hidden" id="sync-now-btn" onclick="onSyncNow()" data-i18n="progress.sync_now_btn">🔄 مزامنة الآن</button>
-      <button class="sync-btn sync-signout hidden" id="sync-signout-btn" onclick="onSyncSignOut()" data-i18n="progress.sync_signout_btn">تسجيل الخروج</button>
-    </div>
-    <div class="sync-msg hidden" id="sync-msg"></div>
-  </div>
-
-
-  <div id="backup-wrap">
-    <div class="card">
-      <h2 data-i18n="progress.backup_title">💾 نسخة احتياطية</h2>
-      <div class="backup-status" id="backup-status" data-i18n="progress.backup_none">لم تُؤخذ أي نسخة احتياطية بعد</div>
-      <div class="backup-suggest hidden" id="backup-suggest" data-i18n="progress.backup_suggest">⏰ مرّت فترة طويلة — يُستحسن أخذ نسخة احتياطية جديدة، لأن بياناتك محفوظة في هذا المتصفح فقط</div>
-      <div class="backup-actions">
-        <button class="bk-btn bk-export" onclick="doExport()" data-i18n="progress.backup_export_btn">⬇️ تنزيل نسخة احتياطية</button>
-        <label class="bk-btn bk-import" style="display:flex;align-items:center;justify-content:center;">
-          <span data-i18n="progress.backup_import_btn">⬆️ استيراد نسخة</span>
-          <input type="file" id="import-file" accept="application/json" style="display:none" onchange="doImport(this.files[0])">
-        </label>
-      </div>
-      <div class="bk-msg hidden" id="bk-msg"></div>
-    </div>
-  </div>
-
-
   <div id="data-bottom">
     <div class="card">
       <h2 data-i18n="progress.surah_progress_title">📚 تقدّمك في كل سورة</h2>
@@ -514,6 +484,37 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
     </div>
 
   </div>
+
+  <div class="card" id="sync-card">
+    <h2 data-i18n="progress.sync_title">☁️ مزامنة عبر جوجل</h2>
+    <div class="sync-desc" data-i18n="progress.sync_desc">سجّل الدخول بحساب جوجل ليُحفظ تقدّمك ويُزامَن تلقائيًا بين أجهزتك، حتى لو غيّرت الهاتف أو مسحت بيانات المتصفح.</div>
+    <div class="sync-status hidden" id="sync-status"></div>
+    <div class="sync-actions">
+      <button class="sync-btn sync-signin" id="sync-signin-btn" onclick="onSyncSignIn()" data-i18n="progress.sync_signin_btn">🔵 تسجيل الدخول بجوجل</button>
+      <button class="sync-btn sync-now hidden" id="sync-now-btn" onclick="onSyncNow()" data-i18n="progress.sync_now_btn">🔄 مزامنة الآن</button>
+      <button class="sync-btn sync-signout hidden" id="sync-signout-btn" onclick="onSyncSignOut()" data-i18n="progress.sync_signout_btn">تسجيل الخروج</button>
+    </div>
+    <div class="sync-msg hidden" id="sync-msg"></div>
+  </div>
+
+
+  <div id="backup-wrap">
+    <div class="card">
+      <h2 data-i18n="progress.backup_title">💾 نسخة احتياطية</h2>
+      <div class="backup-status" id="backup-status" data-i18n="progress.backup_none">لم تُؤخذ أي نسخة احتياطية بعد</div>
+      <div class="backup-suggest hidden" id="backup-suggest" data-i18n="progress.backup_suggest">⏰ مرّت فترة طويلة — يُستحسن أخذ نسخة احتياطية جديدة، لأن بياناتك محفوظة في هذا المتصفح فقط</div>
+      <div class="backup-actions">
+        <button class="bk-btn bk-export" onclick="doExport()" data-i18n="progress.backup_export_btn">⬇️ تنزيل نسخة احتياطية</button>
+        <label class="bk-btn bk-import" style="display:flex;align-items:center;justify-content:center;">
+          <span data-i18n="progress.backup_import_btn">⬆️ استيراد نسخة</span>
+          <input type="file" id="import-file" accept="application/json" style="display:none" onchange="doImport(this.files[0])">
+        </label>
+      </div>
+      <div class="bk-msg hidden" id="bk-msg"></div>
+    </div>
+  </div>
+
+
 
 </div>
 
