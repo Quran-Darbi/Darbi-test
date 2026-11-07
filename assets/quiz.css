@@ -157,3 +157,4 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .order-x{margin-inline-start:auto;flex:0 0 auto;font-size:14px;line-height:1;color:var(--text-soft,#6B8067);opacity:.75;padding:4px 2px 4px 4px;}
 .order-slot.correct-slot .order-x,.order-slot.wrong-slot .order-x{display:none;}
 #order-check-btn:disabled{opacity:.5;cursor:default;}
+.oh-rounds-note{margin:10px 0 0;padding:8px 10px;border-radius:10px;background:var(--surface3);color:var(--text-soft,var(--accent));font-size:13px;line-height:1.7;text-align:center;}
