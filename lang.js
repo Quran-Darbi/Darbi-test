@@ -241,7 +241,9 @@ ar: {
 
   // ===== الترتيب =====
   'order.instruction':'رتّب الآيات — اضغط على الآية فتُوضَع بالتسلسل. تريد تخطّي خانة؟ اضغط على الخانة التي تريد المتابعة منها',
-  'order.instruction_short':'اضغط الآيات بالترتيب الصحيح',
+  'order.instruction_short':'رتّب الآيات بالترتيب الصحيح',
+  'order.counter_ayat':'{a} من {b} آيات',
+  'order.counter_segs':'{a} من {b} مقاطع',
   'order.help_btn':'؟ كيف يعمل الترتيب',
   'order.help_title':'طريقة الترتيب',
   'order.help_prev':'← السابق',
@@ -662,7 +664,9 @@ en: {
 
   // ===== Ordering =====
   'order.instruction':'Put the ayahs in order — tap an ayah to place it in sequence. Want to skip a slot? Tap the slot you want to continue from.',
-  'order.instruction_short':'Tap the ayahs in the correct order',
+  'order.instruction_short':'Put the ayahs in the correct order',
+  'order.counter_ayat':'{a} of {b} ayahs',
+  'order.counter_segs':'{a} of {b} parts',
   'order.help_btn':'? How ordering works',
   'order.help_title':'How ordering works',
   'order.help_prev':'← Previous',
@@ -1078,7 +1082,9 @@ fr: {
 
   // ===== Remise en ordre =====
   'order.instruction':'Remettez les versets dans l’ordre — touchez un verset pour le placer dans la séquence. Vous voulez passer une case ? Touchez la case à partir de laquelle continuer.',
-  'order.instruction_short':'Touchez les versets dans le bon ordre',
+  'order.instruction_short':'Remettez les versets dans le bon ordre',
+  'order.counter_ayat':'{a} sur {b} versets',
+  'order.counter_segs':'{a} sur {b} parties',
   'order.help_btn':'? Comment fonctionne le classement',
   'order.help_title':'Comment fonctionne le classement',
   'order.help_prev':'← Précédent',
@@ -1494,7 +1500,9 @@ tr: {
 
   // ===== Sıralama =====
   'order.instruction':'Ayetleri sıraya diz — sırayla yerleştirmek için bir ayete dokun. Bir hücreyi atlamak mı istiyorsun? Devam etmek istediğin hücreye dokun.',
-  'order.instruction_short':'Ayetlere doğru sırayla dokun',
+  'order.instruction_short':'Ayetleri doğru sıraya diz',
+  'order.counter_ayat':'{a} / {b} ayet',
+  'order.counter_segs':'{a} / {b} bölüm',
   'order.help_btn':'? Sıralama nasıl çalışır',
   'order.help_title':'Sıralama nasıl çalışır',
   'order.help_prev':'← Önceki',
@@ -1911,7 +1919,9 @@ de: {
 
   // ===== Reihenfolge =====
   'order.instruction':'Bringe die Ayat in die richtige Reihenfolge — tippe eine Ayah an, um sie einzusetzen. Möchtest du einen Platz überspringen? Tippe den Platz an, ab dem du fortfahren möchtest.',
-  'order.instruction_short':'Tippe die Ayat in der richtigen Reihenfolge an',
+  'order.instruction_short':'Bringe die Ayat in die richtige Reihenfolge',
+  'order.counter_ayat':'{a} von {b} Ayat',
+  'order.counter_segs':'{a} von {b} Abschnitten',
   'order.help_btn':'? Wie die Reihenfolge funktioniert',
   'order.help_title':'Wie die Reihenfolge funktioniert',
   'order.help_prev':'← Zurück',
@@ -2327,7 +2337,9 @@ es: {
 
   // ===== Ordenar =====
   'order.instruction':'Ordena las aleyas — toca una aleya para colocarla en la secuencia. ¿Quieres saltar una casilla? Toca la casilla desde la que quieres continuar.',
-  'order.instruction_short':'Toca las aleyas en el orden correcto',
+  'order.instruction_short':'Ordena las aleyas en el orden correcto',
+  'order.counter_ayat':'{a} de {b} aleyas',
+  'order.counter_segs':'{a} de {b} partes',
   'order.help_btn':'? Cómo funciona el orden',
   'order.help_title':'Cómo funciona el orden',
   'order.help_prev':'← Anterior',
@@ -2743,7 +2755,9 @@ fa: {
 
   // ===== ترتیب =====
   'order.instruction':'آیات را به ترتیب بچینید — برای قرار دادن یک آیه در توالی، روی آن ضربه بزنید. می‌خواهید از یک جایگاه رد شوید؟ روی جایگاهی که می‌خواهید از آن ادامه دهید ضربه بزنید.',
-  'order.instruction_short':'روی آیات را به ترتیب درست ضربه بزنید',
+  'order.instruction_short':'آیات را به ترتیب درست مرتب کنید',
+  'order.counter_ayat':'{a} از {b} آیه',
+  'order.counter_segs':'{a} از {b} بخش',
   'order.help_btn':'؟ چیدن ترتیب چگونه کار می‌کند',
   'order.help_title':'چیدن ترتیب چگونه کار می‌کند',
   'order.help_prev':'← قبلی',
