@@ -200,12 +200,8 @@ let ohSt=ohS0(),ohStep=0,ohTap=0,ohTimer=null,ohPlaying=false,ohFlash=null;
 const OH_STEPS=[
  {get act(){return darbiT('oh.step1_act');},
   get why(){return darbiT('oh.step1_why');},
-  taps:[
-   {at:function(){return document.querySelector('#oh-pool [data-p="1"]');},
-    run:function(s){s.placed[s.cursor]=1;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,s.cursor+1);}},
-   {at:function(){return document.querySelector('#oh-pool [data-p="0"]');},
-    run:function(s){s.placed[s.cursor]=0;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,s.cursor+1);}}
-  ]},
+  taps:[1,0,2].map(function(k){return {at:function(){return document.querySelector('#oh-pool [data-p="'+k+'"]');},
+    run:function(s){s.placed[s.cursor]=k;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,s.cursor+1);}};})},
  {get act(){return darbiT('oh.step2_act');},
   get why(){return darbiT('oh.step2_why');},
   taps:[
@@ -217,18 +213,13 @@ const OH_STEPS=[
  {get act(){return darbiT('oh.step3_act');},
   get why(){return darbiT('oh.step3_why');},
   taps:[
-   {at:function(){return document.querySelector('#oh-slots [data-s="0"]');},
-    run:function(s){ohFlash='p'+s.placed[0];s.placed[0]=null;s.cursor=0;}}
-  ]},
- {get act(){return darbiT('oh.step4_act');},
-  get why(){return darbiT('oh.step4_why');},
-  taps:[
-   {at:function(){return document.querySelector('#oh-slots [data-d="2"]');},
-    run:function(s){s.cursor=2;ohFlash='d2';}},
+   {at:function(){return document.querySelector('#oh-slots [data-s="2"]');},
+    run:function(s){ohFlash='p'+s.placed[2];s.placed[2]=null;s.cursor=2;}},
    {at:function(){return document.querySelector('#oh-pool [data-p="2"]');},
     run:function(s){s.placed[2]=2;ohFlash='s2';s.cursor=ohEmpty(s.placed,0);}}
   ]}
 ];
+
 
 function ohDraw(){
  const sl=document.getElementById('oh-slots'),po=document.getElementById('oh-pool');
