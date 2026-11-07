@@ -302,6 +302,17 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .grp-more{margin-top:12px;border-top:1px dashed var(--border);padding-top:10px;}
 .grp-more>summary{cursor:pointer;color:var(--green);font-size:0.85rem;padding:4px 0;}
 .juz-head{font-size:0.72rem;color:var(--soft);margin:10px 0 2px;border-bottom:1px solid var(--border);padding-bottom:2px;}
+.rev-prog{display:flex;align-items:center;gap:4px;margin-top:5px;}
+.rev-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--green);background:transparent;}
+.rev-dot.on{background:var(--green);}
+.stable-box{margin-top:12px;border-top:1px dashed var(--border);padding-top:10px;}
+.stable-box>summary{cursor:pointer;color:var(--green);font-size:0.85rem;padding:4px 0;}
+.stable-note{font-size:0.72rem;color:var(--soft);line-height:1.7;margin:4px 0 6px;}
+.stable-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);}
+.stable-item:last-child{border-bottom:none;}
+.stable-chip{flex-shrink:0;background:var(--green3);color:var(--green);font-size:0.68rem;padding:3px 9px;border-radius:8px;white-space:nowrap;}
+.rev-back{flex-shrink:0;border:1px solid var(--border);background:transparent;color:var(--green);border-radius:8px;width:30px;height:30px;font-size:.95rem;cursor:pointer;font-family:inherit;}
+.rev-back:hover{border-color:var(--green);}
 </style>
 <script src="lang.js"></script>
 </head>
@@ -428,6 +439,11 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <div id="review-list"></div>
       <button type="button" class="more-btn hidden" id="review-more" onclick="toggleReviewMore()"></button>
       <div id="review-empty" class="hidden" style="color:var(--soft);font-size:0.85rem;" data-i18n="progress.review_empty">لا توجد أسئلة بحاجة إلى مراجعة حاليًا — واصل هكذا 👏</div>
+      <details class="stable-box hidden" id="stable-box">
+        <summary id="stable-sum"></summary>
+        <div class="stable-note" id="stable-note"></div>
+        <div id="stable-list"></div>
+      </details>
     </div>
 
   </div>
@@ -805,6 +821,54 @@ function renderWeakWords(all,keys,nameByKey){
   box.classList.remove('hidden');
 }
 
+/* ===== شارة التقدّم نحو التثبيت + قائمة «راجعتها وثبتت» ===== */
+function revProgHTML(item){
+  if(!window.DarbiExtra||!DarbiExtra.stableCount)return '';
+  const need=DarbiExtra.STABLE_AFTER, c=Math.min(DarbiExtra.stableCount(item),need);
+  if(!c)return '';
+  let d='';for(let i=0;i<need;i++)d+='<i class="rev-dot'+(i<c?' on':'')+'"></i>';
+  return '<span class="rev-prog" role="img" aria-label="'+darbiT('progress.stable_progress',{c:c,n:need})+'">'+d+'</span>';
+}
+function renderStable(all,nameByKey){
+  const box=document.getElementById('stable-box');
+  if(!box||!window.DarbiExtra||!DarbiExtra.getStableList){return;}
+  const list=DarbiExtra.getStableList();
+  box.classList.toggle('hidden',!list.length);
+  const holder=document.getElementById('stable-list');
+  holder.innerHTML='';
+  if(!list.length)return;
+  document.getElementById('stable-sum').textContent=darbiT('progress.stable_title',{n:list.length});
+  document.getElementById('stable-note').textContent=darbiT('progress.stable_note',{n:DarbiExtra.STABLE_AFTER});
+  list.forEach(item=>{
+    const stem=darbiKeyToStem(item.pageKey);
+    const canJump=(typeof item.qIndex==='number')&&['easy','medium','hard'].includes(item.level);
+    const a=document.createElement('a');
+    a.className='stable-item';
+    a.href=(stem||'')+'.html'+(canJump?('?review='+item.level+':'+item.qIndex):'');
+    const name=pgName(nameByKey[stem]||stem||'');
+    const qLabel=(typeof item.qIndex==='number')?darbiT('progress.question_label',{n:item.qIndex+1}):'';
+    a.innerHTML=
+      '<span class="stable-chip">'+levelLabel(item.level)+'</span>'+
+      '<span class="rev-mid"><span class="rev-title">'+name+(qLabel?' — '+qLabel:'')+'</span>'+
+      '<span class="rev-verse notranslate" translate="no">'+(item.verseText||'')+'</span></span>';
+    const back=document.createElement('button');
+    back.type='button';back.className='rev-back';back.textContent='↺';
+    const bl=darbiT('progress.stable_return');back.title=bl;back.setAttribute('aria-label',bl);
+    back.addEventListener('click',function(ev){
+      ev.preventDefault();ev.stopPropagation();
+      DarbiExtra.returnToReview(item.pageKey,item.level,item.qIndex);render();
+    });
+    const del=document.createElement('button');
+    del.type='button';del.className='rev-del';del.textContent='🗑';
+    const dl=darbiT('progress.review_remove');del.title=dl;del.setAttribute('aria-label',dl);
+    del.addEventListener('click',function(ev){
+      ev.preventDefault();ev.stopPropagation();
+      DarbiExtra.removeMiss(item.pageKey,item.level,item.qIndex);render();
+    });
+    a.appendChild(back);a.appendChild(del);holder.appendChild(a);
+  });
+}
+
 function render(){
   const all=safeAll();
   const hasAny=Object.keys(all).length>0;
@@ -986,6 +1050,7 @@ function render(){
           '<span class="rev-mid">'+
           '<span class="rev-title">'+name+(qLabel?' — '+qLabel:'')+'</span>'+
           '<span class="rev-verse notranslate" translate="no">'+(item.verseText||'')+'</span>'+
+          revProgHTML(item)+
           '</span>'+
           '<span class="rev-count">×'+item.missCount+'</span>'+
           (canJump?'<span class="rev-retry-icon">↻</span>':'');
@@ -1004,6 +1069,8 @@ function render(){
       try{sessionStorage.setItem('darbi_review_chain',JSON.stringify(chain));}catch(e){}
     }
   }
+
+  renderStable(all,nameByKey);
 
   // ---- النسخة الاحتياطية ----
   if(window.DarbiExtra){
