@@ -340,6 +340,8 @@ function _orderHelpSet(open){
 }
 function toggleOrderHelp(){const p=document.getElementById('order-help');if(!p)return;_orderHelpSet(p.style.display==='none');_orderHelpMark();}
 function closeOrderHelp(){_orderHelpSet(false);_orderHelpMark();}
+/* اتجاه لوحة الشرح في اللغات اللاتينية — يُحقن من هنا حتى لا يعتمد على نسخة quiz.css المخزّنة في المتصفح */
+(function(){try{if(document.getElementById('oh-ltr-style'))return;var st=document.createElement('style');st.id='oh-ltr-style';st.textContent='html[dir="ltr"] .order-help,html[dir="ltr"] .order-help .order-item,html[dir="ltr"] .order-help .order-slot{direction:ltr;text-align:left;}html[dir="ltr"] .order-help,html[dir="ltr"] .order-help *:not(.ayah-end):not(.order-badge){font-family:inherit;}';document.head.appendChild(st);}catch(e){}})();
 function maybeShowOrderHelp(){var seen=false;try{seen=!!localStorage.getItem(ORDER_HELP_KEY);}catch(e){}if(seen){_orderHelpSet(false);}else{_orderHelpSet(true);_orderHelpMark();}}
 /* ===== نهاية لوحة شرح الترتيب ===== */
 /*OHJS-END*/
