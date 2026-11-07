@@ -202,37 +202,36 @@ let ohSt=ohS0(),ohStep=0,ohTap=0,ohTimer=null,ohPlaying=false,ohFlash=null;
 const OH_STEPS=[
  {get act(){return darbiT('oh.step1_act');},
   get why(){return darbiT('oh.step1_why');},
-  taps:[
-   {at:function(){return document.querySelector('#oh-pool [data-p="1"]');},
-    run:function(s){s.placed[s.cursor]=1;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,s.cursor+1);}}
-  ]},
+  taps:[1,0,2].map(function(k){return {at:function(){return document.querySelector('#oh-pool [data-p="'+k+'"]');},
+    run:function(s){s.placed[s.cursor]=k;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,s.cursor+1);}};})},
  {get act(){return darbiT('oh.step2_act');},
   get why(){return darbiT('oh.step2_why');},
-  taps:[
-   {at:function(){return document.querySelector('#oh-slots [data-d="2"]');},
-    run:function(s){s.cursor=2;ohFlash='d2';}},
-   {at:function(){return document.querySelector('#oh-pool [data-p="2"]');},
-    run:function(s){s.placed[2]=2;ohFlash='s2';s.cursor=ohEmpty(s.placed,0);}},
-   {at:function(){return document.querySelector('#oh-pool [data-p="0"]');},
-    run:function(s){s.placed[s.cursor]=0;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,0);}}
-  ]},
- {get act(){return darbiT('oh.step3_act');},
-  get why(){return darbiT('oh.step3_why');},
   taps:[
    {at:function(){return document.querySelector('#oh-slots [data-s="0"] .order-badge');},
     run:function(s){s.selected=0;ohFlash='s0';}},
    {at:function(){return document.querySelector('#oh-slots [data-s="1"] .order-badge');},
     run:function(s){const t=s.placed[0];s.placed[0]=s.placed[1];s.placed[1]=t;s.selected=-1;ohFlash='s0';}}
   ]},
- {get act(){return darbiT('oh.step4_act');},
-  get why(){return darbiT('oh.step4_why');},
+ {get act(){return darbiT('oh.step3_act');},
+  get why(){return darbiT('oh.step3_why');},
   taps:[
    {at:function(){return document.querySelector('#oh-slots [data-s="2"]');},
     run:function(s){ohFlash='p'+s.placed[2];s.placed[2]=null;s.cursor=2;}},
+   {at:function(){return document.querySelector('#oh-slots [data-s="1"]');},
+    run:function(s){ohFlash='p'+s.placed[1];s.placed[1]=null;s.cursor=1;}}
+  ]},
+ {get act(){return darbiT('oh.step4_act');},
+  get why(){return darbiT('oh.step4_why');},
+  taps:[
+   {at:function(){return document.querySelector('#oh-slots [data-d="2"]');},
+    run:function(s){s.cursor=2;ohFlash='d2';}},
    {at:function(){return document.querySelector('#oh-pool [data-p="2"]');},
-    run:function(s){s.placed[2]=2;ohFlash='s2';s.cursor=ohEmpty(s.placed,0);}}
+    run:function(s){s.placed[2]=2;ohFlash='s2';s.cursor=ohEmpty(s.placed,0);}},
+   {at:function(){return document.querySelector('#oh-pool [data-p="1"]');},
+    run:function(s){s.placed[s.cursor]=1;ohFlash='s'+s.cursor;s.cursor=ohEmpty(s.placed,0);}}
   ]}
 ];
+
 
 
 
@@ -351,7 +350,7 @@ function _orderHelpSet(open){
 function toggleOrderHelp(){const p=document.getElementById('order-help');if(!p)return;_orderHelpSet(p.style.display==='none');_orderHelpMark();}
 function closeOrderHelp(){_orderHelpSet(false);_orderHelpMark();}
 /* اتجاه لوحة الشرح في اللغات اللاتينية — يُحقن من هنا حتى لا يعتمد على نسخة quiz.css المخزّنة في المتصفح */
-(function(){try{if(document.getElementById('oh-ltr-style'))return;var st=document.createElement('style');st.id='oh-ltr-style';st.textContent='html[dir="ltr"] .order-help,html[dir="ltr"] .order-help .order-item,html[dir="ltr"] .order-help .order-slot{direction:ltr;text-align:left;}html[dir="ltr"] .order-help,html[dir="ltr"] .order-help *:not(.ayah-end):not(.order-badge):not(.oh-ayah){font-family:inherit;}.oh-ayah{display:block;flex:1;text-align:right;font-family:\'Scheherazade New\',\'Amiri\',\'Traditional Arabic\',serif;}';document.head.appendChild(st);}catch(e){}})();
+(function(){try{if(document.getElementById('oh-ltr-style'))return;var st=document.createElement('style');st.id='oh-ltr-style';st.textContent='html[dir="ltr"] .order-badge,html[dir="ltr"] .order-dot,html[dir="ltr"] .ayah-end{direction:rtl;unicode-bidi:isolate;}html[dir="ltr"] .order-help,html[dir="ltr"] .order-help .order-item,html[dir="ltr"] .order-help .order-slot{direction:ltr;text-align:left;}html[dir="ltr"] .order-help,html[dir="ltr"] .order-help *:not(.ayah-end):not(.order-badge):not(.oh-ayah){font-family:inherit;}.oh-ayah{display:block;flex:1;text-align:right;font-family:\'Scheherazade New\',\'Amiri\',\'Traditional Arabic\',serif;}';document.head.appendChild(st);}catch(e){}})();
 function maybeShowOrderHelp(){var seen=false;try{seen=!!localStorage.getItem(ORDER_HELP_KEY);}catch(e){}if(seen){_orderHelpSet(false);}else{_orderHelpSet(true);_orderHelpMark();}}
 /* ===== نهاية لوحة شرح الترتيب ===== */
 /*OHJS-END*/
