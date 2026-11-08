@@ -23,7 +23,7 @@
 
   var TOKEN_KEY = 'darbi_push_token_v1';
   var SW_PATH = 'firebase-messaging-sw.js';
-  var SW_SCOPE = '/firebase-cloud-messaging-push-scope';
+  var SW_SCOPE = './firebase-cloud-messaging-push-scope'; // نسبي: يعمل على الجذر وعلى مجلد فرعي (موقع التجربة)
   var COLLECTION = 'darbi_reminders';
 
   var app = null, messaging = null, db = null;

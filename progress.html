@@ -313,10 +313,46 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .stable-chip{flex-shrink:0;background:var(--green3);color:var(--green);font-size:0.68rem;padding:3px 9px;border-radius:8px;white-space:nowrap;}
 .rev-back{flex-shrink:0;border:1px solid var(--border);background:transparent;color:var(--green);border-radius:8px;width:30px;height:30px;font-size:.95rem;cursor:pointer;font-family:inherit;}
 .rev-back:hover{border-color:var(--green);}
+/* ===== تبويبات سفلية + رأس مضغوط + لمسات (نوفمبر 2026) ===== */
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom));}
+body:not([data-active="today"]) [data-tab="today"],
+body:not([data-active="progress"]) [data-tab="progress"],
+body:not([data-active="badges"]) [data-tab="badges"],
+body:not([data-active="settings"]) [data-tab="settings"]{display:none;}
+body[data-active="today"] .phead-slim{display:none;}
+body:not([data-active="today"]) .phead-hero{display:none;}
+.phead-slim{padding:14px 18px;}
+.phead-slim .phead-title{font-size:1.25rem;margin:0;}
+.hero-row{display:flex;align-items:center;gap:14px;margin:0 auto 12px;}
+.hero-side{flex:1;min-width:0;}
+.hero-side .streak-row{margin-bottom:0;padding:10px 12px;gap:10px;}
+.hero-row .ring-wrap{flex-shrink:0;}
+.ring,.ring svg{width:104px;height:104px;}
+.ring-pct{font-size:1.2rem;}
+.week-row{margin-bottom:4px;}
+.week-lbl{font-size:0.68rem;}
+.badge-name{font-size:0.72rem;}
+.phead-hero .phead-title{display:flex;align-items:center;justify-content:center;gap:8px;}
+.phead-title svg.ico{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.card h2 svg.ico{width:20px;height:20px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+.smart-msg{display:flex;align-items:center;gap:10px;background:var(--green3);border:1px solid var(--border);border-radius:14px;padding:11px 14px;margin-bottom:14px;color:var(--text);font-size:0.88rem;line-height:1.7;}
+.smart-msg svg{width:20px;height:20px;flex-shrink:0;stroke:var(--gold);fill:var(--gold2);stroke-width:1.5;stroke-linejoin:round;}
+.sync-signin{background:var(--green);color:#fff;}
+#rec-empty:not(.hidden){display:flex;align-items:center;justify-content:space-between;gap:12px;}
+#rec-empty .rec-go{margin-top:0;white-space:nowrap;flex-shrink:0;}
+.tabbar{position:fixed;bottom:0;left:0;right:0;z-index:250;background:var(--nav);border-top:1.5px solid var(--border);box-shadow:0 -2px 12px var(--shadow);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);}
+.tabbar-in{display:flex;width:100%;max-width:760px;}
+.tab-btn{flex:1;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 4px;background:none;border:none;color:var(--soft);font-family:inherit;font-size:0.74rem;cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent;}
+.tab-btn svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+.tab-btn[aria-selected="true"]{color:var(--green);font-weight:700;}
+.tab-btn[aria-selected="true"]::before{content:'';position:absolute;top:0;left:24%;right:24%;height:3px;border-radius:0 0 3px 3px;background:var(--green);}
+.tab-btn:focus-visible{outline:2px solid var(--green);outline-offset:-4px;border-radius:10px;}
+@media (prefers-reduced-motion:reduce){.nur{animation:none;}.ring-fill,.goal-fill,.grp-bar-fill{transition:none;}}
 </style>
 <script src="lang.js"></script>
 </head>
 <body>
+<script>(function(){var ok=['today','progress','badges','settings'],t=location.hash.slice(1);if(ok.indexOf(t)<0){try{t=sessionStorage.getItem('darbi_progress_tab');}catch(e){}}document.body.setAttribute('data-active',ok.indexOf(t)>=0?t:'today');})();</script>
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="icons/darbi_favicon_64.png" alt="دربي لحفظ القرآن" data-i18n-alt="home.title" width="24" height="24"> <span data-i18n="home.title">دربي لحفظ القرآن</span></a>
@@ -343,11 +379,25 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   </div>
 </nav>
 
-<div class="phead">
+<div class="phead phead-hero">
   <div class="phead-inner">
-    <div class="phead-title" data-i18n="home.progress_btn">📊 تقدّمي</div>
+    <div class="phead-title" data-ico="chart" data-i18n="home.progress_btn">📊 تقدّمي</div>
     <div class="phead-sub" id="phead-sub" data-i18n="progress.subtitle">تابع رحلتك في حفظ القرآن</div>
 
+    <div class="hero-row">
+    <div class="ring-wrap" id="ring-wrap">
+      <div class="ring">
+        <svg viewBox="0 0 112 112">
+          <circle class="ring-track" cx="56" cy="56" r="47.5"></circle>
+          <circle class="ring-fill" id="ring-fill" cx="56" cy="56" r="47.5" stroke-dasharray="298" stroke-dashoffset="298"></circle>
+        </svg>
+        <div class="ring-label">
+          <div class="ring-pct" id="ring-pct">0%</div>
+          <div class="ring-cnt" id="ring-cnt">0 / 0</div>
+        </div>
+      </div>
+    </div>
+      <div class="hero-side">
     <div class="streak-row" id="streak-row">
       <div class="nur">
         <svg viewBox="0 0 40 40">
@@ -373,43 +423,36 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       </div>
       <div class="streak-best"><b id="streak-best">0</b><span data-i18n="progress.streak_best_label">أطول سلسلة</span></div>
     </div>
-
-    <div class="week-row" id="week-row"></div>
-
-    <div class="ring-wrap" id="ring-wrap">
-      <div class="ring">
-        <svg viewBox="0 0 112 112">
-          <circle class="ring-track" cx="56" cy="56" r="47.5"></circle>
-          <circle class="ring-fill" id="ring-fill" cx="56" cy="56" r="47.5" stroke-dasharray="298" stroke-dashoffset="298"></circle>
-        </svg>
-        <div class="ring-label">
-          <div class="ring-pct" id="ring-pct">0%</div>
-          <div class="ring-cnt" id="ring-cnt">0 / 0</div>
-        </div>
       </div>
     </div>
+
+    <div class="week-row" id="week-row"></div>
   </div>
 </div>
 
+<div class="phead phead-slim" id="phead-slim"><div class="phead-inner"><div class="phead-title" id="slim-title"></div></div></div>
+
 <div class="main" id="main">
 
-  <div id="empty-state" class="card empty hidden">
+  <div class="smart-msg hidden" id="smart-msg" data-tab="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg><span id="smart-txt"></span></div>
+
+  <div id="empty-state" class="card empty hidden" data-tab="today">
     <div class="empty-emoji">🌱</div>
     <p data-i18n="progress.empty_text">لم تبدأ رحلة الحفظ هنا بعد — ابدأ أول اختبار وسيظهر تقدّمك في هذه الصفحة أولًا بأول</p>
     <a href="index.html" data-i18n="progress.empty_cta">ابدأ الآن</a>
   </div>
 
   <div id="data-top">
-    <div class="card hidden" id="continue-card">
-      <h2 data-i18n="progress.continue_title">▶️ تابع من حيث توقفت</h2>
+    <div class="card hidden" id="continue-card" data-tab="today">
+      <h2 data-ico="play" data-i18n="progress.continue_title">▶️ تابع من حيث توقفت</h2>
       <a class="cont-link" id="continue-link" href="#">
         <span class="cont-mid"><span class="cont-name" id="continue-name"></span><span class="cont-meta" id="continue-meta"></span></span>
         <span class="cont-btn" data-i18n="progress.continue_btn">تابع</span>
       </a>
     </div>
 
-    <div class="card">
-      <h2 data-i18n="progress.goal_title">🎯 هدفي اليومي</h2>
+    <div class="card" data-tab="today">
+      <h2 data-ico="target" data-i18n="progress.goal_title">🎯 هدفي اليومي</h2>
       <div class="goal-row">
         <div class="goal-ring">
           <svg viewBox="0 0 76 76">
@@ -431,11 +474,10 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
         <span class="goal-pick-lbl" data-i18n="progress.goal_type_label">نوع الهدف:</span>
         <div class="goal-chips goal-chips-wrap" id="goal-type-chips"></div>
       </div>
-      <div class="celebrate hidden" id="goal-celebrate"><span class="emoji">🎉</span><b data-i18n="progress.goal_done_msg">أنجزت هدف اليوم — أحسنت!</b></div>
     </div>
 
-    <div class="card" id="review-card">
-      <h2 data-i18n="progress.review_today_title">🔁 راجع اليوم</h2>
+    <div class="card" id="review-card" data-tab="today">
+      <h2 data-ico="repeat" data-i18n="progress.review_today_title">🔁 راجع اليوم</h2>
       <div id="review-list"></div>
       <button type="button" class="more-btn hidden" id="review-more" onclick="toggleReviewMore()"></button>
       <div id="review-empty" class="hidden" style="color:var(--soft);font-size:0.85rem;" data-i18n="progress.review_empty">لا توجد أسئلة بحاجة إلى مراجعة حاليًا — واصل هكذا 👏</div>
@@ -449,8 +491,8 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   </div>
 
   <div id="data-bottom">
-    <div class="card">
-      <h2 data-i18n="progress.surah_progress_title">📚 تقدّمك في كل سورة</h2>
+    <div class="card" data-tab="progress">
+      <h2 data-ico="book" data-i18n="progress.surah_progress_title">📚 تقدّمك في كل سورة</h2>
       <div class="grp-filter-row">
         <button type="button" class="grp-filter-chip active" data-mode="all" onclick="setGrpFilter('all',this)" data-i18n="progress.filter_all_surahs">كل السور</button>
         <button type="button" class="grp-filter-chip" data-mode="complete" onclick="setGrpFilter('complete',this)" data-i18n="progress.filter_complete">مكتمل</button>
@@ -464,13 +506,13 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <div class="grp-filter-empty" id="grp-filter-empty" data-i18n="progress.filter_empty">لا توجد سور مطابقة لهذا الفلتر حاليًا.</div>
     </div>
 
-    <div class="card">
-      <h2 data-i18n="progress.badges_title">🏅 الأوسمة</h2>
+    <div class="card" data-tab="badges">
+      <h2 data-ico="award" data-i18n="progress.badges_title">🏅 الأوسمة</h2>
       <div class="badge-grid" id="badge-grid"></div>
     </div>
 
-    <div class="card" id="rec-card">
-      <h2 data-i18n="home.recite_btn">🎤 اختبر حفظك</h2>
+    <div class="card" id="rec-card" data-tab="progress">
+      <h2 data-ico="mic" data-i18n="home.recite_btn">🎤 اختبر حفظك</h2>
       <div class="rec-stats" id="rec-stats"></div>
       <div class="rec-sub" id="rec-last-title" data-i18n="progress.rec_last_title">آخر المحاولات</div>
       <div id="rec-list"></div>
@@ -482,8 +524,8 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
       <div class="rec-note" id="rec-note" data-i18n="progress.rec_note">النسبة تخص الكلمات وترتيبها، ولا تشمل الحركات وأحكام التجويد.</div>
     </div>
 
-    <div class="card" id="reminder-card">
-      <h2 data-i18n="progress.reminder_title">🔔 التذكير اليومي</h2>
+    <div class="card" id="reminder-card" data-tab="settings">
+      <h2 data-ico="bell" data-i18n="progress.reminder_title">🔔 التذكير اليومي</h2>
       <div id="reminder-controls" class="hidden">
         <div class="rem-row">
           <div class="rem-label"><span data-i18n="progress.reminder_enable_label">تفعيل إشعارات التذكير</span><small data-i18n="progress.reminder_enable_sub">تصل حتى لو الموقع مغلق</small></div>
@@ -501,8 +543,8 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 
   </div>
 
-  <div class="card" id="sync-card">
-    <h2 data-i18n="progress.sync_title">☁️ مزامنة عبر جوجل</h2>
+  <div class="card" id="sync-card" data-tab="settings">
+    <h2 data-ico="cloud" data-i18n="progress.sync_title">☁️ مزامنة عبر جوجل</h2>
     <div class="sync-desc" data-i18n="progress.sync_desc">سجّل الدخول بحساب جوجل ليُحفظ تقدّمك ويُزامَن تلقائيًا بين أجهزتك، حتى لو غيّرت الهاتف أو مسحت بيانات المتصفح.</div>
     <div class="sync-status hidden" id="sync-status"></div>
     <div class="sync-actions">
@@ -514,9 +556,9 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   </div>
 
 
-  <div id="backup-wrap">
+  <div id="backup-wrap" data-tab="settings">
     <div class="card">
-      <h2 data-i18n="progress.backup_title">💾 نسخة احتياطية</h2>
+      <h2 data-ico="save" data-i18n="progress.backup_title">💾 نسخة احتياطية</h2>
       <div class="backup-status" id="backup-status" data-i18n="progress.backup_none">لم تُؤخذ أي نسخة احتياطية بعد</div>
       <div class="backup-suggest hidden" id="backup-suggest" data-i18n="progress.backup_suggest">⏰ مرّت فترة طويلة — يُستحسن أخذ نسخة احتياطية جديدة، لأن بياناتك محفوظة في هذا المتصفح فقط</div>
       <div class="backup-actions">
@@ -532,6 +574,15 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 
 
 
+</div>
+
+<div class="tabbar" id="tabbar" role="tablist" aria-label="تقدّمي">
+  <div class="tabbar-in">
+    <button type="button" class="tab-btn" role="tab" data-go="today" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="progress.tab_today">اليوم</span></button>
+    <button type="button" class="tab-btn" role="tab" data-go="progress" data-needs-data aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg><span data-i18n="progress.tab_progress">التقدّم</span></button>
+    <button type="button" class="tab-btn" role="tab" data-go="badges" data-needs-data aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg><span data-i18n="progress.tab_badges">الأوسمة</span></button>
+    <button type="button" class="tab-btn" role="tab" data-go="settings" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></svg><span data-i18n="progress.tab_settings">الإعدادات</span></button>
+  </div>
 </div>
 
 <footer>
@@ -869,6 +920,58 @@ function renderStable(all,nameByKey){
   });
 }
 
+/* ===== أيقونات العناوين (SVG موحّدة بدل الإيموجي) ===== */
+const ICO={
+  play:'<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>',
+  target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+  repeat:'<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
+  book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  award:'<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>',
+  mic:'<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>',
+  bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+  cloud:'<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
+  chart:'<line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/>',
+  save:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>'
+};
+function polishTitles(){
+  document.querySelectorAll('h2[data-ico],.phead-title[data-ico]').forEach(h=>{
+    const txt=h.textContent.replace(/^[^\p{L}\p{N}]+/u,'').trim();
+    if(!txt)return;
+    h.textContent='';
+    h.insertAdjacentHTML('afterbegin','<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">'+(ICO[h.dataset.ico]||'')+'</svg>');
+    const sp=document.createElement('span');sp.textContent=txt;h.appendChild(sp);
+  });
+}
+
+/* ===== التبويبات السفلية ===== */
+const TABS=['today','progress','badges','settings'];
+function setTab(t,fromUser){
+  if(TABS.indexOf(t)<0)t='today';
+  document.body.setAttribute('data-active',t);
+  document.querySelectorAll('.tab-btn').forEach(b=>b.setAttribute('aria-selected',b.dataset.go===t?'true':'false'));
+  const sl=document.getElementById('slim-title');
+  if(sl)sl.textContent=darbiT('progress.tab_'+t);
+  try{sessionStorage.setItem('darbi_progress_tab',t);}catch(e){}
+  if(fromUser){try{history.replaceState(null,'','#'+t);}catch(e){}window.scrollTo(0,0);}
+}
+document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.go,true)));
+
+/* ===== رسالة ذكية في أعلى «اليوم» ===== */
+function liveStreak(s){
+  if(!s||!s.lastActiveDate)return 0;
+  const d=Math.round((new Date(localDay(new Date()))-new Date(s.lastActiveDate))/86400000);
+  return d<=1?(s.currentStreak||0):0; // السلسلة المنقطعة منذ أكثر من يوم لا تُعرض
+}
+function renderSmart(all,streak){
+  const box=document.getElementById('smart-msg');
+  if(!box)return;
+  let msg='';
+  if(window.DarbiExtra){const q=DarbiExtra.getReviewQueue(50).length;if(q>0)msg=darbiT('progress.sm_review',{n:q});}
+  if(!msg){const t=findContinue(all);if(t)msg=darbiT('progress.sm_next',{name:pgName(t[1])});}
+  document.getElementById('smart-txt').textContent=msg;
+  box.classList.toggle('hidden',!msg);
+}
+
 function render(){
   const all=safeAll();
   const hasAny=Object.keys(all).length>0;
@@ -878,6 +981,11 @@ function render(){
   document.getElementById('backup-wrap').classList.toggle('hidden',!hasAny);
   document.getElementById('ring-wrap').classList.toggle('hidden',!hasAny);
   document.getElementById('streak-row').classList.toggle('hidden',!hasAny);
+  document.querySelector('.hero-row').classList.toggle('hidden',!hasAny);
+  document.querySelectorAll('.tab-btn[data-needs-data]').forEach(b=>b.classList.toggle('hidden',!hasAny));
+  if(!hasAny&&document.body.getAttribute('data-active')!=='settings')setTab('today');
+  else setTab(document.body.getAttribute('data-active'));
+  polishTitles();
   document.getElementById('week-row').classList.toggle('hidden',!hasAny);
   if(!hasAny){
     document.getElementById('phead-sub').textContent=darbiT('progress.subtitle_empty');
@@ -906,7 +1014,7 @@ function render(){
   let streak={currentStreak:0,longestStreak:0};
   if(window.DarbiExtra){
     streak=DarbiExtra.getStreak();
-    document.getElementById('streak-cur').textContent=streak.currentStreak||0;
+    document.getElementById('streak-cur').textContent=liveStreak(streak);
     document.getElementById('streak-best').textContent=streak.longestStreak||0;
 
     const weekRow=document.getElementById('week-row');
@@ -936,8 +1044,7 @@ function render(){
   goalFill.setAttribute('stroke-dashoffset',(CIRC_GOAL*(1-goalPct/100)).toFixed(1));
   document.getElementById('goal-emoji').textContent = goalDone ? '🎉' : '📖';
   document.getElementById('goal-headline').textContent = goalDone ? darbiT('progress.goal_done_headline') : darbiT('progress.goal_not_done');
-  document.getElementById('goal-desc').textContent = goalTs.length===1 ? darbiT('progress.goal_progress',{c:Math.min(todayN,99),n:goalN}) : goalTs.map((t,i)=>goalTypeLabel(t)+' '+Math.min(counts[i],goalN)+'/'+goalN).join(' · ');
-  document.getElementById('goal-celebrate').classList.toggle('hidden', !goalDone);
+  document.getElementById('goal-desc').textContent = goalTs.length===1 ? darbiT('progress.goal_progress',{c:Math.min(todayN,goalN),n:goalN}) : goalTs.map((t,i)=>goalTypeLabel(t)+' '+Math.min(counts[i],goalN)+'/'+goalN).join(' · ');
   const chips=document.getElementById('goal-chips');chips.innerHTML='';
   [1,2,3,5].forEach(n=>{
     const b=document.createElement('button');b.type='button';
@@ -1071,6 +1178,7 @@ function render(){
   }
 
   renderStable(all,nameByKey);
+  renderSmart(all,streak);
 
   // ---- النسخة الاحتياطية ----
   if(window.DarbiExtra){
@@ -1112,13 +1220,13 @@ function showBkMsg(text,cls){
 function renderReminderCard(){
   const controls=document.getElementById('reminder-controls');
   const info=document.getElementById('reminder-info');
+  const remCard=document.getElementById('reminder-card');
   if(!window.DarbiPush){
-    controls.classList.add('hidden');
-    info.classList.remove('hidden');
-    info.textContent=darbiT('progress.reminder_coming_soon');
+    remCard.classList.add('hidden'); // لا تُعرض بطاقة لا تعمل
     return;
   }
   const st=DarbiPush.status();
+  remCard.classList.toggle('hidden',st==='unsupported'||st==='not-configured');
   const sw=document.getElementById('rem-switch');
   const timeRow=document.getElementById('rem-time-row');
 

@@ -292,7 +292,7 @@
     var hasProgress = Object.keys(safeGetJSON(PROGRESS_KEY, {})).length > 0;
     if (!hasProgress) return false;
     var last = getLastBackupDate();
-    if (!last) return true;
+    if (!last) return safeGetJSON(HISTORY_KEY, []).length >= 7; // مستخدم جديد: لا إزعاج قبل أسبوع من النشاط
     var days = Math.round((new Date(todayStr()) - new Date(last)) / 86400000);
     return days >= BACKUP_REMIND_DAYS;
   }
