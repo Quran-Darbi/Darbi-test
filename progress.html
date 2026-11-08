@@ -286,8 +286,11 @@ html[data-theme="dark"] .qr-title{color:#6BBF5A;}
 html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .qr-close-btn{background:none;border:1px solid var(--border,#E4EAE4);color:var(--text,#1A1A1A);}
 /* ===== تحسينات «تقدّمي» (أكتوبر 2026) ===== */
-.cont-link{display:flex;flex-direction:column;align-items:stretch;gap:10px;text-decoration:none;color:var(--text);background:var(--green3);border:1.5px solid var(--border);border-radius:14px;padding:12px 14px;}
-.cont-mid{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
+.cont-link{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 10px;text-decoration:none;color:var(--text);background:var(--green3);border:1.5px solid var(--border);border-radius:14px;padding:12px 14px;}
+.cont-mid{display:contents;}
+.cont-name{grid-column:1;grid-row:1;}
+.cont-btn{grid-column:2;grid-row:1;}
+.cont-meta{grid-column:1/-1;grid-row:2;}
 .cont-name{font-weight:700;font-size:1rem;}
 .cont-meta{font-size:0.74rem;color:var(--soft);white-space:normal;}
 .cont-meta{display:flex;flex-wrap:nowrap;gap:4px 8px;font-size:0.7rem;}
@@ -296,7 +299,7 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .cont-chip i{flex:none;width:13px;height:13px;border-radius:50%;border:1.5px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:0.62rem;line-height:1;color:#fff;}
 .cont-chip.done{color:var(--green);}
 .cont-chip.done i{background:var(--green);border-color:var(--green);}
-.cont-btn{background:var(--green);color:#fff;border-radius:18px;padding:8px 18px;font-size:0.88rem;white-space:nowrap;text-align:center;}
+.cont-btn{background:var(--green);color:#fff;border-radius:18px;padding:6px 18px;font-size:0.85rem;white-space:nowrap;text-align:center;}
 .goal-pick{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
 .goal-pick-lbl{font-size:0.78rem;color:var(--soft);}
 .goal-chips{display:flex;gap:6px;}
