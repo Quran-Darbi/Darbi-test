@@ -762,8 +762,31 @@ function findContinue(all){
   for(let i=0;i<i0;i++)if(!darbiPageComplete(all[flat[i][0]]))return flat[i];
   return null;
 }
+// اختبار بدأتُه ولم أُنهِه: الحالة المحفوظة في المتصفح (quranResume_*) من محرك الاختبارات
+function findResume(){
+  let best=null;
+  (window.DARBI_GROUPS||[]).forEach(g=>g.pages.forEach(p=>{
+    if(NO_PAGE_FILE.has(p[0]))return;
+    let s=null;
+    try{s=JSON.parse(localStorage.getItem('quranResume_'+p[1]));}catch(e){}
+    if(!s||['easy','medium','hard'].indexOf(s.level)<0||!s.statuses||!s.statuses.length)return;
+    let qi=+s.qIndex||0;
+    while(qi<s.statuses.length&&s.statuses[qi]&&s.statuses[qi]!=='pending')qi++;
+    if(qi>=s.statuses.length||(qi===0&&!(s.statuses||[]).some(x=>x&&x!=='pending')))return;
+    if(!best||(s.date||0)>best.date)best={file:p[0],name:p[2],level:s.level,qi:qi,total:s.statuses.length,date:s.date||0};
+  }));
+  return best;
+}
 function renderContinue(all){
   const card=document.getElementById('continue-card');
+  const rs=findResume();
+  if(rs){
+    card.classList.remove('hidden');
+    document.getElementById('continue-link').href=rs.file+'.html?resume=1';
+    document.getElementById('continue-name').textContent=pgName(rs.name);
+    document.getElementById('continue-meta').innerHTML='<span class="cont-chip">'+levelLabel(rs.level)+' · '+darbiT('quiz.q_number',{cur:rs.qi+1,total:rs.total})+'</span>';
+    return;
+  }
   const t=findContinue(all);
   card.classList.toggle('hidden',!t);
   if(!t)return;
