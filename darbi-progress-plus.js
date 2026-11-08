@@ -126,10 +126,11 @@
   function getWeekTracker() {
     var hist = safeGetJSON(HISTORY_KEY, []);
     var lg0 = (window.darbiLang && window.darbiLang()) || document.documentElement.lang || 'ar';
-    if (['en', 'fr', 'de', 'es', 'tr'].indexOf(lg0) !== -1) {
-      // أسبوع يبدأ بالاثنين (المعتاد في هذه اللغات): من الاثنين إلى الأحد، والأيام المقبلة فارغة
+    if (['en', 'fr', 'de', 'es', 'tr', 'ar', 'fa'].indexOf(lg0) !== -1) {
+      // أسبوع تقويمي والأيام المقبلة فارغة: يبدأ بالسبت في العربية والفارسية، وبالاثنين في الباقي
       var now = new Date();
-      var mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
+      var startShift = (lg0 === 'ar' || lg0 === 'fa') ? ((now.getDay() + 1) % 7) : ((now.getDay() + 6) % 7);
+      var mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() - startShift);
       var wk = [];
       for (var k = 0; k < 7; k++) {
         var dd = new Date(mon.getFullYear(), mon.getMonth(), mon.getDate() + k);

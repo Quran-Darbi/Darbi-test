@@ -290,6 +290,11 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .cont-mid{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
 .cont-name{font-weight:700;font-size:1rem;}
 .cont-meta{font-size:0.74rem;color:var(--soft);white-space:normal;}
+.cont-meta{display:flex;flex-wrap:wrap;gap:4px 10px;}
+.cont-chip{display:inline-flex;align-items:center;gap:4px;}
+.cont-chip i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:0.62rem;line-height:1;color:#fff;}
+.cont-chip.done{color:var(--green);}
+.cont-chip.done i{background:var(--green);border-color:var(--green);}
 .cont-btn{background:var(--green);color:#fff;border-radius:18px;padding:7px 18px;font-size:0.88rem;white-space:nowrap;}
 .goal-pick{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
 .goal-pick-lbl{font-size:0.78rem;color:var(--soft);}
@@ -347,12 +352,13 @@ body:not([data-active="today"]) .phead-hero{display:none;}
 .tab-btn[aria-selected="true"]{color:var(--green);font-weight:700;}
 .tab-btn[aria-selected="true"]::before{content:'';position:absolute;top:0;left:24%;right:24%;height:3px;border-radius:0 0 3px 3px;background:var(--green);}
 .tab-btn:focus-visible{outline:2px solid var(--green);outline-offset:-4px;border-radius:10px;}
+.card.flash{box-shadow:0 0 0 3px var(--gold);transition:box-shadow .3s;}
 @media (prefers-reduced-motion:reduce){.nur{animation:none;}.ring-fill,.goal-fill,.grp-bar-fill{transition:none;}}
 </style>
 <script src="lang.js"></script>
 </head>
 <body>
-<script>(function(){var ok=['today','progress','badges','settings'],t=location.hash.slice(1);if(ok.indexOf(t)<0){try{t=sessionStorage.getItem('darbi_progress_tab');}catch(e){}}document.body.setAttribute('data-active',ok.indexOf(t)>=0?t:'today');})();</script>
+<script>(function(){var ok=['today','progress','badges','settings'],t=location.hash.slice(1);if(t==='sync-card'||t==='backup-wrap')t='settings';if(ok.indexOf(t)<0){try{t=sessionStorage.getItem('darbi_progress_tab');}catch(e){}}document.body.setAttribute('data-active',ok.indexOf(t)>=0?t:'today');})();</script>
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="icons/darbi_favicon_64.png" alt="دربي لحفظ القرآن" data-i18n-alt="home.title" width="24" height="24"> <span data-i18n="home.title">دربي لحفظ القرآن</span></a>
@@ -385,18 +391,6 @@ body:not([data-active="today"]) .phead-hero{display:none;}
     <div class="phead-sub" id="phead-sub" data-i18n="progress.subtitle">تابع رحلتك في حفظ القرآن</div>
 
     <div class="hero-row">
-    <div class="ring-wrap" id="ring-wrap">
-      <div class="ring">
-        <svg viewBox="0 0 112 112">
-          <circle class="ring-track" cx="56" cy="56" r="47.5"></circle>
-          <circle class="ring-fill" id="ring-fill" cx="56" cy="56" r="47.5" stroke-dasharray="298" stroke-dashoffset="298"></circle>
-        </svg>
-        <div class="ring-label">
-          <div class="ring-pct" id="ring-pct">0%</div>
-          <div class="ring-cnt" id="ring-cnt">0 / 0</div>
-        </div>
-      </div>
-    </div>
       <div class="hero-side">
     <div class="streak-row" id="streak-row">
       <div class="nur">
@@ -424,6 +418,18 @@ body:not([data-active="today"]) .phead-hero{display:none;}
       <div class="streak-best"><b id="streak-best">0</b><span data-i18n="progress.streak_best_label">أطول سلسلة</span></div>
     </div>
       </div>
+    <div class="ring-wrap" id="ring-wrap">
+      <div class="ring">
+        <svg viewBox="0 0 112 112">
+          <circle class="ring-track" cx="56" cy="56" r="47.5"></circle>
+          <circle class="ring-fill" id="ring-fill" cx="56" cy="56" r="47.5" stroke-dasharray="298" stroke-dashoffset="298"></circle>
+        </svg>
+        <div class="ring-label">
+          <div class="ring-pct" id="ring-pct">0%</div>
+          <div class="ring-cnt" id="ring-cnt">0 / 0</div>
+        </div>
+      </div>
+    </div>
     </div>
 
     <div class="week-row" id="week-row"></div>
@@ -747,8 +753,13 @@ function renderContinue(all){
   const e=all[t[0]]||{};
   document.getElementById('continue-link').href=t[0]+'.html';
   document.getElementById('continue-name').textContent=pgName(t[1]);
-  const lv=['easy','medium','hard','order'].map(l=>(e[l]&&e[l].done?'✅ ':'⬜ ')+levelLabel(l));
-  document.getElementById('continue-meta').textContent=lv.join('  ');
+  // رموز مرسومة بـCSS (✓ / ○) بدل إيموجي قد لا يدعمها خط الجهاز فتظهر مربعات
+  const lv=['easy','medium','hard','order','recitation'].map(l=>{
+    const lbl=l==='recitation'?darbiT('progress.goal_type_recite'):levelLabel(l);
+    const done=!!(e[l]&&e[l].done);
+    return '<span class="cont-chip'+(done?' done':'')+'"><i>'+(done?'✓':'')+'</i>'+lbl+'</span>';
+  });
+  document.getElementById('continue-meta').innerHTML=lv.join('');
 }
 
 /* ===== راجع اليوم ===== */
@@ -955,6 +966,18 @@ function setTab(t,fromUser){
   if(fromUser){try{history.replaceState(null,'','#'+t);}catch(e){}window.scrollTo(0,0);}
 }
 document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.go,true)));
+function openHash(){
+  const id=location.hash.slice(1);
+  if(!id)return;
+  if(TABS.indexOf(id)>=0){setTab(id);return;}
+  const el=document.getElementById(id);
+  if(!el)return;
+  const tab=el.closest('[data-tab]');
+  if(tab)setTab(tab.getAttribute('data-tab'));
+  setTimeout(()=>{try{el.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){el.scrollIntoView();}
+    el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);},120);
+}
+window.addEventListener('hashchange',openHash);
 
 /* ===== رسالة ذكية في أعلى «اليوم» ===== */
 function liveStreak(s){
