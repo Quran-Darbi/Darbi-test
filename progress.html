@@ -286,16 +286,17 @@ html[data-theme="dark"] .qr-title{color:#6BBF5A;}
 html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
 .qr-close-btn{background:none;border:1px solid var(--border,#E4EAE4);color:var(--text,#1A1A1A);}
 /* ===== تحسينات «تقدّمي» (أكتوبر 2026) ===== */
-.cont-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text);background:var(--green3);border:1.5px solid var(--border);border-radius:14px;padding:12px 14px;}
+.cont-link{display:flex;flex-direction:column;align-items:stretch;gap:10px;text-decoration:none;color:var(--text);background:var(--green3);border:1.5px solid var(--border);border-radius:14px;padding:12px 14px;}
 .cont-mid{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
 .cont-name{font-weight:700;font-size:1rem;}
 .cont-meta{font-size:0.74rem;color:var(--soft);white-space:normal;}
-.cont-meta{display:flex;flex-wrap:wrap;gap:4px 10px;}
+.cont-meta{display:flex;flex-wrap:nowrap;gap:4px 8px;font-size:0.7rem;}
+@media (max-width:340px){.cont-meta{flex-wrap:wrap;}}
 .cont-chip{display:inline-flex;align-items:center;gap:4px;}
-.cont-chip i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:0.62rem;line-height:1;color:#fff;}
+.cont-chip i{flex:none;width:13px;height:13px;border-radius:50%;border:1.5px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:0.62rem;line-height:1;color:#fff;}
 .cont-chip.done{color:var(--green);}
 .cont-chip.done i{background:var(--green);border-color:var(--green);}
-.cont-btn{background:var(--green);color:#fff;border-radius:18px;padding:7px 18px;font-size:0.88rem;white-space:nowrap;}
+.cont-btn{background:var(--green);color:#fff;border-radius:18px;padding:8px 18px;font-size:0.88rem;white-space:nowrap;text-align:center;}
 .goal-pick{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
 .goal-pick-lbl{font-size:0.78rem;color:var(--soft);}
 .goal-chips{display:flex;gap:6px;}
@@ -352,6 +353,10 @@ body:not([data-active="today"]) .phead-hero{display:none;}
 .tab-btn[aria-selected="true"]{color:var(--green);font-weight:700;}
 .tab-btn[aria-selected="true"]::before{content:'';position:absolute;top:0;left:24%;right:24%;height:3px;border-radius:0 0 3px 3px;background:var(--green);}
 .tab-btn:focus-visible{outline:2px solid var(--green);outline-offset:-4px;border-radius:10px;}
+.cal-box{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);}
+.cal-title{font-size:0.86rem;font-weight:700;margin-bottom:8px;}
+.cal-box .time-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+.cal-btn{flex:1;min-width:150px;background:var(--green);color:#fff;border-color:var(--green);}
 .card.flash{box-shadow:0 0 0 3px var(--gold);transition:box-shadow .3s;}
 @media (prefers-reduced-motion:reduce){.nur{animation:none;}.ring-fill,.goal-fill,.grp-bar-fill{transition:none;}}
 </style>
@@ -545,6 +550,15 @@ body:not([data-active="today"]) .phead-hero{display:none;}
         <div class="rem-msg hidden" id="rem-msg"></div>
       </div>
       <div id="reminder-info" class="rem-info hidden"></div>
+      <div class="cal-box" id="cal-box">
+        <div class="cal-title" data-i18n="progress.cal_title">أو أضِف تذكيرًا إلى تقويم هاتفك</div>
+        <div class="time-row">
+          <span style="font-size:0.82rem;color:var(--soft);" data-i18n="progress.reminder_time_label">الوقت:</span>
+          <input class="time-input" type="time" id="cal-time" step="900" value="20:00">
+          <button class="sync-btn cal-btn" type="button" onclick="onCalendarAdd()" data-i18n="progress.cal_btn">أضِف إلى تقويم الهاتف</button>
+        </div>
+        <div class="rem-note" data-i18n="progress.cal_note"></div>
+      </div>
     </div>
 
   </div>
@@ -966,6 +980,18 @@ function setTab(t,fromUser){
   if(fromUser){try{history.replaceState(null,'','#'+t);}catch(e){}window.scrollTo(0,0);}
 }
 document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.go,true)));
+// يُبقي الشريط السفلي ظاهرًا دائمًا: في النوافذ العائمة/المقسومة قد يزيد ارتفاع الصفحة عن الجزء المرئي فيُقصّ الشريط
+(function keepTabbarVisible(){
+  const bar=document.getElementById('tabbar'),vv=window.visualViewport;
+  if(!bar||!vv)return;
+  function fit(){
+    const cut=document.documentElement.clientHeight-(vv.offsetTop+vv.height);
+    bar.style.transform=cut>1?'translateY('+(-cut)+'px)':'';
+  }
+  vv.addEventListener('resize',fit);vv.addEventListener('scroll',fit);
+  window.addEventListener('resize',fit);window.addEventListener('orientationchange',fit);
+  fit();
+})();
 function openHash(){
   const id=location.hash.slice(1);
   if(!id)return;
@@ -1244,19 +1270,23 @@ function renderReminderCard(){
   const controls=document.getElementById('reminder-controls');
   const info=document.getElementById('reminder-info');
   const remCard=document.getElementById('reminder-card');
+  // البطاقة تبقى ظاهرة دائمًا: خيار التقويم لا يحتاج إشعارات المتصفح
+  const calT=document.getElementById('cal-time');
+  const savedT=localStorage.getItem('darbi_push_localtime_v1');
+  if(calT&&savedT)calT.value=savedT;
   if(!window.DarbiPush){
-    remCard.classList.add('hidden'); // لا تُعرض بطاقة لا تعمل
+    controls.classList.add('hidden');
+    info.classList.add('hidden');
     return;
   }
   const st=DarbiPush.status();
-  remCard.classList.toggle('hidden',st==='unsupported'||st==='not-configured');
+  remCard.classList.remove('hidden');
   const sw=document.getElementById('rem-switch');
   const timeRow=document.getElementById('rem-time-row');
 
   if(st==='unsupported' || st==='not-configured'){
     controls.classList.add('hidden');
-    info.classList.remove('hidden');
-    info.textContent=darbiT('progress.reminder_coming_soon');
+    info.classList.add('hidden');
     return;
   }
 
@@ -1277,6 +1307,27 @@ function renderReminderCard(){
   timeRow.classList.toggle('hidden',!active);
   const savedTime=localStorage.getItem('darbi_push_localtime_v1');
   if(savedTime) document.getElementById('rem-time').value=savedTime;
+}
+
+// تنزيل حدث تقويم يومي متكرر (.ics) بتنبيه — يعمل من تطبيق التقويم دون حاجة للإشعارات
+function onCalendarAdd(){
+  const v=(document.getElementById('cal-time').value||'20:00').split(':');
+  const hh=+v[0],mm=+v[1]||0,pad=n=>String(n).padStart(2,'0');
+  const now=new Date();
+  const start=new Date(now.getFullYear(),now.getMonth(),now.getDate(),hh,mm);
+  if(start<=now)start.setDate(start.getDate()+1);
+  const ds=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';
+  const esc=t=>String(t).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+  const title=darbiT('progress.cal_ev_title'),desc=darbiT('progress.cal_ev_desc')+' https://quran-darbi.com';
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Quran Darbi//Daily Reminder//AR','CALSCALE:GREGORIAN','BEGIN:VEVENT',
+    'UID:darbi-daily-reminder@quran-darbi.com','DTSTAMP:'+now.toISOString().replace(/[-:]/g,'').replace(/\.\d+/,''),
+    'DTSTART:'+ds(start),'DURATION:PT15M','RRULE:FREQ=DAILY','SUMMARY:'+esc(title),'DESCRIPTION:'+esc(desc),
+    'BEGIN:VALARM','TRIGGER:PT0S','ACTION:DISPLAY','DESCRIPTION:'+esc(title),'END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='darbi-reminder.ics';
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);
 }
 
 function showRemMsg(text,cls){
