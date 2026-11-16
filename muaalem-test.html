@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>اختبار فحص الضبط (تجريبي)</title>
+<style>
+  :root{--accent:#4a7c4a;--bg:#f0f4f0;--gold:#c4a84a;--fg:#1d2a1d;--card:#fff;--line:#cfdccf}
+  html[data-theme="dark"]{--bg:#141a14;--fg:#e6eee6;--card:#1d261d;--line:#334033}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;line-height:1.7}
+  main{max-width:640px;margin:0 auto;padding:16px}
+  h1{font-size:1.3rem;color:var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  label{display:block;margin:8px 0 2px}
+  input{width:100%;box-sizing:border-box;padding:8px;font-size:1rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg)}
+  .row{display:flex;gap:8px}.row>div{flex:1}
+  button{padding:10px 14px;font-size:1rem;border:0;border-radius:10px;background:var(--accent);color:#fff;margin:6px 4px 0 0;cursor:pointer}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  button.alt{background:var(--gold);color:#222}
+  pre{direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-word;font-size:.82rem;background:rgba(0,0,0,.06);padding:8px;border-radius:8px;max-height:320px;overflow:auto}
+  .note{font-size:.9rem;opacity:.85}
+</style>
+</head>
+<body>
+<main>
+  <h1>اختبار فحص الضبط (تجريبي)</h1>
+  <p class="note">صفحة اختبار تقنية فقط للتأكد من عمل التسجيل والتحويل والإرسال. ليست ضمن الموقع، ولا تُنشر للمستخدمين.</p>
+
+  <div class="card">
+    <div class="row">
+      <div><label for="surah">رقم السورة</label><input id="surah" type="number" min="1" max="114" value="108"></div>
+      <div><label for="aya">من الآية</label><input id="aya" type="number" min="1" max="286" value="1"></div>
+      <div><label for="num">عدد الآيات</label><input id="num" type="number" min="1" max="10" value="3"></div>
+    </div>
+    <button id="rec">🎤 ابدأ التسجيل</button>
+    <button id="stop" class="alt" disabled>⏹ إيقاف</button>
+    <div id="status" class="note" role="status" aria-live="polite">جاهز.</div>
+    <audio id="player" controls hidden style="width:100%;margin-top:8px"></audio>
+  </div>
+
+  <div class="card">
+    <div id="ts"></div>
+    <button id="send" disabled>إرسال للفحص</button>
+  </div>
+
+  <div class="card">
+    <strong>سجل الجهاز (للجدول)</strong>
+    <pre id="log"></pre>
+  </div>
+  <div class="card">
+    <strong>النتيجة</strong>
+    <pre id="out">—</pre>
+  </div>
+</main>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+(function(){
+  var WORKER = "https://darbi-muaalem-prox.hindhany78.workers.dev";
+  var SITE_KEY = "0x4AAAAAAF5uG6_d7Un4zq5_";
+  var $ = function(id){return document.getElementById(id)};
+  var logEl = $("log"), outEl = $("out"), statusEl = $("status");
+  var rec, chunks = [], stream = null, wavBlob = null, token = null, widgetId = null;
+
+  function log(k, v){ logEl.textContent += k + ": " + v + "\n"; }
+  function setStatus(t){ statusEl.textContent = t; }
+
+  log("userAgent", navigator.userAgent);
+  log("MediaRecorder", typeof MediaRecorder !== "undefined" ? "yes" : "NO");
+
+  function pickMime(){
+    if (typeof MediaRecorder === "undefined") return "";
+    var c = ["audio/webm;codecs=opus", "audio/mp4", "audio/ogg;codecs=opus", "audio/webm"];
+    for (var i = 0; i < c.length; i++) { if (MediaRecorder.isTypeSupported(c[i])) return c[i]; }
+    return "";
+  }
+
+  // ---- Turnstile ----
+  function renderTurnstile(){
+    if (!window.turnstile) { setTimeout(renderTurnstile, 300); return; }
+    widgetId = turnstile.render("#ts", {
+      sitekey: SITE_KEY,
+      callback: function(t){ token = t; refresh(); },
+      "expired-callback": function(){ token = null; refresh(); },
+      "error-callback": function(){ token = null; setStatus("تعذّر تحميل التحقق الأمني."); refresh(); }
+    });
+  }
+  renderTurnstile();
+
+  function refresh(){ $("send").disabled = !(wavBlob && token); }
+
+  // ---- Recording ----
+  $("rec").onclick = function(){
+    if (typeof MediaRecorder === "undefined") { setStatus("هذا المتصفح لا يدعم التسجيل."); return; }
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(s){
+      stream = s; chunks = []; wavBlob = null; refresh();
+      var mime = pickMime();
+      rec = mime ? new MediaRecorder(s, {mimeType: mime}) : new MediaRecorder(s);
+      rec.ondataavailable = function(e){ if (e.data && e.data.size) chunks.push(e.data); };
+      rec.onstop = onStopped;
+      rec.start();
+      log("recorder mime", rec.mimeType || "(default)");
+      $("rec").disabled = true; $("stop").disabled = false;
+      setStatus("جارٍ التسجيل…");
+    }).catch(function(err){ setStatus("تعذّر الوصول للميكروفون: " + err.name); log("mic error", err.name); });
+  };
+  $("stop").onclick = function(){ if (rec && rec.state !== "inactive") rec.stop(); };
+
+  function onStopped(){
+    if (stream) stream.getTracks().forEach(function(t){ t.stop(); });
+    $("rec").disabled = false; $("stop").disabled = true;
+    var type = (rec.mimeType || "audio/webm");
+    var blob = new Blob(chunks, {type: type});
+    log("recorded", type + ", " + blob.size + " bytes");
+    setStatus("جارٍ التحويل إلى WAV…");
+    blob.arrayBuffer().then(toWav).then(function(w){
+      wavBlob = w;
+      log("wav", w.size + " bytes (16 kHz mono)");
+      var p = $("player"); p.src = URL.createObjectURL(w); p.hidden = false;
+      setStatus("تم التحويل. أكمل التحقق الأمني ثم أرسل.");
+      refresh();
+    }).catch(function(e){ setStatus("فشل التحويل."); log("convert error", e && e.message || e); });
+  }
+
+  // ---- decode -> resample 16k mono -> WAV ----
+  function decode(buf){
+    var AC = window.AudioContext || window.webkitAudioContext;
+    var ctx = new AC();
+    return new Promise(function(res, rej){
+      var p = ctx.decodeAudioData(buf, res, rej);
+      if (p && p.then) p.then(res, rej);
+    }).then(function(b){ try{ctx.close();}catch(e){} return b; });
+  }
+  function toWav(buf){
+    return decode(buf).then(function(ab){
+      log("decoded", ab.sampleRate + " Hz, " + ab.numberOfChannels + " ch, " + ab.duration.toFixed(2) + " s");
+      var OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+      var len = Math.ceil(ab.duration * 16000);
+      var off = new OAC(1, len, 16000);
+      var src = off.createBufferSource(); src.buffer = ab; src.connect(off.destination); src.start(0);
+      return new Promise(function(res, rej){
+        var p = off.startRendering();
+        off.oncomplete = function(e){ res(e.renderedBuffer); };
+        if (p && p.then) p.then(res, rej);
+      });
+    }).then(function(rb){
+      var d = rb.getChannelData(0), n = d.length;
+      var out = new DataView(new ArrayBuffer(44 + n * 2));
+      function w(o, s){ for (var i = 0; i < s.length; i++) out.setUint8(o + i, s.charCodeAt(i)); }
+      w(0, "RIFF"); out.setUint32(4, 36 + n * 2, true); w(8, "WAVE"); w(12, "fmt ");
+      out.setUint32(16, 16, true); out.setUint16(20, 1, true); out.setUint16(22, 1, true);
+      out.setUint32(24, 16000, true); out.setUint32(28, 32000, true); out.setUint16(32, 2, true); out.setUint16(34, 16, true);
+      w(36, "data"); out.setUint32(40, n * 2, true);
+      for (var i = 0; i < n; i++){ var s = Math.max(-1, Math.min(1, d[i])); out.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true); }
+      return new Blob([out], {type: "audio/wav"});
+    });
+  }
+
+  // ---- Send ----
+  $("send").onclick = function(){
+    if (!wavBlob || !token) return;
+    $("send").disabled = true; setStatus("جارٍ الفحص…"); outEl.textContent = "…";
+    var fd = new FormData();
+    fd.append("file", wavBlob, "rec.wav");
+    fd.append("surah", $("surah").value);
+    fd.append("aya", $("aya").value);
+    fd.append("num_ayat", $("num").value);
+    fd.append("cf-turnstile-response", token);
+    var t0 = Date.now();
+    fetch(WORKER, {method: "POST", body: fd}).then(function(r){
+      log("http", r.status + " in " + ((Date.now() - t0) / 1000).toFixed(1) + " s");
+      return r.text().then(function(t){ return {ok: r.ok, t: t}; });
+    }).then(function(x){
+      try { outEl.textContent = JSON.stringify(JSON.parse(x.t), null, 2); } catch (e) { outEl.textContent = x.t; }
+      setStatus(x.ok ? "تم." : "رفض الخادم الطلب (انظر النتيجة).");
+    }).catch(function(e){ setStatus("تعذّر الاتصال بالخادم."); log("network error", e && e.message || e); })
+    .then(function(){
+      token = null; try { turnstile.reset(widgetId); } catch (e) {}
+      refresh();
+    });
+  };
+})();
+</script>
+</body>
+</html>
