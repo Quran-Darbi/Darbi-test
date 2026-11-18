@@ -1098,6 +1098,8 @@ html[data-theme="dark"] .qr-copy-btn{background:#4A9E40;}
   <div class="transcript-box" id="transcriptBox"></div>
   <button class="clear-btn" id="clearBtn" onclick="clearAll()" data-i18n="recite.clear_btn">🗑️ مسح والبدء من جديد</button>
   <button class="check-btn" id="checkBtn" onclick="checkRecitation()" data-i18n="recite.check_btn">✓ تحقق من التلاوة</button>
+  <button class="reveal-btn" id="tashBtn" onclick="tashOpen()" style="display:none;">🎧 فحص الضبط (تجريبي)</button>
+  <div id="tashRoot"></div>
 </div>
 <div class="result-card" id="resultCard">
   <div class="result-header">
@@ -2885,6 +2887,25 @@ function onSelectSurah(){
     const si=document.getElementById('selectedInfo');si.textContent=darbiT('recite.load_error');si.style.display='block';
   });
 }
+// فحص الضبط (تجريبي): يظهر على موقع التجربة فقط حتى تُفعَّل TASH_LIVE. المنطق كله في tashkeel-check.js ويُحمَّل عند الضغط.
+const TASH_LIVE=false;
+const TASH_ON=TASH_LIVE||location.pathname.indexOf('/Darbi-test')===0||location.hostname==='localhost';
+function tashSync(){
+  const b=document.getElementById('tashBtn'),r=document.getElementById('tashRoot');
+  if(!b)return;
+  if(r)r.innerHTML='';
+  b.style.display=(TASH_ON&&currentKey)?'block':'none';
+}
+function tashOpen(){
+  if(!currentKey)return;
+  if(window.TashCheck){TashCheck.open(currentKey);return;}
+  const s=document.createElement('script');
+  s.src='tashkeel-check.js';
+  s.onload=()=>TashCheck.open(currentKey);
+  s.onerror=()=>alert('تعذّر تحميل أداة فحص الضبط. تحقق من الإنترنت.');
+  document.head.appendChild(s);
+}
+
 function applySurah(){
   _renderScope();
   _retryQ=[];_retryTarget=-1;
@@ -2907,6 +2928,7 @@ function applySurah(){
   document.getElementById('hintBtn').disabled=false;
   document.getElementById('hintBtn').textContent=darbiT('hint.btn_rec');
   document.getElementById('hintBox').style.display='none';
+  tashSync();
   clearAll();
 }
 
