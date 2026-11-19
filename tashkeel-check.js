@@ -58,7 +58,31 @@ var CSS=
 "html[data-theme=dark] .tash-l{background:#5a4220;color:#ffd699}"+
 ".tash-miss{text-decoration:line-through}"+
 ".tash-extra{border-bottom:2px solid currentColor}"+
-".tash-btn:focus-visible,.tash-range input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}";
+".tash-btn:focus-visible,.tash-range input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}"+
+".tash-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;font-size:15px;font-weight:700}"+
+".tash-chip{font-size:12.5px;font-weight:700;border-radius:20px;padding:3px 10px}"+
+".tash-chip.h{background:#f8d0d0;color:#9b1c1c;border-bottom:3px solid #c0392b}"+
+".tash-chip.l{background:#ffe3bf;color:#7a4300;border-bottom:3px dashed #d98a1c}"+
+".tash-chip.m{background:#f6efc8;color:#5c4d0a;border-bottom:3px dotted #b89b1e}"+
+".tash-text{margin-top:10px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-family:'Scheherazade New','Amiri','Traditional Arabic',serif;font-size:25px;line-height:2.6;text-align:right}"+
+".tash-w{border-radius:4px;padding:0 3px;cursor:pointer;touch-action:manipulation}"+
+".tash-w.h{background:#f8d0d0;color:#9b1c1c;border-bottom:3px solid #c0392b}"+
+".tash-w.l{background:#ffe3bf;color:#7a4300;border-bottom:3px dashed #d98a1c}"+
+".tash-w.m{background:#f6efc8;color:#5c4d0a;border-bottom:3px dotted #b89b1e}"+
+"html[data-theme=dark] .tash-chip.h,html[data-theme=dark] .tash-w.h{background:#5a2a2a;color:#ffb4b4}"+
+"html[data-theme=dark] .tash-chip.l,html[data-theme=dark] .tash-w.l{background:#5a4220;color:#ffd699}"+
+"html[data-theme=dark] .tash-chip.m,html[data-theme=dark] .tash-w.m{background:#4f4718;color:#f0e29a}"+
+".tash-an{color:#8a6d1f;font-size:.72em;font-weight:700;margin:0 2px}"+
+".tash-notes{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}"+
+".tash-nitem{padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--card);scroll-margin:70px}"+
+".tash-flash{outline:2px solid var(--accent);outline-offset:2px}"+
+".tash-nword{font-family:'Scheherazade New','Amiri','Traditional Arabic',serif;font-size:24px;font-weight:700;line-height:1.8}"+
+".tash-nline{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;line-height:1.9}"+
+".tash-dot{flex:none;width:10px;height:10px;margin-top:9px;border-radius:50%}"+
+".tash-dot.h{background:#c0392b}.tash-dot.l{background:#d98a1c}.tash-dot.m{background:#b89b1e}"+
+".tash-raw{margin-top:12px;font-size:13px}.tash-raw summary{cursor:pointer;color:var(--accent);padding:6px 0}"+
+".tash-w:focus-visible{outline:2px solid var(--accent);outline-offset:2px}"+
+"";
 function injectCss(){
   if(document.getElementById("tashCss"))return;
   var s=document.createElement("style");s.id="tashCss";s.textContent=CSS;document.head.appendChild(s);
@@ -227,10 +251,10 @@ function ops(a,b){
   return out;
 }
 function esc(s){return s.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
-function render(o){
-  var ref=o.reference_phonemes_joined||o.reference_phonemes||"",got=o.phonemes_text||"";
-  var out=$("tashOut"),r=ops(ref,got);
-  if(!r){out.innerHTML='<div class="tash-warn">التسجيل طويل جدًا للمقارنة التفصيلية. اختر آيات أقل.</div>';return;}
+/* ---------- عرض خام (احتياطي): رموز النطق كما هي، بتظليل الفروق حرفًا حرفًا ---------- */
+function rawParts(ref,got){
+  var r=ops(ref,got);
+  if(!r)return null;
   var html="",hunk=[],tash=0,letter=0;
   function flush(){
     if(!hunk.length)return;
@@ -242,15 +266,203 @@ function render(o){
   }
   r.forEach(function(p){if(p[0]==="="){flush();html+=esc(p[1]);}else hunk.push(p);});
   flush();
-  var head;
-  if(!tash&&!letter)head='<div class="tash-ok">لم يُلتقَط فرق بين تلاوتك والمرجع. بارك الله فيك.</div>';
-  else head='<div class="tash-sum">ملاحظات الضبط (الحركات): <b>'+tash+'</b> &nbsp;|&nbsp; ملاحظات الحروف: <b>'+letter+'</b></div>';
-  out.innerHTML=head+
-   '<div class="tash-legend"><span class="tash-d tash-miss">ضبط ناقص/مختلف</span> <span class="tash-l tash-miss">حرف ناقص</span> <span class="tash-extra tash-l">مسموع زائد</span></div>'+
-   '<div class="tash-diff" dir="rtl" lang="ar">'+html+'</div>'+
-   '<div class="tash-caveat">رموز النطق أعلاه تمثّل صوت المرجع، وليست رسم المصحف. استعن بمعلّم للتأكد من أي ملاحظة.</div>';
+  return{tash:tash,letter:letter,
+    legend:'<div class="tash-legend"><span class="tash-d tash-miss">ضبط ناقص/مختلف</span> <span class="tash-l tash-miss">حرف ناقص</span> <span class="tash-extra tash-l">مسموع زائد</span></div>',
+    diff:'<div class="tash-diff" dir="rtl" lang="ar">'+html+'</div>',
+    caveat:'<div class="tash-caveat">رموز النطق أعلاه تمثّل صوت المرجع، وليست رسم المصحف. استعن بمعلّم للتأكد من أي ملاحظة.</div>'};
+}
+function rawView(ref,got){
+  var p=rawParts(ref,got);
+  if(!p)return '<div class="tash-warn">التسجيل طويل جدًا للمقارنة التفصيلية. اختر آيات أقل.</div>';
+  var head=(!p.tash&&!p.letter)
+    ?'<div class="tash-ok">لم يُلتقَط فرق بين تلاوتك والمرجع. بارك الله فيك.</div>'
+    :'<div class="tash-sum">ملاحظات الضبط (الحركات): <b>'+p.tash+'</b> &nbsp;|&nbsp; ملاحظات الحروف: <b>'+p.letter+'</b></div>';
+  return head+p.legend+p.diff+p.caveat;
+}
+
+/* ---------- ربط الملاحظات بكلمات المصحف ----------
+   رموز النطق القادمة من الخادم لا تحمل حدود الكلمات. فنحاذي هيكل حروف كلمات الصفحة مع حروف
+   المرجع الصوتي (محاذاة بتسامح للمدّ والتشديد والإدغام وحذف همزة الوصل)، ثم نُسند كل فرق
+   إلى الكلمة التي يقع فيها. لو ضعفت المحاذاة نرجع للعرض الخام بدل أن نُظهر كلمة خاطئة. */
+var SHADDA="ّ",DAGGER="ٰ",SMALL_WAW="ۥ",SMALL_YA="ۦ",TATWEEL="ـ";
+var TANW={"ً":1,"ٌ":1,"ٍ":1,"ࣰ":1,"ࣱ":1,"ࣲ":1};
+var VOWEL={"ا":1,"و":1,"ي":1};
+var MARK_NAME={"ً":"تنوين فتح","ٌ":"تنوين ضم","ٍ":"تنوين كسر","َ":"فتحة","ُ":"ضمة","ِ":"كسرة",
+  "ّ":"شدّة","ْ":"سكون","ۡ":"سكون","ٰ":"ألف خنجرية","ٓ":"مدّة"};
+var AR_DIGITS="٠١٢٣٤٥٦٧٨٩";
+var MIN_QUALITY=0.6;       // أقل نسبة تطابق لحروف الصفحة مع المرجع كي نثق بالربط
+var KIND_RANK={h:3,l:2,m:1};
+
+function toAr(n){return String(n).split("").map(function(d){return AR_DIGITS.charAt(+d);}).join("");}
+function skeleton(word){
+  var out=[],cs=Array.from(word),i,c;
+  for(i=0;i<cs.length;i++){
+    c=cs[i];
+    if(c===SHADDA){if(out.length)out.push(out[out.length-1]);}
+    else if(TANW[c])out.push("ن");
+    else if(c===DAGGER)out.push("ا");
+    else if(c===SMALL_WAW)out.push("و");
+    else if(c===SMALL_YA)out.push("ي");
+    else if(c===TATWEEL||MARK.test(c))continue;
+    else if(c==="أ"||c==="إ"||c==="ؤ"||c==="ئ")out.push("ء");
+    else if(c==="آ"){if(!out.length)out.push("ء");out.push("ا");}
+    else if(c==="ٱ")out.push("ا");
+    else if(c==="ى")out.push("ي");
+    else if(c==="ة")out.push("ت");
+    else out.push(c);
+  }
+  return out;
+}
+function sc2(a,b){return a===b?2:(VOWEL[a]&&VOWEL[b]?0:-1);}
+/* محاذاة عالمية بأطراف حرّة: ترجع أزواج [فهرس في هيكل الصفحة، فهرس في حروف المرجع] */
+function alignSkel(S,P){
+  var n=S.length,m=P.length,w=m+1;
+  if(!n||!m||(n+1)*w>9e6)return null;
+  var H=new Int16Array((n+1)*w),T=new Uint8Array((n+1)*w),i,j,d,u,l,v,t;
+  for(i=1;i<=n;i++)for(j=1;j<=m;j++){
+    d=H[(i-1)*w+j-1]+sc2(S[i-1],P[j-1]);u=H[(i-1)*w+j]-1;l=H[i*w+j-1]-1;
+    if(d>=u&&d>=l){v=d;t=1;}else if(u>=l){v=u;t=2;}else{v=l;t=3;}
+    H[i*w+j]=v;T[i*w+j]=t;
+  }
+  var bi=n,bj=m,best=-32768,pairs=[];
+  for(j=0;j<=m;j++)if(H[n*w+j]>best){best=H[n*w+j];bi=n;bj=j;}
+  for(i=0;i<=n;i++)if(H[i*w+m]>best){best=H[i*w+m];bi=i;bj=m;}
+  i=bi;j=bj;
+  while(i>0&&j>0){
+    t=T[i*w+j];
+    if(t===1){pairs.push([i-1,j-1]);i--;j--;}else if(t===2)i--;else j--;
+  }
+  return pairs.reverse();
+}
+function markList(s){return Array.from(s).map(function(c){return MARK_NAME[c]||c;}).join("، ");}
+function describe(h){
+  var kind=h.t,d=h.del,i=h.ins,after=h.base?" بعد حرف «"+esc(h.base)+"»":"",title,det;
+  if(kind==="h"){
+    title=d&&i?"حركة مختلفة":(d?"حركة ناقصة":"حركة زائدة");
+    det=(d?"المتوقع «"+esc(markList(d))+"»":"")+(d&&i?" والمسموع ":(i?"المسموع ":""))+(i?"«"+esc(markList(i))+"»":"");
+  }else if(kind==="l"){
+    title=d&&i?"حرف مختلف":(d?"حرف ناقص":"حرف زائد");
+    det=(d?"المتوقع «"+esc(d)+"»":"")+(d&&i?" والمسموع ":(i?"المسموع ":""))+(i?"«"+esc(i)+"»":"");
+  }else{
+    title=d?"مدّ أو غنّة أو تشديد أقصر من المتوقع":"مدّ أو غنّة أو تشديد أطول من المتوقع";
+    after="";det="عند حرف «"+esc((d||i).charAt(0))+"»";
+  }
+  return"<b>"+title+"</b>"+after+" — "+det;
+}
+/* تحليل: يرجع {q: جودة الربط، notes:[{w,t,del,ins,base}], counts:{h,l,m}} أو null إن تعذّر */
+function analyze(words,ref,got){
+  var S=[],sw=[],P=[],pidx=[],rc=Array.from(ref),k,i,sk,W=words.length;
+  for(k=0;k<W;k++){sk=skeleton(words[k]);for(i=0;i<sk.length;i++){S.push(sk[i]);sw.push(k);}}
+  for(i=0;i<rc.length;i++){if(!MARK.test(rc[i])&&rc[i].trim()&&rc[i]!==TATWEEL){P.push(rc[i]);pidx.push(i);}}
+  var pairs=alignSkel(S,P),r=ops(ref,got);
+  if(!pairs||!r)return null;
+  var eq=0,st=[],own=[],q,nxt=rc.length,p;
+  for(i=0;i<pairs.length;i++){
+    if(S[pairs[i][0]]===P[pairs[i][1]])eq++;
+    k=sw[pairs[i][0]];if(st[k]===undefined)st[k]=pidx[pairs[i][1]];
+  }
+  q=S.length?eq/S.length:0;
+  for(k=W-1;k>=0;k--){if(st[k]===undefined)st[k]=nxt;else nxt=st[k];}
+  k=0;for(p=0;p<=rc.length;p++){while(k+1<W&&st[k+1]<=p)k++;own[p]=k;}
+  var notes=[],counts={h:0,l:0,m:0},cur=null,ri=0,base="",idx,op,L,kind,pos;
+  function close(next){
+    if(!cur)return;
+    var d=cur.del,ins=cur.ins,all=d+ins,prev=cur.prev;
+    if(Array.from(all).every(function(c){return MARK.test(c);}))kind="h";
+    else{
+      L=Array.from(all)[0];
+      kind=(!(d&&ins)&&Array.from(all).every(function(c){return c===L;})&&(prev===L||next===L))?"m":"l";
+    }
+    pos=cur.firstDel>=0?cur.firstDel:Math.max(0,cur.ri0-1);
+    notes.push({w:own[Math.min(pos,rc.length)],t:kind,del:d,ins:ins,base:cur.base});
+    counts[kind]++;cur=null;
+  }
+  for(idx=0;idx<r.length;idx++){
+    op=r[idx];
+    if(op[0]==="="){
+      close(op[1]);
+      if(!MARK.test(op[1])&&op[1].trim())base=op[1];
+      ri++;
+    }else{
+      if(!cur)cur={del:"",ins:"",ri0:ri,base:base,prev:idx?r[idx-1][1]:"",firstDel:-1};
+      if(op[0]==="-"){if(cur.firstDel<0)cur.firstDel=ri;cur.del+=op[1];ri++;}
+      else cur.ins+=op[1];
+    }
+  }
+  close("");
+  return{q:q,notes:notes,counts:counts};
+}
+
+/* كلمات الصفحة: نص الموقع نفسه (برقم الآية) ما أمكن، وإلا نص المرجع القادم من الخادم */
+function pageSegments(o){
+  var i=info(),A=(typeof AYAHS!=="undefined")?AYAHS[st.key]:null,chunked=(typeof AYAH_CHUNK_NUMS!=="undefined")&&AYAH_CHUNK_NUMS[st.key],segs=[],k;
+  if(A&&i&&!chunked&&A.length===i.count){
+    for(k=st.from-1;k<st.to;k++){if(A[k])segs.push({num:i.start+k,text:A[k]});}
+    return segs.length?segs:null;
+  }
+  return o.reference_text?[{num:0,text:o.reference_text}]:null;
+}
+function smartView(o,ref,got){
+  var segs=pageSegments(o);
+  if(!segs)return null;
+  var rows=[],words=[];
+  segs.forEach(function(sg){
+    var row=sg.text.split(/\s+/).filter(Boolean).map(function(x){
+      if(skeleton(x).length){words.push(x);return{t:x,w:words.length-1};}
+      return{t:x,w:-1};
+    });
+    rows.push({num:sg.num,row:row});
+  });
+  var an=words.length?analyze(words,ref,got):null;
+  if(!an||an.q<MIN_QUALITY)return null;
+  var c=an.counts,total=c.h+c.l+c.m,caveat='<div class="tash-caveat">النتيجة آلية وإرشادية وقد تُخطئ أحيانًا (خصوصًا في المدّ والغنّة). استعن بمعلّم للتأكد من أي ملاحظة.</div>';
+  if(!total)return'<div class="tash-ok">لم يُلتقَط فرق بين تلاوتك والمرجع. بارك الله فيك.</div>'+caveat;
+  var byW={},wk=[],w;
+  an.notes.forEach(function(n){
+    if(!byW[n.w]){byW[n.w]={rank:0,kind:"m",items:[]};wk.push(n.w);}
+    var b=byW[n.w];b.items.push(n);
+    if(KIND_RANK[n.t]>b.rank){b.rank=KIND_RANK[n.t];b.kind=n.t;}
+  });
+  wk.sort(function(a,b){return a-b;});
+  var text=rows.map(function(rw){
+    var s=rw.row.map(function(x){
+      if(x.w>=0&&byW[x.w])return'<span class="tash-w '+byW[x.w].kind+'" role="button" tabindex="0" data-w="'+x.w+'" aria-label="كلمة عليها ملاحظة، اضغط لعرضها">'+esc(x.t)+'</span>';
+      return esc(x.t);
+    }).join(" ");
+    return s+(rw.num>0?' <span class="tash-an">﴿'+toAr(rw.num)+'﴾</span>':"");
+  }).join(" ");
+  var list=wk.map(function(k){
+    return'<li class="tash-nitem" id="tashN'+k+'"><div class="tash-nword" dir="rtl" lang="ar">'+esc(words[k])+'</div>'+
+      byW[k].items.map(function(n){return'<div class="tash-nline"><span class="tash-dot '+n.t+'" aria-hidden="true"></span><span>'+describe(n)+'</span></div>';}).join("")+'</li>';
+  }).join("");
+  var raw=rawParts(ref,got);
+  return'<div class="tash-head"><span>ملاحظات على '+wk.length+' من '+words.length+' كلمة</span>'+
+    '<span class="tash-chip h">حركات: '+c.h+'</span><span class="tash-chip l">حروف: '+c.l+'</span><span class="tash-chip m">مدّ/غنّة/تشديد: '+c.m+'</span></div>'+
+    '<div class="tash-text" dir="rtl" lang="ar">'+text+'</div>'+
+    '<div class="tash-hint">اضغط على أي كلمة مظلَّلة لتصل إلى ملاحظتها.</div>'+
+    '<ul class="tash-notes">'+list+'</ul>'+
+    (raw?'<details class="tash-raw"><summary>تفاصيل رموز النطق (للمتخصصين)</summary>'+raw.legend+raw.diff+raw.caveat+'</details>':"")+caveat;
+}
+function jump(e){
+  if(e.type==="keydown"&&e.key!=="Enter"&&e.key!==" ")return;
+  var el=e.target;
+  while(el&&el.getAttribute&&el.getAttribute("data-w")===null)el=el.parentNode;
+  if(!el||!el.getAttribute)return;
+  var n=$("tashN"+el.getAttribute("data-w"));
+  if(!n)return;
+  if(e.type==="keydown")e.preventDefault();
+  var calm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  n.scrollIntoView({behavior:calm?"auto":"smooth",block:"center"});
+  n.classList.add("tash-flash");setTimeout(function(){n.classList.remove("tash-flash");},1400);
+}
+function render(o){
+  var ref=o.reference_phonemes_joined||o.reference_phonemes||"",got=o.phonemes_text||"",out=$("tashOut"),view=null;
+  try{view=smartView(o,ref,got);}catch(e){view=null;}
+  out.onclick=out.onkeydown=null;
+  if(view){out.innerHTML=view;out.onclick=jump;out.onkeydown=jump;return;}
+  out.innerHTML=rawView(ref,got);
 }
 
 /* ---------- واجهة عامة ---------- */
-window.TashCheck={supported:supported,open:function(key){st.key=key;st.wav=null;st.token=null;build();}};
+window.TashCheck={supported:supported,analyze:analyze,open:function(key){st.key=key;st.wav=null;st.token=null;build();}};
 })();
