@@ -15,6 +15,18 @@
   إضافة لغة جديدة مستقبلًا = إضافة كائن جديد جوه DICT بعد مراجعته،
   ثم إضافته لمصفوفة SUPPORTED. من غير كده الزر ميتفعّلش.
 */
+/* موقع التجربة فقط (المسار /Darbi-test): لا فهرسة في محركات البحث ولا تثبيت كتطبيق.
+   لا أثر له على الموقع الحي (مساره مختلف)، وهو نفس شرط تعطيل Google Analytics في الصفحات. */
+(function(){
+  if(location.pathname.indexOf("/Darbi-test")!==0)return;
+  try{
+    var m=document.createElement("meta");m.name="robots";m.content="noindex,nofollow,noarchive";document.head.appendChild(m);
+    var l=document.querySelectorAll('link[rel="manifest"]');
+    for(var i=0;i<l.length;i++)l[i].parentNode.removeChild(l[i]);
+    window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();});
+  }catch(e){}
+})();
+
 (function(){
 'use strict';
 
