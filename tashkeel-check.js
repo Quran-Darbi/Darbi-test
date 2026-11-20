@@ -217,7 +217,12 @@ function toWav(buf){
 function send(){
   if(!st.wav||!st.token||st.busy)return;
   var i=info();if(!i)return;
-  st.busy=true;refresh();$("tashOut").innerHTML="";setStatus("جارٍ الفحص… قد يستغرق أول طلب دقيقة.");
+  st.busy=true;refresh();$("tashOut").innerHTML="";
+  var t0=Date.now(),tick5=setInterval(function(){
+    var sec=Math.round((Date.now()-t0)/1000);
+    setStatus("جارٍ الفحص… "+sec+" ث"+(sec>=10?" — أول طلب بعد فترة توقف يستغرق نحو دقيقة لأن الخادم يستيقظ، ثم تصير الفحوص التالية أسرع.":""));
+  },5000);
+  setStatus("جارٍ الفحص… قد يستغرق أول طلب دقيقة.");
   var fd=new FormData();
   fd.append("file",st.wav,"rec.wav");
   fd.append("surah",String(i.surah));
@@ -231,7 +236,7 @@ function send(){
     if(!x.ok||!x.j||x.j.error){setStatus(ERR[x.j&&x.j.error]||"تعذّر الفحص (رمز "+x.status+").");return;}
     setStatus("");render(x.j);
   }).catch(function(){setStatus("تعذّر الاتصال بالخدمة. تحقق من الإنترنت وأعد المحاولة.");})
-  .then(function(){clearTimeout(to);st.busy=false;st.token=null;try{turnstile.reset(st.widget);}catch(e){}refresh();});
+  .then(function(){clearTimeout(to);clearInterval(tick5);st.busy=false;st.token=null;try{turnstile.reset(st.widget);}catch(e){}refresh();});
 }
 
 /* ---------- مقارنة: LCS على الحروف، وتصنيف الفروق إلى ضبط وحروف ---------- */
@@ -292,25 +297,28 @@ var MARK_NAME={"ً":"تنوين فتح","ٌ":"تنوين ضم","ٍ":"تنوين 
 var AR_DIGITS="٠١٢٣٤٥٦٧٨٩";
 var MIN_QUALITY=0.6;       // أقل نسبة تطابق لحروف الصفحة مع المرجع كي نثق بالربط
 var KIND_RANK={h:3,l:2,m:1};
+var TAIL_MAX=4;            // أقصى عدد رموز بعد آخر حرف أصلي يُعدّ "آخر الكلمة" عند الوقف
 
 function toAr(n){return String(n).split("").map(function(d){return AR_DIGITS.charAt(+d);}).join("");}
 function skeleton(word){
-  var out=[],cs=Array.from(word),i,c;
+  var out=[],real=[],cs=Array.from(word),i,c;
+  function add(ch,r){out.push(ch);real.push(r);}   // r: حرف أصلي في رسم الكلمة (لا تنوين ولا تشديد ولا مدّ صغير)
   for(i=0;i<cs.length;i++){
     c=cs[i];
-    if(c===SHADDA){if(out.length)out.push(out[out.length-1]);}
-    else if(TANW[c])out.push("ن");
-    else if(c===DAGGER)out.push("ا");
-    else if(c===SMALL_WAW)out.push("و");
-    else if(c===SMALL_YA)out.push("ي");
+    if(c===SHADDA){if(out.length)add(out[out.length-1],false);}
+    else if(TANW[c])add("ن",false);
+    else if(c===DAGGER)add("ا",false);
+    else if(c===SMALL_WAW)add("و",false);
+    else if(c===SMALL_YA)add("ي",false);
     else if(c===TATWEEL||MARK.test(c))continue;
-    else if(c==="أ"||c==="إ"||c==="ؤ"||c==="ئ")out.push("ء");
-    else if(c==="آ"){if(!out.length)out.push("ء");out.push("ا");}
-    else if(c==="ٱ")out.push("ا");
-    else if(c==="ى")out.push("ي");
-    else if(c==="ة")out.push("ت");
-    else out.push(c);
+    else if(c==="أ"||c==="إ"||c==="ؤ"||c==="ئ")add("ء",true);
+    else if(c==="آ"){if(!out.length)add("ء",true);add("ا",true);}
+    else if(c==="ٱ")add("ا",true);
+    else if(c==="ى")add("ي",true);
+    else if(c==="ة")add("ت",true);
+    else add(c,true);
   }
+  out.real=real;
   return out;
 }
 function sc2(a,b){return a===b?2:(VOWEL[a]&&VOWEL[b]?0:-1);}
@@ -350,9 +358,10 @@ function describe(h){
   return"<b>"+title+"</b>"+after+" — "+det;
 }
 /* تحليل: يرجع {q: جودة الربط، notes:[{w,t,del,ins,base}], counts:{h,l,m}} أو null إن تعذّر */
-function analyze(words,ref,got){
-  var S=[],sw=[],P=[],pidx=[],rc=Array.from(ref),k,i,sk,W=words.length;
-  for(k=0;k<W;k++){sk=skeleton(words[k]);for(i=0;i<sk.length;i++){S.push(sk[i]);sw.push(k);}}
+function analyze(words,ref,got,ends){
+  var S=[],sw=[],sr=[],P=[],pidx=[],rc=Array.from(ref),k,i,sk,W=words.length,isEnd={},lastP=[],ignored=0;
+  (ends||[]).forEach(function(e){isEnd[e]=true;});
+  for(k=0;k<W;k++){sk=skeleton(words[k]);for(i=0;i<sk.length;i++){S.push(sk[i]);sw.push(k);sr.push(sk.real[i]);}}
   for(i=0;i<rc.length;i++){if(!MARK.test(rc[i])&&rc[i].trim()&&rc[i]!==TATWEEL){P.push(rc[i]);pidx.push(i);}}
   var pairs=alignSkel(S,P),r=ops(ref,got);
   if(!pairs||!r)return null;
@@ -360,6 +369,7 @@ function analyze(words,ref,got){
   for(i=0;i<pairs.length;i++){
     if(S[pairs[i][0]]===P[pairs[i][1]])eq++;
     k=sw[pairs[i][0]];if(st[k]===undefined)st[k]=pidx[pairs[i][1]];
+    if(sr[pairs[i][0]])lastP[k]=pidx[pairs[i][1]];   // فهرس آخر حرف أصلي محاذى في كل كلمة
   }
   q=S.length?eq/S.length:0;
   for(k=W-1;k>=0;k--){if(st[k]===undefined)st[k]=nxt;else nxt=st[k];}
@@ -374,7 +384,10 @@ function analyze(words,ref,got){
       kind=(!(d&&ins)&&Array.from(all).every(function(c){return c===L;})&&(prev===L||next===L))?"m":"l";
     }
     pos=cur.firstDel>=0?cur.firstDel:Math.max(0,cur.ri0-1);
-    notes.push({w:own[Math.min(pos,rc.length)],t:kind,del:d,ins:ins,base:cur.base});
+    var w=own[Math.min(pos,rc.length)],after=cur.firstDel>=0?cur.firstDel:cur.ri0;
+    /* آخر كلمة في الآية: يجوز الوقف عليها فتسكَّن، فلا تُحسب حركة آخرها ولا ما بعد آخر حرفها */
+    if(isEnd[w]&&lastP[w]!==undefined&&after>lastP[w]&&after<=lastP[w]+TAIL_MAX){ignored++;cur=null;return;}
+    notes.push({w:w,t:kind,del:d,ins:ins,base:cur.base});
     counts[kind]++;cur=null;
   }
   for(idx=0;idx<r.length;idx++){
@@ -390,7 +403,7 @@ function analyze(words,ref,got){
     }
   }
   close("");
-  return{q:q,notes:notes,counts:counts};
+  return{q:q,notes:notes,counts:counts,ignored:ignored};
 }
 
 /* كلمات الصفحة: نص الموقع نفسه (برقم الآية) ما أمكن، وإلا نص المرجع القادم من الخادم */
@@ -405,18 +418,20 @@ function pageSegments(o){
 function smartView(o,ref,got){
   var segs=pageSegments(o);
   if(!segs)return null;
-  var rows=[],words=[];
+  var rows=[],words=[],ends=[];
   segs.forEach(function(sg){
     var row=sg.text.split(/\s+/).filter(Boolean).map(function(x){
       if(skeleton(x).length){words.push(x);return{t:x,w:words.length-1};}
       return{t:x,w:-1};
     });
     rows.push({num:sg.num,row:row});
+    if(words.length)ends.push(words.length-1);
   });
-  var an=words.length?analyze(words,ref,got):null;
+  var an=words.length?analyze(words,ref,got,ends):null;
   if(!an||an.q<MIN_QUALITY)return null;
   var c=an.counts,total=c.h+c.l+c.m,caveat='<div class="tash-caveat">النتيجة آلية وإرشادية وقد تُخطئ أحيانًا (خصوصًا في المدّ والغنّة). استعن بمعلّم للتأكد من أي ملاحظة.</div>';
-  if(!total)return'<div class="tash-ok">لم يُلتقَط فرق بين تلاوتك والمرجع. بارك الله فيك.</div>'+caveat;
+  var waqf=an.ignored?'<div class="tash-hint">لم نُحصِ '+an.ignored+' فرقًا عند آخر الآيات: يجوز للقارئ أن يقف فتُسكَّن آخر الكلمة، فلا تُفحص حركتها هناك.</div>':"";
+  if(!total)return'<div class="tash-ok">لم يُلتقَط فرق بين تلاوتك والمرجع. بارك الله فيك.</div>'+waqf+caveat;
   var byW={},wk=[],w;
   an.notes.forEach(function(n){
     if(!byW[n.w]){byW[n.w]={rank:0,kind:"m",items:[]};wk.push(n.w);}
@@ -439,7 +454,7 @@ function smartView(o,ref,got){
   return'<div class="tash-head"><span>ملاحظات على '+wk.length+' من '+words.length+' كلمة</span>'+
     '<span class="tash-chip h">حركات: '+c.h+'</span><span class="tash-chip l">حروف: '+c.l+'</span><span class="tash-chip m">مدّ/غنّة/تشديد: '+c.m+'</span></div>'+
     '<div class="tash-text" dir="rtl" lang="ar">'+text+'</div>'+
-    '<div class="tash-hint">اضغط على أي كلمة مظلَّلة لتصل إلى ملاحظتها.</div>'+
+    '<div class="tash-hint">اضغط على أي كلمة مظلَّلة لتصل إلى ملاحظتها.</div>'+waqf+
     '<ul class="tash-notes">'+list+'</ul>'+
     (raw?'<details class="tash-raw"><summary>تفاصيل رموز النطق (للمتخصصين)</summary>'+raw.legend+raw.diff+raw.caveat+'</details>':"")+caveat;
 }
